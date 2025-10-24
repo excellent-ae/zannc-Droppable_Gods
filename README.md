@@ -3,6 +3,8 @@ Adds Artemis, Athena and Dionysus to the god pool, allowing them to spawn as a n
 
 To progress their respective stories, the primary way is still to find their encounters, however you can still give gifts to their boons to progress relationships.
 
+<img width="530" height="413" alt="Hades2_UDLa0XzKdF" src="https://github.com/user-attachments/assets/adcdb972-37f4-4ee4-a53b-1d456f12afe4" />
+
 ### INFO
 Be aware that this is a very early release, and bugs are to be expected, as well as other cosmetic issues (such as dialogue). If you have found a bug - or very out of place dialogue, please report it on [Github](https://github.com/excellent-ae/zannc-Droppable_Gods/issues/new) or in the [Hades Modding Discord](https://discord.gg/AHk3D48WYD)
 
