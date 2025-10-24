@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.0.0] - 2025-10-24
+
 Blocked stacking for the default boons per the NPCs.
 Added `Cost` to the NPC traits (needed for more boons to be added)
 (Hopefully) Made it so any new boons added to the NPCs will be implemented correctly (and ordered as such).
@@ -14,5 +17,6 @@ Updated ReadME.
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/1.0.0...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/73aa3aa4e19b033b6e57de667555f2554a7c487c...1.0.0
