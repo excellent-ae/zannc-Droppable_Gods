@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.0.1] - 2025-10-24
+
 - Reduced package size in half.
 - Fix Changelog.
 
@@ -19,6 +22,7 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.0...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.1...HEAD
+[2.0.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/73aa3aa4e19b033b6e57de667555f2554a7c487c...1.0.0
