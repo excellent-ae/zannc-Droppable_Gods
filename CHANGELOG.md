@@ -1,17 +1,19 @@
 # Changelog
 
 ## [Unreleased]
+- Reduced package size in half.
+- Fix Changelog.
 
 ## [2.0.0] - 2025-10-24
 
-Blocked stacking for the default boons per the NPCs.
-Added `Cost` to the NPC traits (needed for more boons to be added)
-(Hopefully) Made it so any new boons added to the NPCs will be implemented correctly (and ordered as such).
-Turned down the brightness of Artemis' boon drop.
-Changed the `TextLineSets` you can recieve from a drop to be the repeatable dialogue, to progress stories, you now have to find their respective NPC rooms.
-Added config options to allow for customizing how the gods spawn.
-Fixed issue with Dionysus (and possibly Athena) which wouldnt allow you to interact with them if you have already talked to them in the current run.
-Updated ReadME.
+- Blocked stacking for the default boons per the NPCs.
+- Added `Cost` to the NPC traits (needed for more boons to be added)
+- (Hopefully) Made it so any new boons added to the NPCs will be implemented correctly (and ordered as such).
+- Turned down the brightness of Artemis' boon drop.
+- Changed the `TextLineSets` you can recieve from a drop to be the repeatable dialogue, to progress stories, you now have to find their respective NPC rooms.
+- Added config options to allow for customizing how the gods spawn.
+- Fixed issue with Dionysus (and possibly Athena) which wouldnt allow you to interact with them if you have already talked to them in the current run.
+- Updated ReadME.
 
 ## [1.0.0] - 2025-10-17
 
