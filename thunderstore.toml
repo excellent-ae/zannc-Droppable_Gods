@@ -42,7 +42,7 @@ target = "./plugins_data"
 
 [publish]
 repository = "https://thunderstore.io"
-communities = [ "hades-ii", "misc" ]
+communities = [ "hades-ii" ]
 
 [publish.categories]
-hades-ii = [ "mods", ]
+hades-ii = [ "mods", "misc" ]
