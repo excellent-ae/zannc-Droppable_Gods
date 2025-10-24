@@ -11,13 +11,14 @@ end)
 -- * Data from Apollo - LootData_Apollo, Hera, Aphrodite etc
 zannc_BaseGod = {
 	NarrativeContextArtFlippable = false,
-	GodLoot = true,
+	GodLoot = true, -- * without this, you will have to manually do drop requirements, stacking etc.
+	TreatAsGodLootByShops = true,
 	TextLinesIgnoreQuests = true,
 	GoldConversionEligible = true,
 	UsePromptOffsetX = 80,
 	CanReceiveGift = true,
 	AlwaysShowDefaultUseText = true,
-	Weight = 10,
+	Weight = 10, -- This is only here for weights in the shop - does nothing on its own.
 	DestroyOnPickup = true,
 	SelectionSound = "/SFX/Menu Sounds/GeneralWhooshMENU",
 	ConfirmSound = "/SFX/Menu Sounds/GodBoonChoiceConfirm",
@@ -87,7 +88,6 @@ zannc_BaseGod = {
 	BoonInfoTitleText = nil, --* Display name in codex, needed for npcs
 	SurfaceShopText = nil, --* Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
 	SurfaceShopIcon = nil,
-	--  OffersElementalTrait = { "Air", "Water", "Earth" },
 
 	--#region Traits
 	-- ! Example Traits
@@ -156,17 +156,87 @@ local requirementName = { MaxHealthDrop = true, MaxManaDrop = true, RoomMoneyDro
 
 function zannc_AddGodtoRunData(runData, upgrade)
 	for _, entry in ipairs(runData) do
-		if requirementName[entry.Name] then
-			if entry.GameStateRequirements then
-				for _, requirement in ipairs(entry.GameStateRequirements) do
-					if requirement.CountOf then
-						table.insert(requirement.CountOf, upgrade)
-					end
-				end
+		if not requirementName[entry.Name] then
+			return
+		end
+
+		if not entry.GameStateRequirements then
+			return
+		end
+
+		for _, requirement in ipairs(entry.GameStateRequirements) do
+			if requirement.CountOf then
+				table.insert(requirement.CountOf, upgrade)
 			end
 		end
 	end
 end
+
+-- Do this before it gets copied over into the main god
+local function StackingandCostForGods(traits, godName)
+	local traitsToBlock = {}
+
+	local godData = game.EnemyData[godName]
+	if godData and godData.Traits then
+		for _, traitName in ipairs(godData.Traits) do
+			traitsToBlock[traitName] = true
+		end
+	end
+
+	for traitName, entry in pairs(traits) do
+		if traitsToBlock[traitName] and not entry.BlockStacking then
+			entry.BlockStacking = true
+			-- print("Set BlockStacking = true for " .. traitName .. " in " .. godName)
+		end
+		if traitsToBlock[traitName] and not entry.Cost then
+			entry.Cost = 30
+			-- print("Set Cost to 30 for " .. traitName .. " in " .. godName)
+		end
+	end
+end
+
+StackingandCostForGods(game.TraitData, "NPC_Artemis_Field_01")
+StackingandCostForGods(game.TraitData, "NPC_Athena_01")
+StackingandCostForGods(game.TraitData, "NPC_Dionysus_01")
+
+game.EnemyData.NPC_Dionysus_01.AlwaysShowDefaultUseText = true
+game.EnemyData.NPC_Athena_01.AlwaysShowDefaultUseText = true
+
+local function getTraitIndex(godName)
+	local traitIndex = {}
+
+	local godData = game.EnemyData[godName]
+	if godData and godData.Traits then
+		for _, traitName in ipairs(godData.Traits) do
+			traitIndex[traitName] = true
+		end
+	end
+	return traitIndex
+end
+
+ModUtil.LoadOnce(function()
+	local npcGods = {
+		ArtemisUpgrade = "NPC_Artemis_Field_01",
+		AthenaUpgrade = "NPC_Athena_01",
+		DionysusUpgrade = "NPC_Dionysus_01",
+	}
+
+	for k, godName in pairs(npcGods) do
+		local traits = game.EnemyData[godName].Traits
+		local traitIndex = getTraitIndex(godName)
+
+		game.LootData[k].Traits = traits
+		game.LootData[k].TraitIndex = traitIndex
+		game.EnemyData[godName].TraitIndex = traitIndex
+
+		--
+		-- game.ScreenData.BoonInfo.TraitDictionary[k] = traitIndex
+		-- game.ScreenData.BoonInfo.TraitDictionary[godName] = traitIndex
+
+		-- game.ScreenData.BoonInfo.TraitSortOrder[k] = traits
+		-- game.ScreenData.BoonInfo.TraitSortOrder[godName] = traits
+	end
+end)
 
 -- Just creates a new entry based on original, just so it doesnt crash when you open from boon select
 --? game.CodexData.OlympianGods.Entries.ArtemisUpgrade = game.CodexData.OlympianGods.Entries.NPC_Artemis_01
@@ -198,3 +268,253 @@ modutil.mod.Path.Wrap("AttemptOpenUpgradeChoiceBoonInfo", function(base, screen,
 		base(screen, button)
 	end
 end)
+
+-- * Requirements Stuff
+-- !Artemis
+if not config.Artemis.ArtemisNoRequirements then
+	game.NamedRequirementsData.ArtemisUpgradeRequirements = {
+		-- run requirements
+		{
+			FunctionName = "RequiredNotInStore",
+			FunctionArgs = { Name = "ShopArtemisUpgrade" },
+		},
+		{
+			Path = { "CurrentRun", "BiomeUseRecord" },
+			HasNone = { "ArtemisUpgrade", "ShopArtemisUpgrade" },
+		},
+		{
+			Path = { "CurrentRun", "LootTypeHistory", "ArtemisUpgrade" },
+			Comparison = "<=",
+			Value = config.Artemis.ArtemisSpawnAmount,
+		},
+	}
+
+	local ArtemisUpgrade = {
+		Name = "ArtemisUpgrade",
+		GameStateRequirements = {
+			NamedRequirements = { "ArtemisUpgradeRequirements" },
+		},
+	}
+
+	table.insert(game.RewardStoreData.HubRewards, ArtemisUpgrade)
+	table.insert(game.RewardStoreData.RunProgress, ArtemisUpgrade)
+
+	game.ConsumableData.ShopArtemisUpgrade = {
+		InheritFrom = { "BaseConsumable" },
+		ResourceCosts = {
+			Money = 150,
+		},
+		UseText = "UsePurchaseLoot",
+		UseFunctionName = "rom.mods." .. _PLUGIN.guid .. ".CreateArtemisLoot",
+		SurfaceShopText = "ArtemisUpgrade_Store",
+		SurfaceShopIcon = "ArtemisUpgradeShop",
+		GameStateRequirements = {
+			{
+				Path = { "CurrentRun", "BiomeUseRecord" },
+				HasNone = { "ArtemisUpgrade", "ShopArtemisUpgrade" },
+			},
+			{
+				Path = { "CurrentRun", "LootTypeHistory", "ArtemisUpgrade" },
+				Comparison = "<=",
+				Value = config.Artemis.ArtemisSpawnAmount,
+			},
+		},
+	}
+
+	table.insert(game.StoreData.SurfaceShop.GroupsOf[2].OptionsData, { Name = "ShopArtemisUpgrade" })
+	table.insert(game.StoreData.WorldShop.GroupsOf[1].OptionsData, { Name = "ShopArtemisUpgrade" })
+	table.insert(game.StoreData.I_WorldShop.GroupsOf[4].OptionsData, { Name = "ShopArtemisUpgrade", Cost = 500, UpgradeChance = 1.0, UpgradedCost = 500, ReplaceRequirements = nil })
+	table.insert(game.StoreData.Q_WorldShop.GroupsOf[3].OptionsData, { Name = "ShopArtemisUpgrade", Cost = 500, UpgradeChance = 1.0, UpgradedCost = 500, ReplaceRequirements = nil })
+
+	function mod.CreateArtemisLoot(args)
+		args = args or {}
+		return CreateLoot(MergeTables(args, { Name = "ArtemisUpgrade", AutoLoadPackages = true }))
+	end
+
+	modutil.mod.Path.Wrap("SpawnStoreItemInWorld", function(base, itemData, kitId)
+		if not itemData then
+			return
+		end
+		local spawnedItem = nil
+		if itemData.Name == "ShopArtemisUpgrade" then
+			spawnedItem = mod.CreateArtemisLoot({
+				SpawnPoint = kitId,
+				ResourceCosts = itemData.ResourceCosts or GetProcessedValue(ConsumableData[itemData.Name].ResourceCosts),
+				DoesNotBlockExit = true,
+				SuppressSpawnSounds = true,
+				BoughtFromShop = true,
+				AddBoostedAnimation = itemData.AddBoostedAnimation,
+				BoonRaritiesOverride = itemData.BoonRaritiesOverride,
+			})
+			spawnedItem.CanReceiveGift = false
+			SetThingProperty({ Property = "SortBoundsScale", Value = 1.0, DestinationId = spawnedItem.ObjectId })
+		end
+		base(itemData, kitId)
+	end)
+end
+
+--! Athena
+if not config.Athena.AthenaNoRequirements then
+	game.NamedRequirementsData.AthenaUpgradeRequirements = {
+		-- run requirements
+		{
+			FunctionName = "RequiredNotInStore",
+			FunctionArgs = { Name = "ShopAthenaUpgrade" },
+		},
+		{
+			Path = { "CurrentRun", "BiomeUseRecord" },
+			HasNone = { "AthenaUpgrade", "ShopAthenaUpgrade" },
+		},
+		{
+			Path = { "CurrentRun", "LootTypeHistory", "AthenaUpgrade" },
+			Comparison = "<=",
+			Value = config.Athena.AthenaSpawnAmount,
+		},
+	}
+
+	local AthenaUpgrade = {
+		Name = "AthenaUpgrade",
+		GameStateRequirements = {
+			NamedRequirements = { "AthenaUpgradeRequirements" },
+		},
+	}
+
+	table.insert(game.RewardStoreData.HubRewards, AthenaUpgrade)
+	table.insert(game.RewardStoreData.RunProgress, AthenaUpgrade)
+
+	game.ConsumableData.ShopAthenaUpgrade = {
+		InheritFrom = { "BaseConsumable" },
+		ResourceCosts = {
+			Money = 150,
+		},
+		UseText = "UsePurchaseLoot",
+		UseFunctionName = "rom.mods." .. _PLUGIN.guid .. ".CreateAthenaLoot",
+		SurfaceShopText = "AthenaUpgrade_Store",
+		SurfaceShopIcon = "AthenaUpgradeShop",
+		GameStateRequirements = {
+			{
+				Path = { "CurrentRun", "BiomeUseRecord" },
+				HasNone = { "AthenaUpgrade", "ShopAthenaUpgrade" },
+			},
+			{
+				Path = { "CurrentRun", "LootTypeHistory", "AthenaUpgrade" },
+				Comparison = "<=",
+				Value = config.Athena.AthenaSpawnAmount,
+			},
+		},
+	}
+
+	table.insert(game.StoreData.SurfaceShop.GroupsOf[2].OptionsData, { Name = "ShopAthenaUpgrade" })
+	table.insert(game.StoreData.WorldShop.GroupsOf[1].OptionsData, { Name = "ShopAthenaUpgrade" })
+	table.insert(game.StoreData.I_WorldShop.GroupsOf[4].OptionsData, { Name = "ShopAthenaUpgrade", Cost = 500, UpgradeChance = 1.0, UpgradedCost = 500, ReplaceRequirements = nil })
+	table.insert(game.StoreData.Q_WorldShop.GroupsOf[3].OptionsData, { Name = "ShopAthenaUpgrade", Cost = 500, UpgradeChance = 1.0, UpgradedCost = 500, ReplaceRequirements = nil })
+
+	function mod.CreateAthenaLoot(args)
+		args = args or {}
+		return CreateLoot(MergeTables(args, { Name = "AthenaUpgrade", AutoLoadPackages = true }))
+	end
+
+	modutil.mod.Path.Wrap("SpawnStoreItemInWorld", function(base, itemData, kitId)
+		if not itemData then
+			return
+		end
+		local spawnedItem = nil
+		if itemData.Name == "ShopAthenaUpgrade" then
+			spawnedItem = mod.CreateArtemisLoot({
+				SpawnPoint = kitId,
+				ResourceCosts = itemData.ResourceCosts or GetProcessedValue(ConsumableData[itemData.Name].ResourceCosts),
+				DoesNotBlockExit = true,
+				SuppressSpawnSounds = true,
+				BoughtFromShop = true,
+				AddBoostedAnimation = itemData.AddBoostedAnimation,
+				BoonRaritiesOverride = itemData.BoonRaritiesOverride,
+			})
+			spawnedItem.CanReceiveGift = false
+			SetThingProperty({ Property = "SortBoundsScale", Value = 1.0, DestinationId = spawnedItem.ObjectId })
+		end
+		base(itemData, kitId)
+	end)
+end
+
+--! Dionysus
+if not config.Dionysus.DionysusNoRequirements then
+	game.NamedRequirementsData.DionysusUpgradeRequirements = {
+		-- run requirements
+		{
+			FunctionName = "RequiredNotInStore",
+			FunctionArgs = { Name = "ShopDionysusUpgrade" },
+		},
+		{
+			Path = { "CurrentRun", "BiomeUseRecord" },
+			HasNone = { "DionysusUpgrade", "ShopDionysusUpgrade" },
+		},
+		{
+			Path = { "CurrentRun", "LootTypeHistory", "DionysusUpgrade" },
+			Comparison = "<=",
+			Value = config.Dionysus.DionysusSpawnAmount,
+		},
+	}
+
+	local DionysusUpgrade = {
+		Name = "DionysusUpgrade",
+		GameStateRequirements = {
+			NamedRequirements = { "DionysusUpgradeRequirements" },
+		},
+	}
+
+	table.insert(game.RewardStoreData.HubRewards, DionysusUpgrade)
+	table.insert(game.RewardStoreData.RunProgress, DionysusUpgrade)
+
+	game.ConsumableData.ShopDionysusUpgrade = {
+		InheritFrom = { "BaseConsumable" },
+		ResourceCosts = {
+			Money = 150,
+		},
+		UseText = "UsePurchaseLoot",
+		UseFunctionName = "rom.mods." .. _PLUGIN.guid .. ".CreateDionysusLoot",
+		SurfaceShopText = "DionysusUpgrade_Store",
+		SurfaceShopIcon = "DionysusUpgradeShop",
+		GameStateRequirements = {
+			{
+				Path = { "CurrentRun", "BiomeUseRecord" },
+				HasNone = { "DionysusUpgrade", "ShopDionysusUpgrade" },
+			},
+			{
+				Path = { "CurrentRun", "LootTypeHistory", "DionysusUpgrade" },
+				Comparison = "<=",
+				Value = config.Dionysus.DionysusSpawnAmount,
+			},
+		},
+	}
+
+	table.insert(game.StoreData.SurfaceShop.GroupsOf[2].OptionsData, { Name = "ShopDionysusUpgrade" })
+	table.insert(game.StoreData.WorldShop.GroupsOf[1].OptionsData, { Name = "ShopDionysusUpgrade" })
+	table.insert(game.StoreData.I_WorldShop.GroupsOf[4].OptionsData, { Name = "ShopDionysusUpgrade", Cost = 500, UpgradeChance = 1.0, UpgradedCost = 500, ReplaceRequirements = nil })
+	table.insert(game.StoreData.Q_WorldShop.GroupsOf[3].OptionsData, { Name = "ShopDionysusUpgrade", Cost = 500, UpgradeChance = 1.0, UpgradedCost = 500, ReplaceRequirements = nil })
+
+	function mod.CreateDionysusLoot(args)
+		args = args or {}
+		return CreateLoot(MergeTables(args, { Name = "DionysusUpgrade", AutoLoadPackages = true }))
+	end
+
+	modutil.mod.Path.Wrap("SpawnStoreItemInWorld", function(base, itemData, kitId)
+		if not itemData then
+			return
+		end
+		local spawnedItem = nil
+		if itemData.Name == "ShopDionysusUpgrade" then
+			spawnedItem = mod.CreateArtemisLoot({
+				SpawnPoint = kitId,
+				ResourceCosts = itemData.ResourceCosts or GetProcessedValue(ConsumableData[itemData.Name].ResourceCosts),
+				DoesNotBlockExit = true,
+				SuppressSpawnSounds = true,
+				BoughtFromShop = true,
+				AddBoostedAnimation = itemData.AddBoostedAnimation,
+				BoonRaritiesOverride = itemData.BoonRaritiesOverride,
+			})
+			spawnedItem.CanReceiveGift = false
+			SetThingProperty({ Property = "SortBoundsScale", Value = 1.0, DestinationId = spawnedItem.ObjectId })
+		end
+		base(itemData, kitId)
+	end)
+end

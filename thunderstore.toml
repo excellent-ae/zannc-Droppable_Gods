@@ -5,9 +5,9 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "zannc"
 name = "Droppable_Gods"
-versionNumber = "1.0.0"
-description = "Allows for Athena, Artemis and Dionysus to spawn like other Olympian Gods"
-websiteUrl = "https://github.com/zanncdwbl/zannc-Droppable_Gods"
+versionNumber = "2.0.0"
+description = "Allows for Athena, Artemis and Dionysus to spawn like other Olympian Gods - Config available."
+websiteUrl = "https://github.com/excellent-ae/zannc-Droppable_Gods"
 containsNsfwContent = false
 
 [package.dependencies]
@@ -42,7 +42,7 @@ target = "./plugins_data"
 
 [publish]
 repository = "https://thunderstore.io"
-communities = [ "hades-ii", ]
+communities = [ "hades-ii", "misc" ]
 
 [publish.categories]
 hades-ii = [ "mods", ]

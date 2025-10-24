@@ -1,5 +1,4 @@
 ---@meta _
-zanncdwbl_Droppable_Gods = zanncdwbl_Droppable_Gods or {}
 
 ---@diagnostic disable-next-line: undefined-global
 local mods = rom.mods
@@ -16,6 +15,7 @@ _PLUGIN = PLUGIN
 game = rom.game
 
 modutil = mods["SGG_Modding-ModUtil"]
+
 chalk = mods["SGG_Modding-Chalk"]
 reload = mods["SGG_Modding-ReLoad"]
 sjson = mods["SGG_Modding-SJSON"]
@@ -27,6 +27,9 @@ public.config = config
 import_as_fallback(rom.game)
 
 local function on_ready()
+	mod = modutil.mod.Mod.Register(_PLUGIN.guid)
+	-- mod = mod or {}
+
 	import("ready.lua")
 	import("sjson.lua")
 

@@ -1,23 +1,284 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
 
-local artemisTraitIndex = {
-	SupportingFireBoon = true,
-	CritBonusBoon = true,
-	DashOmegaBuffBoon = true,
-	HighHealthCritBoon = true,
-	InsideCastCritBoon = true,
-	OmegaCastVolleyBoon = true,
-	TimedCritVulnerabilityBoon = true,
-	FocusCritBoon = true,
-	SorceryCritBoon = true,
-}
-
 local artemisBase = game.DeepCopyTable(zannc_BaseGod)
 
 game.EnemyData.NPC_Artemis_01.GiftTextLineSets.ArtemisGift01.GameStateRequirements = {
 	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "ArtemisUpgrade", "NPC_Artemis_Field_01" } },
 }
+
+local textLineSets = {
+	ArtemisChat01 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0004", UseEventEndSound = true, Text = "Take this, Sister, and go find your mark." },
+	},
+	ArtemisChat02 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0005", UseEventEndSound = true, Text = "Tread ever softly and strike swift and true, Sister." },
+	},
+	ArtemisChat03 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0006", UseEventEndSound = true, Text = "Happened to be in the area again, so thought I'd stop on by." },
+	},
+	ArtemisChat04 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0007", UseEventEndSound = true, Text = "May Moonlight guide you to your prey, and expose his every weakness." },
+	},
+	ArtemisChat05 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0008", UseEventEndSound = true, Text = "Another night, another duty for the Silver Sisters." },
+	},
+	ArtemisChat06 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "CurrentRun", "CurrentRoom", "RoomSetName" },
+				IsAny = { "F" },
+			},
+		},
+		{ Cue = "/VO/Artemis_0009", UseEventEndSound = true, Portrait = "Portrait_Artemis_Serious_01", Text = "I have to say, these woods are not my favorite..." },
+	},
+	ArtemisChat07 = {
+		PlayFirst = true,
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				PathTrue = { "CurrentRun", "BiomesReached", "G" },
+			},
+		},
+		{ Cue = "/VO/Artemis_0010", UseEventEndSound = true, Text = "I can't venture any further below, though I can give you this." },
+	},
+	ArtemisChat08 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0011", UseEventEndSound = true, Text = "The skilled huntress keeps her bag of tricks full and with her at all times." },
+	},
+	ArtemisChat09 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0012", UseEventEndSound = true, Text = "Steady yourself, Sister. You have my full support and more." },
+	},
+	ArtemisChat10 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0013", UseEventEndSound = true, Text = "May your aim ever be true. Not unlike mine!" },
+	},
+	ArtemisChat11 = {
+		PlayFirst = true,
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0014", UseEventEndSound = true, Text = "I still think you should try a bow again sometime..." },
+	},
+	ArtemisChat12 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0015", UseEventEndSound = true, Text = "We hunt alone. Although these run-ins aren't so bad!" },
+	},
+	ArtemisChat13 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0016", UseEventEndSound = true, Text = "Always a pleasure working with you, Sister." },
+	},
+	ArtemisChat14 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				PathTrue = { "CurrentRun", "BiomesReached", "F" },
+			},
+			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+		},
+		{ Cue = "/VO/Artemis_0017", UseEventEndSound = true, Text = "Go cut that wretched Titan down to size for me, would you?" },
+	},
+	ArtemisChat15 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0018", UseEventEndSound = true, Text = "May none dare stand between a witch and her prey." },
+	},
+	ArtemisChat16 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+		},
+		{ Cue = "/VO/Artemis_0019", UseEventEndSound = true, Text = "Fine night for hunting Titans, don't you think?" },
+	},
+	ArtemisChat17 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0020", UseEventEndSound = true, Portrait = "Portrait_Artemis_Serious_01", Text = "Picked up the scent of a few stragglers I'll take care of after this..." },
+	},
+	ArtemisChat18 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0021", UseEventEndSound = true, Text = "You'll find your mark. I know you will." },
+	},
+	ArtemisChat19 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0022", UseEventEndSound = true, Text = "Yours is the most dangerous prey of all. I'm a bit envious!" },
+	},
+	ArtemisChat20 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0023", UseEventEndSound = true, Text = "Here's a little something to go with those witching arts of yours." },
+	},
+	ArtemisChat21 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0024", UseEventEndSound = true, Text = "I've got your back, Sister, so just keep moving forward." },
+	},
+	ArtemisChat22 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0025", UseEventEndSound = true, Text = "We're the Silver Sisters, and we never miss our mark." },
+	},
+	ArtemisChat23 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0026", UseEventEndSound = true, Text = "We are the Silver Sisters, and this is our time to shine." },
+	},
+	ArtemisChat24 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0027", UseEventEndSound = true, Text = "Got to say it's nice to get away from it all like this." },
+	},
+	ArtemisChat25 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "CurrentRun", "SpeechRecord" },
+				HasNone = { "/VO/Artemis_0094" },
+			},
+		},
+		{ Cue = "/VO/Artemis_0028", UseEventEndSound = true, Text = "Fancy running into you again, and here of all places!" },
+	},
+	ArtemisChat26 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0029", UseEventEndSound = true, Text = "You tracked {#Emph}me {#Prev}down this time, I'll have you know!" },
+	},
+	ArtemisChat27 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0030", UseEventEndSound = true, Text = "You were born to do this, Sister, and you're going to succeed." },
+	},
+	ArtemisChat28 = {
+		UseableOffSource = true,
+		{ Cue = "/VO/Artemis_0031", UseEventEndSound = true, Text = "Sure beats being back on that mountaintop, let me tell you." },
+	},
+	ArtemisChat29 = {
+		PlayFirst = true,
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "GameState", "GamePhase" },
+				Comparison = "==",
+				Value = 1,
+			},
+		},
+		{ Cue = "/VO/Artemis_0032", UseEventEndSound = true, Text = "The Moon is full again. May our combined might take you far." },
+	},
+	ArtemisChat30 = {
+		PlayFirst = true,
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "GameState", "GamePhase" },
+				Comparison = "==",
+				Value = 5,
+			},
+		},
+		{ Cue = "/VO/Artemis_0033", UseEventEndSound = true, Text = "A new moon marks a new beginning, so take heart, Sister." },
+	},
+	ArtemisChat31 = {
+		PlayFirst = true,
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "GameState", "GamePhase" },
+				Comparison = "==",
+				Value = 4,
+			},
+		},
+		{ Cue = "/VO/Artemis_0034", UseEventEndSound = true, Text = "The Moon's light wanes again, but your strength needn't falter." },
+	},
+	ArtemisChat32 = {
+		PlayFirst = true,
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "GameState", "GamePhase" },
+				Comparison = "==",
+				Value = 8,
+			},
+		},
+		{ Cue = "/VO/Artemis_0035", UseEventEndSound = true, Text = "As the light of the waxing Moon intensifies, so too does our potential, Sister." },
+	},
+	ArtemisChat33 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				PathTrue = { "CurrentRun", "BiomesReached", "N" },
+			},
+			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+		},
+		{ Cue = "/VO/Artemis_0449", UseEventEndSound = true, Text = "Good hunting on the way up to the mountain, Sister." },
+	},
+	ArtemisChat34 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				PathTrue = { "GameState", "ReachedTrueEnding" },
+			},
+		},
+		{ Cue = "/VO/Artemis_0450", UseEventEndSound = true, Text = "Father better have expressed his gratitude for all you've done." },
+	},
+	ArtemisChat35 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				PathTrue = { "GameState", "ReachedTrueEnding" },
+			},
+			{
+				PathTrue = { "CurrentRun", "BiomesReached", "N" },
+			},
+			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+		},
+		{ Cue = "/VO/Artemis_0451", UseEventEndSound = true, Text = "Good of you to deal with Typhon so that we don't have to anymore!" },
+	},
+	ArtemisChat36 = {
+		UseableOffSource = true,
+		GameStateRequirements = {},
+		{ Cue = "/VO/Artemis_0452", UseEventEndSound = true, Text = "I'll cover your tracks, but first, here's something for the road." },
+	},
+	ArtemisChat37 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				Path = { "CurrentRun", "ProjectileRecord", "ArtemisSniperBolt" },
+				Comparison = "<=",
+				Value = 4,
+			},
+			{
+				PathFalse = { "CurrentRun", "SpeechRecord", "/VO/Artemis_0448" },
+			},
+		},
+		{ Cue = "/VO/Artemis_0453", UseEventEndSound = true, Text = "Next time leave more of them for me, would you?" },
+	},
+	-- 38 blank
+	ArtemisChat39 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				FunctionName = "RequiredHealthFraction",
+				FunctionArgs = { Comparison = ">=", Value = 0.8 },
+			},
+			{
+				FunctionName = "RequireRunsSinceTextLines",
+				FunctionArgs = { TextLines = { "ArtemisAboutSayingLittle01" }, Min = 9 },
+			},
+		},
+		{ Cue = "/VO/Artemis_0467", UseEventEndSound = true, Text = "Clean and efficient, just the way I like it, Sister." },
+	},
+	ArtemisChat40 = {
+		UseableOffSource = true,
+		GameStateRequirements = {
+			{
+				FunctionName = "RequireRunsSinceTextLines",
+				FunctionArgs = { TextLines = { "ArtemisGrantsReward01" }, Min = 9 },
+			},
+		},
+		{ Cue = "/VO/Artemis_0468", UseEventEndSound = true, Text = "Here, a little extra Moon magick for all you've done, and still intend to do." },
+	},
+}
+
+for k, v in pairs(textLineSets) do
+	if not v.Name then
+		v.Name = k
+	end
+end
 
 local overrides = {
 	Name = "ArtemisUpgrade",
@@ -26,6 +287,7 @@ local overrides = {
 	BoonInfoIcon = "BoonInfoSymbolArtemisIcon",
 	SuperSacrificeCombatText = "SuperSacrifice_CombatText_ArtemisUpgrade",
 	LootRejectedText = "Player_GodDispleased_ArtemisUpgrade",
+	GodLoot = config.Artemis.ArtemisNoRequirements, -- * without this, you will have to manually do drop requirements, stacking etc.
 	-- WrathPortrait = "Portrait_Artemis_Wrath_01", -- ! Nope, doesn't exist
 	DoorIcon = "BoonDropArtemisPreview",
 	DoorUpgradedIcon = "BoonDropArtemisUpgradedPreview",
@@ -42,16 +304,16 @@ local overrides = {
 
 	PriorityUpgrades = {},
 	WeaponUpgrades = {},
-	Traits = game.EnemyData.NPC_Artemis_Field_01.Traits,
-	TraitIndex = artemisTraitIndex,
+	-- Traits = game.EnemyData.NPC_Artemis_Field_01.Traits,
+	-- TraitIndex = artemisTraitIndex,
 	MenuTitle = "UpgradeChoiceMenu_Artemis",
 	BoonInfoTitleText = "UpgradeChoiceMenu_Artemis", --* Display name in codex, needed for npcs
-	SurfaceShopIcon = "BoonInfoSymbolArtemisIcon", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes // Unsure if needed for artemis
-	SurfaceShopText = "ArtemisUpgrade_Store", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes // Unsure if needed for artemis
+	SurfaceShopIcon = "BoonInfoSymbolArtemisIcon", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
+	SurfaceShopText = "ArtemisUpgrade_Store", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
 
 	Color = { 91, 255, 100, 255 },
-	LightingColor = { 210, 255, 97, 255 },
-	LootColor = { 110, 255, 0, 255 },
+	LightingColor = { 210, 255, 97, 190 },
+	LootColor = { 110, 255, 0, 180 },
 	SubtitleColor = Color.ArtemisVoice,
 
 	-- ! Voice Lines from here downwards
@@ -93,11 +355,9 @@ local overrides = {
 			},
 		},
 		{ Cue = "/VO/MelinoeField_2808", Text = "It's her..." },
-		{ Cue = "/VO/Melinoe_1477", Text = "She's back." },
-		{ Cue = "/VO/ArtemisKeepsake_0214", Text = "Hey Sister." },
 	},
 
-	InteractTextLineSets = game.EnemyData.NPC_Artemis_Field_01.InteractTextLineSets, -- ! may need to change and do manually, possibly just do NPCChat1-30
+	InteractTextLineSets = textLineSets,
 
 	RejectionVoiceLines = {
 		[1] = { GlobalVoiceLines = "GodRejectedVoiceLines" },
@@ -143,23 +403,7 @@ end
 zannc_AddGodtoRunData(game.RewardStoreData.RunProgress, "ArtemisUpgrade")
 zannc_AddGodtoRunData(game.RewardStoreData.TartarusRewards, "ArtemisUpgrade")
 
---? Dont think i need these below
--- -- Adding Icons to default artemis, cause why does she not already have it? ////// ??? does she even need it????
--- game.EnemyData.NPC_Artemis_Field_01.DoorIcon = "BoonDropArtemisPreview"
-
--- -- Dirty code, don't like it, couldn't find a better way
--- -- makes it so if you pick up an artemis boon, it will still count toward codex aka her field version
--- modutil.mod.Path.Wrap("CheckCodexUnlock", function(base, chapterName, entryName, args)
--- 	local GodArtemis = game.GameState.UseRecord.ArtemisUpgrade or 0
--- 	local NPCArtemis = game.GameState.UseRecord.NPC_Artemis_Field_01 or 0
-
--- 	local MaxArtemis = math.max(GodArtemis, NPCArtemis)
-
--- 	game.GameState.UseRecord.ArtemisUpgrade = MaxArtemis
--- 	game.GameState.UseRecord.NPC_Artemis_Field_01 = MaxArtemis
-
--- 	base(chapterName, entryName, args)
--- end)
+game.LinkedTraitData.ArtemisCoreTraits = {}
 
 -- Change Artemis Codex to not have requirements
 game.CodexData.OlympianGods.Entries.NPC_Artemis_01 = {
@@ -182,25 +426,25 @@ game.CodexData.OlympianGods.Entries.NPC_Artemis_01 = {
 
 --#region Artemis SJSON
 
-zanncdwbl_Droppable_Gods.Player_GodDispleased_ArtemisUpgrade = sjson.to_object({
+mod.Player_GodDispleased_ArtemisUpgrade = sjson.to_object({
 	Id = "Player_GodDispleased_ArtemisUpgrade",
 	DisplayName = "Artemis Grew Displeased!",
 	Description = nil,
-}, zanncdwbl_Droppable_Gods.Order)
+}, mod.Order)
 
-zanncdwbl_Droppable_Gods.SuperSacrifice_CombatText_ArtemisUpgrade = sjson.to_object({
+mod.SuperSacrifice_CombatText_ArtemisUpgrade = sjson.to_object({
 	Id = "SuperSacrifice_CombatText_ArtemisUpgrade",
 	DisplayName = "{#CombatTextHighlightFormat}Boons of Artemis {#Prev}{#UpgradeFormat}+{$TempTextData.Amount}{#Prev}{!Icons.PomLevel}!",
 	Description = nil,
-}, zanncdwbl_Droppable_Gods.Order)
+}, mod.Order)
 
-sjson.hook(zanncdwbl_Droppable_Gods.MacroTextFile, function(data)
-	table.insert(data.Texts, zanncdwbl_Droppable_Gods.Player_GodDispleased_ArtemisUpgrade)
-	table.insert(data.Texts, zanncdwbl_Droppable_Gods.SuperSacrifice_CombatText_ArtemisUpgrade)
+sjson.hook(mod.MacroTextFile, function(data)
+	table.insert(data.Texts, mod.Player_GodDispleased_ArtemisUpgrade)
+	table.insert(data.Texts, mod.SuperSacrifice_CombatText_ArtemisUpgrade)
 end)
 
 -- ! Actual Boon Drop
-zanncdwbl_Droppable_Gods.ArtemisUpgrade = sjson.to_object({
+mod.ArtemisUpgrade = sjson.to_object({
 	Name = "ArtemisUpgrade",
 	InheritFrom = "BaseBoon",
 	DisplayInEditor = true,
@@ -209,35 +453,35 @@ zanncdwbl_Droppable_Gods.ArtemisUpgrade = sjson.to_object({
 		Graphic = "BoonDropArtemis",
 		AmbientSound = "", -- !!!!!!!!!!!!!!!!!
 	},
-}, zanncdwbl_Droppable_Gods.GameplayOrder)
+}, mod.GameplayOrder)
 
-sjson.hook(zanncdwbl_Droppable_Gods.GameplayFile, function(data)
-	table.insert(data.Obstacles, zanncdwbl_Droppable_Gods.ArtemisUpgrade)
+sjson.hook(mod.GameplayFile, function(data)
+	table.insert(data.Obstacles, mod.ArtemisUpgrade)
 end)
 -- end
 
-zanncdwbl_Droppable_Gods.BoonInfoSymbolArtemisIcon = sjson.to_object({
+mod.BoonInfoSymbolArtemisIcon = sjson.to_object({
 	Name = "BoonInfoSymbolArtemisIcon",
 	InheritFrom = "BoonInfoSymbolBase",
 	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisIconSpin0015"),
 	OffsetZ = nil,
 	Scale = nil,
 	Hue = nil,
-}, zanncdwbl_Droppable_Gods.IconOrder)
+}, mod.IconOrder)
 
-sjson.hook(zanncdwbl_Droppable_Gods.GUIScreensVFXFile, function(data)
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonInfoSymbolArtemisIcon)
+sjson.hook(mod.GUIScreensVFXFile, function(data)
+	table.insert(data.Animations, mod.BoonInfoSymbolArtemisIcon)
 end)
 
-zanncdwbl_Droppable_Gods.BoonDropArtemis = sjson.to_object({
+mod.BoonDropArtemis = sjson.to_object({
 	Name = "BoonDropArtemis",
 	InheritFrom = "BoonDropGold",
 	ChildAnimation = "BoonDropA-Artemis",
 	CreateAnimations = nil,
 	Color = nil,
-}, zanncdwbl_Droppable_Gods.FxBoonDropOrder)
+}, mod.FxBoonDropOrder)
 
-zanncdwbl_Droppable_Gods.BoonDropA_Artemis = sjson.to_object({
+mod.BoonDropA_Artemis = sjson.to_object({
 	Name = "BoonDropA-Artemis",
 	InheritFrom = "BoonDropA",
 	ChildAnimation = "BoonDropB-Artemis",
@@ -251,9 +495,9 @@ zanncdwbl_Droppable_Gods.BoonDropA_Artemis = sjson.to_object({
 		Green = 0.62,
 		Blue = 0.21,
 	},
-}, zanncdwbl_Droppable_Gods.FxBoonDropOrder)
+}, mod.FxBoonDropOrder)
 
-zanncdwbl_Droppable_Gods.BoonDropB_Artemis = sjson.to_object({
+mod.BoonDropB_Artemis = sjson.to_object({
 	Name = "BoonDropB-Artemis",
 	InheritFrom = "BoonDropB",
 	ChildAnimation = "BoonDropC-Artemis",
@@ -267,9 +511,9 @@ zanncdwbl_Droppable_Gods.BoonDropB_Artemis = sjson.to_object({
 		Green = 0.51,
 		Blue = 0.12,
 	},
-}, zanncdwbl_Droppable_Gods.FxBoonDropOrder)
+}, mod.FxBoonDropOrder)
 
-zanncdwbl_Droppable_Gods.BoonDropC_Artemis = sjson.to_object({
+mod.BoonDropC_Artemis = sjson.to_object({
 	Name = "BoonDropC-Artemis",
 	InheritFrom = "BoonDropC",
 	ChildAnimation = "BoonDropArtemisIcon",
@@ -283,9 +527,9 @@ zanncdwbl_Droppable_Gods.BoonDropC_Artemis = sjson.to_object({
 		Green = 0.57,
 		Blue = 0.31,
 	},
-}, zanncdwbl_Droppable_Gods.FxBoonDropOrder)
+}, mod.FxBoonDropOrder)
 
-zanncdwbl_Droppable_Gods.BoonDropArtemisIcon = sjson.to_object({
+mod.BoonDropArtemisIcon = sjson.to_object({
 	Name = "BoonDropArtemisIcon",
 	InheritFrom = "BoonDropIcon",
 	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisIconSpin"),
@@ -293,9 +537,9 @@ zanncdwbl_Droppable_Gods.BoonDropArtemisIcon = sjson.to_object({
 	OffsetZ = nil,
 	Scale = nil,
 	Hue = 0.9,
-}, zanncdwbl_Droppable_Gods.IconOrder)
+}, mod.IconOrder)
 
-zanncdwbl_Droppable_Gods.BoonDropArtemisPreview = sjson.to_object({
+mod.BoonDropArtemisPreview = sjson.to_object({
 	Name = "BoonDropArtemisPreview",
 	InheritFrom = "BoonDropRoomRewardIconPreviewBase",
 	NumFrames = 1,
@@ -305,36 +549,121 @@ zanncdwbl_Droppable_Gods.BoonDropArtemisPreview = sjson.to_object({
 	ColorFromOwner = "Maintain",
 	AngleFromOwner = "Ignore",
 	Sound = "", -- !
-}, zanncdwbl_Droppable_Gods.FxMainOrder)
+}, mod.FxMainOrder)
 
-zanncdwbl_Droppable_Gods.BoonDropArtemisUpgradedPreview = sjson.to_object({
+mod.BoonDropArtemisUpgradedPreview = sjson.to_object({
 	Name = "BoonDropArtemisUpgradedPreview",
 	InheritFrom = "BoonDropArtemisPreview",
 	ChildAnimation = "BoonUpgradedPreviewSparkles",
 	CreateAnimations = nil,
 	Color = nil,
-}, zanncdwbl_Droppable_Gods.FxBoonDropOrder)
+}, mod.FxBoonDropOrder)
 
-sjson.hook(zanncdwbl_Droppable_Gods.ItemsGeneralVFX, function(data)
+sjson.hook(mod.ItemsGeneralVFX, function(data)
 	-- Everything is just for Artemis Icon and Drops
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropArtemis)
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropA_Artemis)
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropB_Artemis)
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropC_Artemis)
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropArtemisIcon)
+	table.insert(data.Animations, mod.BoonDropArtemis)
+	table.insert(data.Animations, mod.BoonDropA_Artemis)
+	table.insert(data.Animations, mod.BoonDropB_Artemis)
+	table.insert(data.Animations, mod.BoonDropC_Artemis)
+	table.insert(data.Animations, mod.BoonDropArtemisIcon)
 
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropArtemisPreview)
-	table.insert(data.Animations, zanncdwbl_Droppable_Gods.BoonDropArtemisUpgradedPreview)
+	table.insert(data.Animations, mod.BoonDropArtemisPreview)
+	table.insert(data.Animations, mod.BoonDropArtemisUpgradedPreview)
 end)
 
-zanncdwbl_Droppable_Gods.ArtemisUpgrade_Store = sjson.to_object({
+mod.ArtemisUpgrade_Store = sjson.to_object({
 	Id = "ArtemisUpgrade_Store",
 	DisplayName = "Boon of Artemis",
 	Description = "Receive your choice of {#BoldFormat}1 {#Prev}out of {$ScreenData.UpgradeChoice.MaxChoices} {$Keywords.GodBoonPlural} from {#BoldFormat}Artemis{#Prev}.",
-}, zanncdwbl_Droppable_Gods.Order)
+}, mod.Order)
 
-sjson.hook(zanncdwbl_Droppable_Gods.TraitTextFile, function(data)
-	table.insert(data.Texts, zanncdwbl_Droppable_Gods.ArtemisUpgrade_Store)
+sjson.hook(mod.TraitTextFile, function(data)
+	table.insert(data.Texts, mod.ArtemisUpgrade_Store)
 end)
 
 --#endregion
+
+-- modutil.mod.Path.Wrap("EndRun", function(base, currentRun)
+-- 	-- -- Only target these three gods
+-- 	-- local targetGods = {
+-- 	-- 	"ArtemisUpgrade",
+-- 	-- 	"AthenaUpgrade",
+-- 	-- 	"DionysusUpgrade",
+-- 	-- }
+
+-- 	-- -- 1. Fix LineHistory SourceNames
+-- 	-- if currentRun.LineHistory then
+-- 	-- 	for id, lineData in pairs(currentRun.LineHistory) do
+-- 	-- 		if lineData.SourceName == "ArtemisUpgrade" then
+-- 	-- 			lineData.SourceName = "NPC_Artemis_01"
+-- 	-- 		elseif lineData.SourceName == "AthenaUpgrade" then
+-- 	-- 			lineData.SourceName = "NPC_Athena_01"
+-- 	-- 		elseif lineData.SourceName == "DionysusUpgrade" then
+-- 	-- 			lineData.SourceName = "NPC_Dionysus_01"
+-- 	-- 		end
+-- 	-- 	end
+-- 	-- end
+
+-- 	-- --! 2. Remove from UseRecord
+-- 	-- if currentRun.UseRecord then
+-- 	-- 	for _, god in ipairs(targetGods) do
+-- 	-- 		currentRun.UseRecord[god] = nil
+-- 	-- 	end
+-- 	-- end
+
+-- 	-- -- 3. Remove from RoomHistory UseRecords
+-- 	-- if currentRun.RoomHistory then
+-- 	-- 	for roomId, roomData in pairs(currentRun.RoomHistory) do
+-- 	-- 		if roomData.UseRecord then
+-- 	-- 			for _, god in ipairs(targetGods) do
+-- 	-- 				roomData.UseRecord[god] = nil
+-- 	-- 			end
+-- 	-- 		end
+-- 	-- 	end
+-- 	-- end
+
+-- 	-- -- 4. Remove from LootTypeHistory
+-- 	-- if currentRun.LootTypeHistory then
+-- 	-- 	for _, god in ipairs(targetGods) do
+-- 	-- 		currentRun.LootTypeHistory[god] = nil
+-- 	-- 	end
+-- 	-- end
+
+-- 	-- -- 5. Remove from NPCInteractions
+-- 	-- if currentRun.NPCInteractions then
+-- 	-- 	for _, god in ipairs(targetGods) do
+-- 	-- 		currentRun.NPCInteractions[god] = nil
+-- 	-- 	end
+-- 	-- end
+
+-- 	-- -- 6. Remove from LootChoiceHistory
+-- 	-- if currentRun.LootChoiceHistory then
+-- 	-- 	for i, choiceData in ipairs(currentRun.LootChoiceHistory) do
+-- 	-- 		if choiceData.UpgradeName then
+-- 	-- 			for _, god in ipairs(targetGods) do
+-- 	-- 				if choiceData.UpgradeName == god then
+-- 	-- 					currentRun.LootChoiceHistory[i] = nil
+-- 	-- 				end
+-- 	-- 			end
+-- 	-- 		end
+-- 	-- 	end
+-- 	-- 	-- Clean up nil entries
+-- 	-- 	local cleanedChoices = {}
+-- 	-- 	for i, choice in ipairs(currentRun.LootChoiceHistory) do
+-- 	-- 		if choice ~= nil then
+-- 	-- 			table.insert(cleanedChoices, choice)
+-- 	-- 		end
+-- 	-- 	end
+-- 	-- 	currentRun.LootChoiceHistory = cleanedChoices
+-- 	-- end
+
+-- 	-- -- 7. Remove from PickedTraits
+-- 	-- if currentRun.PickedTraits then
+-- 	-- 	for _, god in ipairs(targetGods) do
+-- 	-- 		currentRun.PickedTraits[god] = nil
+-- 	-- 	end
+-- 	-- end
+
+-- 	-- Call original function
+-- 	base(currentRun)
+-- end)
