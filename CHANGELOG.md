@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+Fixed issue which wouldnt allow any traits in slots to overwrite already slotted boons.
 
 ## [2.0.1] - 2025-10-24
 

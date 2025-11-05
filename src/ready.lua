@@ -24,7 +24,7 @@ zannc_BaseGod = {
 	ConfirmSound = "/SFX/Menu Sounds/GodBoonChoiceConfirm",
 	BackgroundAnimation = "DialogueBackground_Olympus_BoonScreen",
 	OnUsedFunctionArgs = { PreserveContextArt = true },
-	InheritFrom = { "BaseLoot", "BaseSoundPackage" },
+	-- InheritFrom = { "BaseLoot", "BaseSoundPackage" },
 	ReplaceSpecialForGoldify = true,
 	BanUnpickedBoonsEligible = true,
 
@@ -87,7 +87,7 @@ zannc_BaseGod = {
 	-- Refer to Artemis for next 3
 	BoonInfoTitleText = nil, --* Display name in codex, needed for npcs
 	SurfaceShopText = nil, --* Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
-	SurfaceShopIcon = nil,
+	SurfaceShopIcon = nil, --* Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
 
 	--#region Traits
 	-- ! Example Traits
@@ -225,16 +225,13 @@ ModUtil.LoadOnce(function()
 		local traits = game.EnemyData[godName].Traits
 		local traitIndex = getTraitIndex(godName)
 
-		game.LootData[k].Traits = traits
+		if not traits.Slot then -- This...POS. - If it has a slot, do not add to traits or else it will not allow for trait replacements.
+			game.LootData[k].Traits = traits
+		end
 		game.LootData[k].TraitIndex = traitIndex
 		game.EnemyData[godName].TraitIndex = traitIndex
-
-		--
-		-- game.ScreenData.BoonInfo.TraitDictionary[k] = traitIndex
-		-- game.ScreenData.BoonInfo.TraitDictionary[godName] = traitIndex
-
-		-- game.ScreenData.BoonInfo.TraitSortOrder[k] = traits
-		-- game.ScreenData.BoonInfo.TraitSortOrder[godName] = traits
+		game.ScreenData.BoonInfo.TraitDictionary[k] = traitIndex
+		game.ScreenData.BoonInfo.TraitSortOrder[k] = traits
 	end
 end)
 
@@ -269,6 +266,7 @@ modutil.mod.Path.Wrap("AttemptOpenUpgradeChoiceBoonInfo", function(base, screen,
 	end
 end)
 
+--#region requirements
 -- * Requirements Stuff
 -- !Artemis
 if not config.Artemis.ArtemisNoRequirements then
@@ -518,3 +516,4 @@ if not config.Dionysus.DionysusNoRequirements then
 		base(itemData, kitId)
 	end)
 end
+--#endregion

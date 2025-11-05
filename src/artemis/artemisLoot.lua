@@ -404,6 +404,7 @@ zannc_AddGodtoRunData(game.RewardStoreData.RunProgress, "ArtemisUpgrade")
 zannc_AddGodtoRunData(game.RewardStoreData.TartarusRewards, "ArtemisUpgrade")
 
 game.LinkedTraitData.ArtemisCoreTraits = {}
+game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = {}
 
 -- Change Artemis Codex to not have requirements
 game.CodexData.OlympianGods.Entries.NPC_Artemis_01 = {
@@ -582,88 +583,3 @@ sjson.hook(mod.TraitTextFile, function(data)
 end)
 
 --#endregion
-
--- modutil.mod.Path.Wrap("EndRun", function(base, currentRun)
--- 	-- -- Only target these three gods
--- 	-- local targetGods = {
--- 	-- 	"ArtemisUpgrade",
--- 	-- 	"AthenaUpgrade",
--- 	-- 	"DionysusUpgrade",
--- 	-- }
-
--- 	-- -- 1. Fix LineHistory SourceNames
--- 	-- if currentRun.LineHistory then
--- 	-- 	for id, lineData in pairs(currentRun.LineHistory) do
--- 	-- 		if lineData.SourceName == "ArtemisUpgrade" then
--- 	-- 			lineData.SourceName = "NPC_Artemis_01"
--- 	-- 		elseif lineData.SourceName == "AthenaUpgrade" then
--- 	-- 			lineData.SourceName = "NPC_Athena_01"
--- 	-- 		elseif lineData.SourceName == "DionysusUpgrade" then
--- 	-- 			lineData.SourceName = "NPC_Dionysus_01"
--- 	-- 		end
--- 	-- 	end
--- 	-- end
-
--- 	-- --! 2. Remove from UseRecord
--- 	-- if currentRun.UseRecord then
--- 	-- 	for _, god in ipairs(targetGods) do
--- 	-- 		currentRun.UseRecord[god] = nil
--- 	-- 	end
--- 	-- end
-
--- 	-- -- 3. Remove from RoomHistory UseRecords
--- 	-- if currentRun.RoomHistory then
--- 	-- 	for roomId, roomData in pairs(currentRun.RoomHistory) do
--- 	-- 		if roomData.UseRecord then
--- 	-- 			for _, god in ipairs(targetGods) do
--- 	-- 				roomData.UseRecord[god] = nil
--- 	-- 			end
--- 	-- 		end
--- 	-- 	end
--- 	-- end
-
--- 	-- -- 4. Remove from LootTypeHistory
--- 	-- if currentRun.LootTypeHistory then
--- 	-- 	for _, god in ipairs(targetGods) do
--- 	-- 		currentRun.LootTypeHistory[god] = nil
--- 	-- 	end
--- 	-- end
-
--- 	-- -- 5. Remove from NPCInteractions
--- 	-- if currentRun.NPCInteractions then
--- 	-- 	for _, god in ipairs(targetGods) do
--- 	-- 		currentRun.NPCInteractions[god] = nil
--- 	-- 	end
--- 	-- end
-
--- 	-- -- 6. Remove from LootChoiceHistory
--- 	-- if currentRun.LootChoiceHistory then
--- 	-- 	for i, choiceData in ipairs(currentRun.LootChoiceHistory) do
--- 	-- 		if choiceData.UpgradeName then
--- 	-- 			for _, god in ipairs(targetGods) do
--- 	-- 				if choiceData.UpgradeName == god then
--- 	-- 					currentRun.LootChoiceHistory[i] = nil
--- 	-- 				end
--- 	-- 			end
--- 	-- 		end
--- 	-- 	end
--- 	-- 	-- Clean up nil entries
--- 	-- 	local cleanedChoices = {}
--- 	-- 	for i, choice in ipairs(currentRun.LootChoiceHistory) do
--- 	-- 		if choice ~= nil then
--- 	-- 			table.insert(cleanedChoices, choice)
--- 	-- 		end
--- 	-- 	end
--- 	-- 	currentRun.LootChoiceHistory = cleanedChoices
--- 	-- end
-
--- 	-- -- 7. Remove from PickedTraits
--- 	-- if currentRun.PickedTraits then
--- 	-- 	for _, god in ipairs(targetGods) do
--- 	-- 		currentRun.PickedTraits[god] = nil
--- 	-- 	end
--- 	-- end
-
--- 	-- Call original function
--- 	base(currentRun)
--- end)

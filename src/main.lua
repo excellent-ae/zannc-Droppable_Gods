@@ -4,8 +4,8 @@
 local mods = rom.mods
 
 ---@diagnostic disable: lowercase-global
----@module 'SGG_Modding-ENVY-auto'
-mods["SGG_Modding-ENVY"].auto()
+---@module 'LuaENVY-ENVY-auto'
+mods["LuaENVY-ENVY"].auto()
 
 ---@diagnostic disable-next-line: undefined-global
 rom = rom
