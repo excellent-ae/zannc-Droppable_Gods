@@ -1,11 +1,11 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
 
-local athenaBase = game.DeepCopyTable(zannc_BaseGod)
-
 game.EnemyData.NPC_Athena_01.GiftTextLineSets.AthenaGift01.GameStateRequirements = {
 	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "AthenaUpgrade", "NPC_Athena_01" } },
 }
+
+game.EnemyData.NPC_Athena_01.WeaponUpgrades = {}
 
 local textLineSets = {
 	AthenaChat01 = {
@@ -279,46 +279,29 @@ for k, v in pairs(textLineSets) do
 	end
 end
 
-local overrides = {
-	Name = "AthenaUpgrade",
-	Speaker = "NPC_Athena_01",
-	SpeakerName = "Athena",
-	BoonInfoIcon = "BoonInfoSymbolAthenaIcon",
-	SuperSacrificeCombatText = "SuperSacrifice_CombatText_AthenaUpgrade",
-	LootRejectedText = "Player_GodDispleased_AthenaUpgrade",
-	GodLoot = config.Athena.AthenaNoRequirements, -- * without this, you will have to manually do drop requirements, stacking etc.
+local spawnrequirements = false
+if config.Athena.requirements then
+	spawnrequirements = true
+end
 
-	-- WrathPortrait = "Portrait_Athena_Wrath_01", -- ! Nope, doesn't exist
-	DoorIcon = "BoonDropAthenaPreview",
-	DoorUpgradedIcon = "BoonDropAthenaUpgradedPreview",
-	Icon = "BoonSymbolAthena",
-	SpawnSound = "/SFX/AthenaWrathHolyShield",
-	PortraitEnterSound = "/SFX/AthenaWrathHolyShield",
-	OverlayAnim = "AthenaOverlay",
-	Gender = "Female",
+gods.InitializeGod({
+	godName = "Athena",
+	godType = "god",
+	Gender = "F",
+	LoadPackages = { "Athena" },
 	FlavorTextIds = { "AthenaUpgrade_FlavorText01", "AthenaUpgrade_FlavorText02", "AthenaUpgrade_FlavorText03" },
-	UpgradeSelectedSound = "/SFX/AthenaBoonChoice",
-	EchoLastRewardId = "EchoLastRewardBoon_Athena",
-	Portrait = "Portrait_Athena_Default_01",
-	LoadPackages = { "Athena" }, -- * Also has NPC_Athena_01
-
-	PriorityUpgrades = {},
-	WeaponUpgrades = {},
-	-- Traits = game.EnemyData.NPC_Athena_01.Traits,
-	-- TraitIndex = athenaTraitIndex,
-	MenuTitle = "UpgradeChoiceMenu_Athena",
-	BoonInfoTitleText = "UpgradeChoiceMenu_Athena", --* Display name in codex, needed for npcs
-	SurfaceShopIcon = "BoonInfoSymbolAthenaIcon", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes // Unsure if needed for Athena
-	SurfaceShopText = "AthenaUpgrade_Store", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes // Unsure if needed for Athena
-
+	SFX_Portrait = "/SFX/AthenaWrathHolyShield",
 	Color = { 91, 255, 100, 255 },
-	LootColor = { 175, 157, 255, 255 },
 	LightingColor = { 175, 157, 255, 255 },
+	LootColor = { 175, 157, 255, 235 },
 	SubtitleColor = Color.AthenaVoice,
+	WeaponUpgrades = game.EnemyData.NPC_Athena_01.WeaponUpgrades,
+	Traits = game.EnemyData.NPC_Athena_01.Traits,
+
+	SpawnLikeHermes = spawnrequirements,
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
-
 	OnSpawnVoiceLines = {
 		BreakIfPlayed = true,
 		RandomRemaining = true,
@@ -379,195 +362,19 @@ local overrides = {
 	BlindBoxOpenedVoiceLines = {}, -- n/a, same as shop
 
 	UpgradeMenuOpenVoiceLines = game.EnemyData.NPC_Athena_01.UpgradeMenuOpenVoiceLines,
-
 	--#endregion
-}
+})
 
-for k, v in pairs(overrides) do
-	athenaBase[k] = v
-end
-
-game.LootData.AthenaUpgrade = athenaBase
-
-zannc_AddGodtoRunData(game.RewardStoreData.RunProgress, "AthenaUpgrade")
-zannc_AddGodtoRunData(game.RewardStoreData.TartarusRewards, "AthenaUpgrade")
-
-game.LinkedTraitData.AthenaCoreTraits = {}
-
--- Change Athena Codex to not have requirements
-game.CodexData.OlympianGods.Entries.NPC_Athena_01 = {
-	-- NoRequirements = true,
-
-	Entries = {
-		{
-			UnlockGameStateRequirements = {
-				{
-					PathTrue = { "GameState", "TextLinesRecord", "AthenaGift01" },
-				},
-			},
-			Text = "CodexData_Athena_01",
-		},
+gods.CreateOlympianSJSONData({
+	godName = "Athena",
+	godType = "god",
+	skipBoonSelectSymbol = true,
+	iconSpinPath = "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaIconSpin",
+	previewPath = "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaPreview",
+	colorA = { Red = 0.76, Green = 0.64, Blue = 0.16 },
+	colorB = { Red = 0.68, Green = 0.57, Blue = 0.12 },
+	colorC = { Red = 0.60, Green = 0.51, Blue = 0.19 },
+	portraitData = {
+		skipNeutralPortrait = true,
 	},
-	Image = "Codex_Portrait_Athena",
-	BoonInfoEnemyName = "NPC_Athena_01",
-	BoonInfoAllowPinning = true,
-}
-
---#region Athena SJSON
-
-mod.Player_GodDispleased_AthenaUpgrade = sjson.to_object({
-	Id = "Player_GodDispleased_AthenaUpgrade",
-	DisplayName = "Athena Grew Displeased!",
-	Description = nil,
-}, mod.Order)
-
-mod.SuperSacrifice_CombatText_AthenaUpgrade = sjson.to_object({
-	Id = "SuperSacrifice_CombatText_AthenaUpgrade",
-	DisplayName = "{#CombatTextHighlightFormat}Boons of Athena {#Prev}{#UpgradeFormat}+{$TempTextData.Amount}{#Prev}{!Icons.PomLevel}!",
-	Description = nil,
-}, mod.Order)
-
-sjson.hook(mod.MacroTextFile, function(data)
-	table.insert(data.Texts, mod.Player_GodDispleased_AthenaUpgrade)
-	table.insert(data.Texts, mod.SuperSacrifice_CombatText_AthenaUpgrade)
-end)
-
--- ! Actual Boon Drop
-mod.AthenaUpgrade = sjson.to_object({
-	Name = "AthenaUpgrade",
-	InheritFrom = "BaseBoon",
-	DisplayInEditor = true,
-	Thing = {
-		EditorOutlineDrawBounds = false,
-		Graphic = "BoonDropAthena",
-		AmbientSound = "", -- !!!!!!!!!!!!!!!!!
-	},
-}, mod.GameplayOrder)
-
-sjson.hook(mod.GameplayFile, function(data)
-	table.insert(data.Obstacles, mod.AthenaUpgrade)
-end)
--- end
-
-mod.BoonInfoSymbolAthenaIcon = sjson.to_object({
-	Name = "BoonInfoSymbolAthenaIcon",
-	InheritFrom = "BoonInfoSymbolBase",
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaIconSpin0015"),
-	OffsetZ = nil,
-	Scale = nil,
-	Hue = nil,
-}, mod.IconOrder)
-
-sjson.hook(mod.GUIScreensVFXFile, function(data)
-	table.insert(data.Animations, mod.BoonInfoSymbolAthenaIcon)
-end)
-
-mod.BoonDropAthena = sjson.to_object({
-	Name = "BoonDropAthena",
-	InheritFrom = "BoonDropGold",
-	ChildAnimation = "BoonDropA-Athena",
-	CreateAnimations = nil,
-	Color = nil,
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropA_Athena = sjson.to_object({
-	Name = "BoonDropA-Athena",
-	InheritFrom = "BoonDropA",
-	ChildAnimation = "BoonDropB-Athena",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.76,
-		Green = 0.64,
-		Blue = 0.16,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropB_Athena = sjson.to_object({
-	Name = "BoonDropB-Athena",
-	InheritFrom = "BoonDropB",
-	ChildAnimation = "BoonDropC-Athena",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.68,
-		Green = 0.57,
-		Blue = 0.12,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropC_Athena = sjson.to_object({
-	Name = "BoonDropC-Athena",
-	InheritFrom = "BoonDropC",
-	ChildAnimation = "BoonDropAthenaIcon",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.60,
-		Green = 0.51,
-		Blue = 0.19,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropAthenaIcon = sjson.to_object({
-	Name = "BoonDropAthenaIcon",
-	InheritFrom = "BoonDropIcon",
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaIconSpin"),
-	--? Not needed I think if it looks fine
-	OffsetZ = nil,
-	Scale = nil,
-	Hue = 0.9,
-}, mod.IconOrder)
-
-mod.BoonDropAthenaPreview = sjson.to_object({
-	Name = "BoonDropAthenaPreview",
-	InheritFrom = "BoonDropRoomRewardIconPreviewBase",
-	NumFrames = 1,
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaPreview"),
-	OffsetZ = 0,
-	Scale = 1.0,
-	ColorFromOwner = "Maintain",
-	AngleFromOwner = "Ignore",
-	Sound = "", -- !
-}, mod.FxMainOrder)
-
-mod.BoonDropAthenaUpgradedPreview = sjson.to_object({
-	Name = "BoonDropAthenaUpgradedPreview",
-	InheritFrom = "BoonDropAthenaPreview",
-	ChildAnimation = "BoonUpgradedPreviewSparkles",
-	CreateAnimations = nil,
-	Color = nil,
-}, mod.FxBoonDropOrder)
-
-sjson.hook(mod.ItemsGeneralVFX, function(data)
-	-- Everything is just for Athena Icon and Drops
-	table.insert(data.Animations, mod.BoonDropAthena)
-	table.insert(data.Animations, mod.BoonDropA_Athena)
-	table.insert(data.Animations, mod.BoonDropB_Athena)
-	table.insert(data.Animations, mod.BoonDropC_Athena)
-	table.insert(data.Animations, mod.BoonDropAthenaIcon)
-
-	table.insert(data.Animations, mod.BoonDropAthenaPreview)
-	table.insert(data.Animations, mod.BoonDropAthenaUpgradedPreview)
-end)
-
-mod.AthenaUpgrade_Store = sjson.to_object({
-	Id = "AthenaUpgrade_Store",
-	DisplayName = "Boon of Athena",
-	Description = "Receive your choice of {#BoldFormat}1 {#Prev}out of {$ScreenData.UpgradeChoice.MaxChoices} {$Keywords.GodBoonPlural} from {#BoldFormat}Athena{#Prev}.",
-}, mod.Order)
-
-sjson.hook(mod.TraitTextFile, function(data)
-	table.insert(data.Texts, mod.AthenaUpgrade_Store)
-end)
-
---#endregion
+})

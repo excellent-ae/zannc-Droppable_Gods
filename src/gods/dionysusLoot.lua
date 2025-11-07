@@ -1,11 +1,11 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
 
-local dionysusBase = game.DeepCopyTable(zannc_BaseGod)
-
 game.EnemyData.NPC_Dionysus_01.GiftTextLineSets.DionysusGift01.GameStateRequirements = {
 	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "DionysusUpgrade", "NPC_Dionysus_01" } },
 }
+
+game.EnemyData.NPC_Dionysus_01.WeaponUpgrades = {}
 
 local textLineSets = {
 	DionysusChat01 = {
@@ -196,46 +196,29 @@ for k, v in pairs(textLineSets) do
 	end
 end
 
-local overrides = {
-	Name = "DionysusUpgrade",
-	Speaker = "NPC_Dionysus_01",
-	SpeakerName = "Dionysus",
-	BoonInfoIcon = "BoonInfoSymbolDionysusIcon",
-	SuperSacrificeCombatText = "SuperSacrifice_CombatText_DionysusUpgrade",
-	LootRejectedText = "Player_GodDispleased_DionysusUpgrade",
-	GodLoot = config.Dionysus.DionysusNoRequirements, -- * without this, you will have to manually do drop requirements, stacking etc.
+local spawnrequirements = false
+if config.Dionysus.requirements then
+	spawnrequirements = true
+end
 
-	-- WrathPortrait = "Portrait_Dionysus_Wrath_01", -- ! Nope, doesn't exist
-	DoorIcon = "BoonDropDionysusPreview",
-	DoorUpgradedIcon = "BoonDropDionysusUpgradedPreview",
-	Icon = "BoonSymbolDionysus",
-	SpawnSound = "/SFX/DionysusBoonWineLaugh",
-	PortraitEnterSound = "/SFX/DionysusBoonWineLaugh",
-	OverlayAnim = "DionysusOverlay",
-	Gender = "Male",
+gods.InitializeGod({
+	godName = "Dionysus",
+	godType = "god",
+	Gender = "F",
+	LoadPackages = { "Dionysus" },
 	FlavorTextIds = { "DionysusUpgrade_FlavorText01", "DionysusUpgrade_FlavorText02", "DionysusUpgrade_FlavorText03" },
-	UpgradeSelectedSound = "/SFX/DionysusBoonChoice",
-	EchoLastRewardId = "EchoLastRewardBoon_Dionysus",
-	Portrait = "Portrait_Dionysus_Default_01",
-	LoadPackages = { "Dionysus" }, -- * Also has NPC_Dionysus_01
-
-	PriorityUpgrades = {},
-	WeaponUpgrades = {},
-	-- Traits = game.EnemyData.NPC_Dionysus_01.Traits,
-	-- TraitIndex = dionysusTraitIndex,
-	MenuTitle = "UpgradeChoiceMenu_Dionysus",
-	BoonInfoTitleText = "UpgradeChoiceMenu_Dionysus", --* Display name in codex, needed for npcs
-	SurfaceShopIcon = "BoonInfoSymbolDionysusIcon", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes // Unsure if needed for Dionysus
-	SurfaceShopText = "DionysusUpgrade_Store", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes // Unsure if needed for Dionysus
-
+	SFX_Portrait = "/SFX/DionysusBoonWineLaugh",
 	Color = { 91, 255, 100, 255 },
-	LootColor = { 200, 0, 255, 255 },
 	LightingColor = { 200, 0, 255, 255 },
+	LootColor = { 200, 0, 255, 227 },
 	SubtitleColor = Color.DionysusVoice,
+	WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades,
+	Traits = game.EnemyData.NPC_Dionysus_01.Traits,
+
+	SpawnLikeHermes = spawnrequirements,
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
-
 	OnSpawnVoiceLines = {
 		BreakIfPlayed = true,
 		RandomRemaining = true,
@@ -303,195 +286,19 @@ local overrides = {
 	BlindBoxOpenedVoiceLines = {}, -- n/a, same as shop
 
 	UpgradeMenuOpenVoiceLines = game.EnemyData.NPC_Dionysus_01.UpgradeMenuOpenVoiceLines,
-
 	--#endregion
-}
+})
 
-for k, v in pairs(overrides) do
-	dionysusBase[k] = v
-end
-
-game.LootData.DionysusUpgrade = dionysusBase
-
-zannc_AddGodtoRunData(game.RewardStoreData.RunProgress, "DionysusUpgrade")
-zannc_AddGodtoRunData(game.RewardStoreData.TartarusRewards, "DionysusUpgrade")
-
-game.LinkedTraitData.DionysusCoreTraits = {}
-
--- Change Dionysus Codex to not have requirements
-game.CodexData.OlympianGods.Entries.NPC_Dionysus_01 = {
-	-- NoRequirements = true,
-
-	Entries = {
-		{
-			UnlockGameStateRequirements = {
-				{
-					PathTrue = { "GameState", "TextLinesRecord", "DionysusGift01" },
-				},
-			},
-			Text = "CodexData_Dionysus_01",
-		},
+gods.CreateOlympianSJSONData({
+	godName = "Dionysus",
+	godType = "god",
+	skipBoonSelectSymbol = true,
+	iconSpinPath = "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusIconSpin",
+	previewPath = "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusPreview",
+	colorA = { Red = 0.65, Green = 0.16, Blue = 0.76 },
+	colorB = { Red = 0.57, Green = 0.11, Blue = 0.70 },
+	colorC = { Red = 0.50, Green = 0.21, Blue = 0.65 },
+	portraitData = {
+		skipNeutralPortrait = true,
 	},
-	Image = "Codex_Portrait_Dionysus",
-	BoonInfoEnemyName = "NPC_Dionysus_01",
-	BoonInfoAllowPinning = true,
-}
-
---#region Dionysus SJSON
-
-mod.Player_GodDispleased_DionysusUpgrade = sjson.to_object({
-	Id = "Player_GodDispleased_DionysusUpgrade",
-	DisplayName = "Dionysus Grew Displeased!",
-	Description = nil,
-}, mod.Order)
-
-mod.SuperSacrifice_CombatText_DionysusUpgrade = sjson.to_object({
-	Id = "SuperSacrifice_CombatText_DionysusUpgrade",
-	DisplayName = "{#CombatTextHighlightFormat}Boons of Dionysus {#Prev}{#UpgradeFormat}+{$TempTextData.Amount}{#Prev}{!Icons.PomLevel}!",
-	Description = nil,
-}, mod.Order)
-
-sjson.hook(mod.MacroTextFile, function(data)
-	table.insert(data.Texts, mod.Player_GodDispleased_DionysusUpgrade)
-	table.insert(data.Texts, mod.SuperSacrifice_CombatText_DionysusUpgrade)
-end)
-
--- ! Actual Boon Drop
-mod.DionysusUpgrade = sjson.to_object({
-	Name = "DionysusUpgrade",
-	InheritFrom = "BaseBoon",
-	DisplayInEditor = true,
-	Thing = {
-		EditorOutlineDrawBounds = false,
-		Graphic = "BoonDropDionysus",
-		AmbientSound = "", -- !!!!!!!!!!!!!!!!!
-	},
-}, mod.GameplayOrder)
-
-sjson.hook(mod.GameplayFile, function(data)
-	table.insert(data.Obstacles, mod.DionysusUpgrade)
-end)
--- end
-
-mod.BoonInfoSymbolDionysusIcon = sjson.to_object({
-	Name = "BoonInfoSymbolDionysusIcon",
-	InheritFrom = "BoonInfoSymbolBase",
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusIconSpin0015"),
-	OffsetZ = nil,
-	Scale = nil,
-	Hue = nil,
-}, mod.IconOrder)
-
-sjson.hook(mod.GUIScreensVFXFile, function(data)
-	table.insert(data.Animations, mod.BoonInfoSymbolDionysusIcon)
-end)
-
-mod.BoonDropDionysus = sjson.to_object({
-	Name = "BoonDropDionysus",
-	InheritFrom = "BoonDropGold",
-	ChildAnimation = "BoonDropA-Dionysus",
-	CreateAnimations = nil,
-	Color = nil,
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropA_Dionysus = sjson.to_object({
-	Name = "BoonDropA-Dionysus",
-	InheritFrom = "BoonDropA",
-	ChildAnimation = "BoonDropB-Dionysus",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.65,
-		Green = 0.16,
-		Blue = 0.76,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropB_Dionysus = sjson.to_object({
-	Name = "BoonDropB-Dionysus",
-	InheritFrom = "BoonDropB",
-	ChildAnimation = "BoonDropC-Dionysus",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.57,
-		Green = 0.11,
-		Blue = 0.70,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropC_Dionysus = sjson.to_object({
-	Name = "BoonDropC-Dionysus",
-	InheritFrom = "BoonDropC",
-	ChildAnimation = "BoonDropDionysusIcon",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.50,
-		Green = 0.21,
-		Blue = 0.65,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropDionysusIcon = sjson.to_object({
-	Name = "BoonDropDionysusIcon",
-	InheritFrom = "BoonDropIcon",
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusIconSpin"),
-	--? Not needed I think if it looks fine
-	OffsetZ = nil,
-	Scale = nil,
-	Hue = 0.9,
-}, mod.IconOrder)
-
-mod.BoonDropDionysusPreview = sjson.to_object({
-	Name = "BoonDropDionysusPreview",
-	InheritFrom = "BoonDropRoomRewardIconPreviewBase",
-	NumFrames = 1,
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusPreview"),
-	OffsetZ = 0,
-	Scale = 1.0,
-	ColorFromOwner = "Maintain",
-	AngleFromOwner = "Ignore",
-	Sound = "", -- !
-}, mod.FxMainOrder)
-
-mod.BoonDropDionysusUpgradedPreview = sjson.to_object({
-	Name = "BoonDropDionysusUpgradedPreview",
-	InheritFrom = "BoonDropDionysusPreview",
-	ChildAnimation = "BoonUpgradedPreviewSparkles",
-	CreateAnimations = nil,
-	Color = nil,
-}, mod.FxBoonDropOrder)
-
-sjson.hook(mod.ItemsGeneralVFX, function(data)
-	-- Everything is just for Dionysus Icon and Drops
-	table.insert(data.Animations, mod.BoonDropDionysus)
-	table.insert(data.Animations, mod.BoonDropA_Dionysus)
-	table.insert(data.Animations, mod.BoonDropB_Dionysus)
-	table.insert(data.Animations, mod.BoonDropC_Dionysus)
-	table.insert(data.Animations, mod.BoonDropDionysusIcon)
-
-	table.insert(data.Animations, mod.BoonDropDionysusPreview)
-	table.insert(data.Animations, mod.BoonDropDionysusUpgradedPreview)
-end)
-
-mod.DionysusUpgrade_Store = sjson.to_object({
-	Id = "DionysusUpgrade_Store",
-	DisplayName = "Boon of Dionysus",
-	Description = "Receive your choice of {#BoldFormat}1 {#Prev}out of {$ScreenData.UpgradeChoice.MaxChoices} {$Keywords.GodBoonPlural} from {#BoldFormat}Dionysus{#Prev}.",
-}, mod.Order)
-
-sjson.hook(mod.TraitTextFile, function(data)
-	table.insert(data.Texts, mod.DionysusUpgrade_Store)
-end)
-
---#endregion
+})

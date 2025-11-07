@@ -1,11 +1,11 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
 
-local artemisBase = game.DeepCopyTable(zannc_BaseGod)
-
 game.EnemyData.NPC_Artemis_01.GiftTextLineSets.ArtemisGift01.GameStateRequirements = {
 	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "ArtemisUpgrade", "NPC_Artemis_Field_01" } },
 }
+
+game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = {}
 
 local textLineSets = {
 	ArtemisChat01 = {
@@ -280,45 +280,29 @@ for k, v in pairs(textLineSets) do
 	end
 end
 
-local overrides = {
-	Name = "ArtemisUpgrade",
-	Speaker = "NPC_Artemis_01",
-	SpeakerName = "Artemis",
-	BoonInfoIcon = "BoonInfoSymbolArtemisIcon",
-	SuperSacrificeCombatText = "SuperSacrifice_CombatText_ArtemisUpgrade",
-	LootRejectedText = "Player_GodDispleased_ArtemisUpgrade",
-	GodLoot = config.Artemis.ArtemisNoRequirements, -- * without this, you will have to manually do drop requirements, stacking etc.
-	-- WrathPortrait = "Portrait_Artemis_Wrath_01", -- ! Nope, doesn't exist
-	DoorIcon = "BoonDropArtemisPreview",
-	DoorUpgradedIcon = "BoonDropArtemisUpgradedPreview",
-	Icon = "BoonSymbolArtemis",
-	SpawnSound = "/SFX/ArtemisBoonArrow",
-	PortraitEnterSound = "/SFX/ArtemisBoonArrow",
-	OverlayAnim = "ArtemisOverlay",
-	Gender = "Female",
+local spawnrequirements = false
+if config.Artemis.requirements then
+	spawnrequirements = true
+end
+
+gods.InitializeGod({
+	godName = "Artemis",
+	godType = "GOD",
+	Gender = "F",
+	LoadPackages = { "Artemis" },
 	FlavorTextIds = { "ArtemisUpgrade_FlavorText01", "ArtemisUpgrade_FlavorText02", "ArtemisUpgrade_FlavorText03" },
-	UpgradeSelectedSound = "/SFX/ArtemisBoonChoice",
-	EchoLastRewardId = "EchoLastRewardBoon_Artemis",
-	Portrait = "Portrait_Artemis_Default_01",
-	LoadPackages = { "Artemis" }, -- * Also has NPC_Artemis_Field_01
-
-	PriorityUpgrades = {},
-	WeaponUpgrades = {},
-	-- Traits = game.EnemyData.NPC_Artemis_Field_01.Traits,
-	-- TraitIndex = artemisTraitIndex,
-	MenuTitle = "UpgradeChoiceMenu_Artemis",
-	BoonInfoTitleText = "UpgradeChoiceMenu_Artemis", --* Display name in codex, needed for npcs
-	SurfaceShopIcon = "BoonInfoSymbolArtemisIcon", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
-	SurfaceShopText = "ArtemisUpgrade_Store", --? Not used on main gods, primarily health, mana, armour, some NPCs like Hermes
-
+	SFX_Portrait = "/SFX/ArtemisBoonArrow",
 	Color = { 91, 255, 100, 255 },
-	LightingColor = { 210, 255, 97, 190 },
-	LootColor = { 110, 255, 0, 180 },
+	LightingColor = { 210, 255, 97, 255 },
+	LootColor = { 20, 120, 7, 255 },
 	SubtitleColor = Color.ArtemisVoice,
+	WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades,
+	Traits = game.EnemyData.NPC_Artemis_Field_01.Traits,
+
+	SpawnLikeHermes = spawnrequirements,
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
-
 	OnSpawnVoiceLines = {
 		BreakIfPlayed = true,
 		RandomRemaining = true,
@@ -376,210 +360,26 @@ local overrides = {
 		},
 	},
 
-	BoughtTextLines = {}, -- n/a
-	RejectionTextLines = {}, -- n/a on portrait and voice
-	MakeUpTextLines = {}, -- n/a
-	FullSuperActivatedVoiceLines = {}, -- n/a
-	DeathTauntVoiceLines = {}, -- n/a
-	BlindBoxOpenedVoiceLines = {}, -- n/a, same as shop
-
 	UpgradeMenuOpenVoiceLines = game.EnemyData.NPC_Artemis_Field_01.UpgradeMenuOpenVoiceLines,
-
 	--#endregion
-}
+})
 
-for k, v in pairs(overrides) do
-	artemisBase[k] = v
-end
-
-game.LootData.ArtemisUpgrade = artemisBase
+gods.CreateOlympianSJSONData({
+	godName = "Artemis",
+	godType = "god",
+	skipBoonSelectSymbol = true,
+	iconSpinPath = "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisIconSpin",
+	previewPath = "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisPreview",
+	colorA = { Red = 0.39, Green = 0.52, Blue = 0.21, Opacity = 0.93 },
+	colorB = { Red = 0.28, Green = 0.46, Blue = 0.12, Opacity = 0.91 },
+	colorC = { Red = 0.23, Green = 0.57, Blue = 0.31, Opacity = 1.0 },
+	portraitData = {
+		skipNeutralPortrait = true,
+	},
+})
 
 if game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines then
 	game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
 	game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
 	game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
 end
-
-zannc_AddGodtoRunData(game.RewardStoreData.RunProgress, "ArtemisUpgrade")
-zannc_AddGodtoRunData(game.RewardStoreData.TartarusRewards, "ArtemisUpgrade")
-
-game.LinkedTraitData.ArtemisCoreTraits = {}
-game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = {}
-
--- Change Artemis Codex to not have requirements
-game.CodexData.OlympianGods.Entries.NPC_Artemis_01 = {
-	-- NoRequirements = true,
-
-	Entries = {
-		{
-			UnlockGameStateRequirements = {
-				{
-					PathTrue = { "GameState", "TextLinesRecord", "ArtemisGift01" },
-				},
-			},
-			Text = "CodexData_Artemis_01",
-		},
-	},
-	Image = "Codex_Portrait_Artemis",
-	BoonInfoEnemyName = "NPC_Artemis_Field_01",
-	BoonInfoAllowPinning = true,
-}
-
---#region Artemis SJSON
-
-mod.Player_GodDispleased_ArtemisUpgrade = sjson.to_object({
-	Id = "Player_GodDispleased_ArtemisUpgrade",
-	DisplayName = "Artemis Grew Displeased!",
-	Description = nil,
-}, mod.Order)
-
-mod.SuperSacrifice_CombatText_ArtemisUpgrade = sjson.to_object({
-	Id = "SuperSacrifice_CombatText_ArtemisUpgrade",
-	DisplayName = "{#CombatTextHighlightFormat}Boons of Artemis {#Prev}{#UpgradeFormat}+{$TempTextData.Amount}{#Prev}{!Icons.PomLevel}!",
-	Description = nil,
-}, mod.Order)
-
-sjson.hook(mod.MacroTextFile, function(data)
-	table.insert(data.Texts, mod.Player_GodDispleased_ArtemisUpgrade)
-	table.insert(data.Texts, mod.SuperSacrifice_CombatText_ArtemisUpgrade)
-end)
-
--- ! Actual Boon Drop
-mod.ArtemisUpgrade = sjson.to_object({
-	Name = "ArtemisUpgrade",
-	InheritFrom = "BaseBoon",
-	DisplayInEditor = true,
-	Thing = {
-		EditorOutlineDrawBounds = false,
-		Graphic = "BoonDropArtemis",
-		AmbientSound = "", -- !!!!!!!!!!!!!!!!!
-	},
-}, mod.GameplayOrder)
-
-sjson.hook(mod.GameplayFile, function(data)
-	table.insert(data.Obstacles, mod.ArtemisUpgrade)
-end)
--- end
-
-mod.BoonInfoSymbolArtemisIcon = sjson.to_object({
-	Name = "BoonInfoSymbolArtemisIcon",
-	InheritFrom = "BoonInfoSymbolBase",
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisIconSpin0015"),
-	OffsetZ = nil,
-	Scale = nil,
-	Hue = nil,
-}, mod.IconOrder)
-
-sjson.hook(mod.GUIScreensVFXFile, function(data)
-	table.insert(data.Animations, mod.BoonInfoSymbolArtemisIcon)
-end)
-
-mod.BoonDropArtemis = sjson.to_object({
-	Name = "BoonDropArtemis",
-	InheritFrom = "BoonDropGold",
-	ChildAnimation = "BoonDropA-Artemis",
-	CreateAnimations = nil,
-	Color = nil,
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropA_Artemis = sjson.to_object({
-	Name = "BoonDropA-Artemis",
-	InheritFrom = "BoonDropA",
-	ChildAnimation = "BoonDropB-Artemis",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.42,
-		Green = 0.62,
-		Blue = 0.21,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropB_Artemis = sjson.to_object({
-	Name = "BoonDropB-Artemis",
-	InheritFrom = "BoonDropB",
-	ChildAnimation = "BoonDropC-Artemis",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.35,
-		Green = 0.51,
-		Blue = 0.12,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropC_Artemis = sjson.to_object({
-	Name = "BoonDropC-Artemis",
-	InheritFrom = "BoonDropC",
-	ChildAnimation = "BoonDropArtemisIcon",
-	CreateAnimations = { {
-		Name = "BoonDropBackGlow",
-	}, {
-		Name = "BoonDropFrontFlare",
-	} },
-	Color = {
-		Red = 0.23,
-		Green = 0.57,
-		Blue = 0.31,
-	},
-}, mod.FxBoonDropOrder)
-
-mod.BoonDropArtemisIcon = sjson.to_object({
-	Name = "BoonDropArtemisIcon",
-	InheritFrom = "BoonDropIcon",
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisIconSpin"),
-	--? Not needed I think if it looks fine
-	OffsetZ = nil,
-	Scale = nil,
-	Hue = 0.9,
-}, mod.IconOrder)
-
-mod.BoonDropArtemisPreview = sjson.to_object({
-	Name = "BoonDropArtemisPreview",
-	InheritFrom = "BoonDropRoomRewardIconPreviewBase",
-	NumFrames = 1,
-	FilePath = rom.path.combine(_PLUGIN.guid, "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisPreview"),
-	OffsetZ = 0,
-	Scale = 1.0,
-	ColorFromOwner = "Maintain",
-	AngleFromOwner = "Ignore",
-	Sound = "", -- !
-}, mod.FxMainOrder)
-
-mod.BoonDropArtemisUpgradedPreview = sjson.to_object({
-	Name = "BoonDropArtemisUpgradedPreview",
-	InheritFrom = "BoonDropArtemisPreview",
-	ChildAnimation = "BoonUpgradedPreviewSparkles",
-	CreateAnimations = nil,
-	Color = nil,
-}, mod.FxBoonDropOrder)
-
-sjson.hook(mod.ItemsGeneralVFX, function(data)
-	-- Everything is just for Artemis Icon and Drops
-	table.insert(data.Animations, mod.BoonDropArtemis)
-	table.insert(data.Animations, mod.BoonDropA_Artemis)
-	table.insert(data.Animations, mod.BoonDropB_Artemis)
-	table.insert(data.Animations, mod.BoonDropC_Artemis)
-	table.insert(data.Animations, mod.BoonDropArtemisIcon)
-
-	table.insert(data.Animations, mod.BoonDropArtemisPreview)
-	table.insert(data.Animations, mod.BoonDropArtemisUpgradedPreview)
-end)
-
-mod.ArtemisUpgrade_Store = sjson.to_object({
-	Id = "ArtemisUpgrade_Store",
-	DisplayName = "Boon of Artemis",
-	Description = "Receive your choice of {#BoldFormat}1 {#Prev}out of {$ScreenData.UpgradeChoice.MaxChoices} {$Keywords.GodBoonPlural} from {#BoldFormat}Artemis{#Prev}.",
-}, mod.Order)
-
-sjson.hook(mod.TraitTextFile, function(data)
-	table.insert(data.Texts, mod.ArtemisUpgrade_Store)
-end)
-
---#endregion
