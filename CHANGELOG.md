@@ -2,8 +2,9 @@
 
 ## [Unreleased]
 - Fixed issue which wouldnt allow any traits in slots to overwrite already slotted boons.
-- Reworked Config
-- DEV: Changed to function with GodsAPI
+- Reworked Config.
+- Fixed issue where if you gifted Artemis/Dio/Athena for the first time, it wouldn't display their respective keepsake animation. 
+- DEV: Changed to function with GodsAPI.
 
 ## [2.0.1] - 2025-10-24
 

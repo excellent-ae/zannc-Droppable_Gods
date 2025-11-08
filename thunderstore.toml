@@ -38,6 +38,10 @@ source = "./src"
 target = "./plugins"
 
 [[build.copy]]
+source = "./lovely"
+target = "./lovely"
+
+[[build.copy]]
 source = "./packages"
 target = "./plugins_data"
 
