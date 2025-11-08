@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.1.0] - 2025-11-08
+
 - Fixed issue which wouldnt allow any traits in slots to overwrite already slotted boons.
 - Reworked Config.
 - Fixed issue where if you gifted Artemis/Dio/Athena for the first time, it wouldn't display their respective keepsake animation. 
@@ -26,7 +29,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.1...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.1...2.1.0
 [2.0.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/73aa3aa4e19b033b6e57de667555f2554a7c487c...1.0.0
