@@ -365,6 +365,7 @@ gods.InitializeGod({
 })
 
 gods.CreateOlympianSJSONData({
+	pluginGUID = _PLUGIN.guid,
 	godName = "Artemis",
 	godType = "god",
 	skipBoonSelectSymbol = true,

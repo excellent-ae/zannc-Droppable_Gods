@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Update to work w/ GodsAPI latest.
 
 ## [2.1.0] - 2025-11-08
 

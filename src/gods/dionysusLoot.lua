@@ -290,6 +290,7 @@ gods.InitializeGod({
 })
 
 gods.CreateOlympianSJSONData({
+	pluginGUID = _PLUGIN.guid,
 	godName = "Dionysus",
 	godType = "god",
 	skipBoonSelectSymbol = true,

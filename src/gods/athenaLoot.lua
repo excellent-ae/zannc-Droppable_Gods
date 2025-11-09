@@ -366,6 +366,7 @@ gods.InitializeGod({
 })
 
 gods.CreateOlympianSJSONData({
+	pluginGUID = _PLUGIN.guid,
 	godName = "Athena",
 	godType = "god",
 	skipBoonSelectSymbol = true,
