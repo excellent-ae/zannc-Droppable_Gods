@@ -49,7 +49,6 @@ local function StackingandCostForGods(traits, godName)
 end
 
 local function on_ready()
-	gods.Initialize(_PLUGIN.guid)
 	mod = modutil.mod.Mod.Register(_PLUGIN.guid)
 
 	local package = rom.path.combine(_PLUGIN.plugins_data_mod_folder_path, _PLUGIN.guid)
