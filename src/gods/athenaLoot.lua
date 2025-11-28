@@ -288,6 +288,7 @@ gods.InitializeGod({
 	godName = "Athena",
 	godType = "god",
 	Gender = "F",
+	skipCodex = true,
 	LoadPackages = { "Athena" },
 	FlavorTextIds = { "AthenaUpgrade_FlavorText01", "AthenaUpgrade_FlavorText02", "AthenaUpgrade_FlavorText03" },
 	SFX_Portrait = "/SFX/AthenaWrathHolyShield",

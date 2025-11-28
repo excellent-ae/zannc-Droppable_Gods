@@ -205,6 +205,7 @@ gods.InitializeGod({
 	godName = "Dionysus",
 	godType = "god",
 	Gender = "F",
+	skipCodex = true,
 	LoadPackages = { "Dionysus" },
 	FlavorTextIds = { "DionysusUpgrade_FlavorText01", "DionysusUpgrade_FlavorText02", "DionysusUpgrade_FlavorText03" },
 	SFX_Portrait = "/SFX/DionysusBoonWineLaugh",

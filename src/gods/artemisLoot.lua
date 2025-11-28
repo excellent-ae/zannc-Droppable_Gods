@@ -289,6 +289,7 @@ gods.InitializeGod({
 	godName = "Artemis",
 	godType = "GOD",
 	Gender = "F",
+	skipCodex = true,
 	LoadPackages = { "Artemis" },
 	FlavorTextIds = { "ArtemisUpgrade_FlavorText01", "ArtemisUpgrade_FlavorText02", "ArtemisUpgrade_FlavorText03" },
 	SFX_Portrait = "/SFX/ArtemisBoonArrow",
