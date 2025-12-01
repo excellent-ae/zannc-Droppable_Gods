@@ -1,11 +1,12 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
+local upgradeName = gods.GetInternalGodName("Dionysus")
 
 game.EnemyData.NPC_Dionysus_01.GiftTextLineSets.DionysusGift01.GameStateRequirements = {
-	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "DionysusUpgrade", "NPC_Dionysus_01" } },
+	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { upgradeName, "NPC_Dionysus_01" } },
 }
 
-game.EnemyData.NPC_Dionysus_01.WeaponUpgrades = {}
+game.EnemyData.NPC_Dionysus_01.WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades or {}
 
 local textLineSets = {
 	DionysusChat01 = {
@@ -190,12 +191,6 @@ local textLineSets = {
 	},
 }
 
-for k, v in pairs(textLineSets) do
-	if not v.Name then
-		v.Name = k
-	end
-end
-
 local spawnrequirements = false
 if config.Dionysus.requirements then
 	spawnrequirements = true
@@ -294,13 +289,20 @@ gods.CreateOlympianSJSONData({
 	pluginGUID = _PLUGIN.guid,
 	godName = "Dionysus",
 	godType = "god",
-	skipBoonSelectSymbol = true,
+	iconPathOverrides = {
+		boonSelectSymbolPath = true,
+	},
+	boonSelectSymbolPath = "GUI\\Screens\\BoonSelectSymbols\\Dionysus",
 	iconSpinPath = "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusIconSpin",
 	previewPath = "Items\\Loot\\Boon\\DionysusIconSpin\\DionysusPreview",
 	colorA = { Red = 0.65, Green = 0.16, Blue = 0.76 },
 	colorB = { Red = 0.57, Green = 0.11, Blue = 0.70 },
 	colorC = { Red = 0.50, Green = 0.21, Blue = 0.65 },
-	portraitData = {
-		skipNeutralPortrait = true,
-	},
+	godDescriptionText = "God of Wine",
 })
+
+if game.LootData[upgradeName] then
+	game.LootData[upgradeName].SpeakerName = "Dionysus"
+	game.LootData[upgradeName].Portrait = "Portrait_Dionysus_Default_01"
+	game.LootData[upgradeName].OverlayAnim = "DionysusOverlay"
+end

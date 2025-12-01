@@ -1,11 +1,12 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
+local upgradeName = gods.GetInternalGodName("Artemis")
 
 game.EnemyData.NPC_Artemis_01.GiftTextLineSets.ArtemisGift01.GameStateRequirements = {
-	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "ArtemisUpgrade", "NPC_Artemis_Field_01" } },
+	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { upgradeName, "NPC_Artemis_Field_01" } },
 }
 
-game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = {}
+game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades or {}
 
 local textLineSets = {
 	ArtemisChat01 = {
@@ -274,12 +275,6 @@ local textLineSets = {
 	},
 }
 
-for k, v in pairs(textLineSets) do
-	if not v.Name then
-		v.Name = k
-	end
-end
-
 local spawnrequirements = false
 if config.Artemis.requirements then
 	spawnrequirements = true
@@ -369,19 +364,25 @@ gods.CreateOlympianSJSONData({
 	pluginGUID = _PLUGIN.guid,
 	godName = "Artemis",
 	godType = "god",
-	skipBoonSelectSymbol = true,
+	iconPathOverrides = {
+		boonSelectSymbolPath = true,
+	},
+	boonSelectSymbolPath = "GUI\\Screens\\BoonSelectSymbols\\Artemis",
 	iconSpinPath = "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisIconSpin",
 	previewPath = "Items\\Loot\\Boon\\ArtemisIconSpin\\ArtemisPreview",
 	colorA = { Red = 0.39, Green = 0.52, Blue = 0.21, Opacity = 0.93 },
 	colorB = { Red = 0.28, Green = 0.46, Blue = 0.12, Opacity = 0.91 },
 	colorC = { Red = 0.23, Green = 0.57, Blue = 0.31, Opacity = 1.0 },
-	portraitData = {
-		skipNeutralPortrait = true,
-	},
+	godDescriptionText = "Goddess of the Hunt",
 })
 
-if game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines then
-	game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
-	game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
-	game.LootData.ArtemisUpgrade.UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
+if game.LootData[upgradeName] then
+	game.LootData[upgradeName].SpeakerName = "Artemis"
+	game.LootData[upgradeName].Portrait = "Portrait_Artemis_Default_01"
+	-- game.LootData[upgradeName].WrathPortrait = "Portrait_Artemis_Default_01_Wrath" doesn't have
+	game.LootData[upgradeName].OverlayAnim = "ArtemisOverlay"
+
+	game.LootData[upgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
+	game.LootData[upgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
+	game.LootData[upgradeName].UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
 end

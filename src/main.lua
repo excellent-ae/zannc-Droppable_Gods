@@ -19,7 +19,7 @@ modutil = mods["SGG_Modding-ModUtil"]
 chalk = mods["SGG_Modding-Chalk"]
 reload = mods["SGG_Modding-ReLoad"]
 sjson = mods["SGG_Modding-SJSON"]
-gods = mods["zannc-GodsAPI"]
+gods = mods["zannc-GodsAPI"].auto()
 
 ---@module 'Droppable_Gods-zannc-config'
 config = chalk.auto("config.lua")
@@ -67,21 +67,21 @@ local function on_ready()
 
 	-- Super Magical Code by Jowday, which doesn't give weird codex unlock popup
 	modutil.mod.Path.Wrap("AttemptOpenUpgradeChoiceBoonInfo", function(base, screen, button)
-		if screen.Source.Name == "AthenaUpgrade" then
+		if screen.Source.Name == "zannc-Droppable_Gods-AthenaUpgrade" then
 			local newScreen = {
 				Source = {
 					Name = "NPC_Athena_01",
 				},
 			}
 			base(newScreen, button)
-		elseif screen.Source.Name == "ArtemisUpgrade" then
+		elseif screen.Source.Name == "zannc-Droppable_Gods-ArtemisUpgrade" then
 			local newScreen = {
 				Source = {
 					Name = "NPC_Artemis_Field_01",
 				},
 			}
 			base(newScreen, button)
-		elseif screen.Source.Name == "DionysusUpgrade" then
+		elseif screen.Source.Name == "zannc-Droppable_Gods-DionysusUpgrade" then
 			local newScreen = {
 				Source = {
 					Name = "NPC_Dionysus_01",
@@ -142,9 +142,9 @@ modutil.once_loaded.game(function()
 	loader.load(on_ready, on_reload)
 
 	local npcGods = {
-		ArtemisUpgrade = "NPC_Artemis_Field_01",
-		AthenaUpgrade = "NPC_Athena_01",
-		DionysusUpgrade = "NPC_Dionysus_01",
+		["zannc-Droppable_Gods-ArtemisUpgrade"] = "NPC_Artemis_Field_01",
+		["zannc-Droppable_Gods-AthenaUpgrade"] = "NPC_Athena_01",
+		["zannc-Droppable_Gods-DionysusUpgrade"] = "NPC_Dionysus_01",
 	}
 
 	for k, godName in pairs(npcGods) do

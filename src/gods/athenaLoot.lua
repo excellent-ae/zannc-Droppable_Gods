@@ -1,11 +1,12 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
+local upgradeName = gods.GetInternalGodName("Athena")
 
 game.EnemyData.NPC_Athena_01.GiftTextLineSets.AthenaGift01.GameStateRequirements = {
-	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { "AthenaUpgrade", "NPC_Athena_01" } },
+	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { upgradeName, "NPC_Athena_01" } },
 }
 
-game.EnemyData.NPC_Athena_01.WeaponUpgrades = {}
+game.EnemyData.NPC_Athena_01.WeaponUpgrades = game.EnemyData.NPC_Athena_01.WeaponUpgrades or {}
 
 local textLineSets = {
 	AthenaChat01 = {
@@ -273,12 +274,6 @@ local textLineSets = {
 	},
 }
 
-for k, v in pairs(textLineSets) do
-	if not v.Name then
-		v.Name = k
-	end
-end
-
 local spawnrequirements = false
 if config.Athena.requirements then
 	spawnrequirements = true
@@ -370,13 +365,20 @@ gods.CreateOlympianSJSONData({
 	pluginGUID = _PLUGIN.guid,
 	godName = "Athena",
 	godType = "god",
-	skipBoonSelectSymbol = true,
+	iconPathOverrides = {
+		boonSelectSymbolPath = true,
+	},
+	boonSelectSymbolPath = "GUI\\Screens\\BoonSelectSymbols\\Athena",
 	iconSpinPath = "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaIconSpin",
 	previewPath = "Items\\Loot\\Boon\\AthenaIconSpin\\AthenaPreview",
 	colorA = { Red = 0.76, Green = 0.64, Blue = 0.16 },
 	colorB = { Red = 0.68, Green = 0.57, Blue = 0.12 },
 	colorC = { Red = 0.60, Green = 0.51, Blue = 0.19 },
-	portraitData = {
-		skipNeutralPortrait = true,
-	},
+	godDescriptionText = "Goddess of Wisdom",
 })
+
+if game.LootData[upgradeName] then
+	game.LootData[upgradeName].SpeakerName = "Athena"
+	game.LootData[upgradeName].Portrait = "Portrait_Athena_Default_01"
+	game.LootData[upgradeName].OverlayAnim = "AthenaOverlay"
+end

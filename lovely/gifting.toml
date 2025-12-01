@@ -8,11 +8,11 @@ target = "GiftLogic.lua"
 pattern = "local giftData = GiftData[name]"
 position = "before"
 payload = '''
-if name == "ArtemisUpgrade" then
+if name == "zannc-Droppable_Gods-ArtemisUpgrade" then
     name = "NPC_Artemis_01"
-elseif name == "DionysusUpgrade" then
+elseif name == "zannc-Droppable_Gods-DionysusUpgrade" then
     name = "NPC_Dionysus_01"
-elseif name == "AthenaUpgrade" then
+elseif name == "zannc-Droppable_Gods-AthenaUpgrade" then
     name = "NPC_Athena_01"
 end
 '''
