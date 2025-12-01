@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [2.1.3] - 2025-12-01
+
 - Update to GodsAPI latest
 
 ## [2.1.2] - 2025-11-28
@@ -36,7 +39,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.2...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.3...HEAD
+[2.1.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.2...2.1.3
 [2.1.2]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.1...2.1.2
 [2.1.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.0.1...2.1.0
