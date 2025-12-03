@@ -291,8 +291,6 @@ gods.InitializeGod({
 	LightingColor = { 210, 255, 97, 255 },
 	LootColor = { 20, 120, 7, 255 },
 	SubtitleColor = Color.ArtemisVoice,
-	WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades,
-	Traits = game.EnemyData.NPC_Artemis_Field_01.Traits,
 
 	SpawnLikeHermes = spawnrequirements,
 
@@ -374,13 +372,29 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "Goddess of the Hunt",
 })
 
-if game.LootData[mod.ArtemisUpgradeName] then
-	game.LootData[mod.ArtemisUpgradeName].SpeakerName = "Artemis"
-	game.LootData[mod.ArtemisUpgradeName].Portrait = "Portrait_Artemis_Default_01"
-	-- game.LootData[mod.ArtemisUpgradeName].WrathPortrait = "Portrait_Artemis_Default_01_Wrath" doesn't have
-	game.LootData[mod.ArtemisUpgradeName].OverlayAnim = "ArtemisOverlay"
+if not game.LootData[mod.ArtemisUpgradeName] then
+	rom.log.error("Artemis not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
+	return
+end
 
-	game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
-	game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
-	game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
+game.LootData[mod.ArtemisUpgradeName].SpeakerName = "Artemis"
+game.LootData[mod.ArtemisUpgradeName].Portrait = "Portrait_Artemis_Default_01"
+-- game.LootData[mod.ArtemisUpgradeName].WrathPortrait = "Portrait_Artemis_Default_01_Wrath" doesn't have
+game.LootData[mod.ArtemisUpgradeName].OverlayAnim = "ArtemisOverlay"
+
+game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
+game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
+game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
+
+local splitTraits = false
+if config.Artemis.splitTraits then
+	splitTraits = true
+end
+
+if splitTraits then
+	game.LootData[mod.ArtemisUpgradeName].WeaponUpgrades = {}
+	game.LootData[mod.ArtemisUpgradeName].Traits = {}
+else
+	game.LootData[mod.ArtemisUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades
+	game.LootData[mod.ArtemisUpgradeName].Traits = game.EnemyData.NPC_Artemis_Field_01.Traits
 end

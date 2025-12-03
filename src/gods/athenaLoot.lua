@@ -290,8 +290,6 @@ gods.InitializeGod({
 	LightingColor = { 175, 157, 255, 255 },
 	LootColor = { 175, 157, 255, 235 },
 	SubtitleColor = Color.AthenaVoice,
-	WeaponUpgrades = game.EnemyData.NPC_Athena_01.WeaponUpgrades,
-	Traits = game.EnemyData.NPC_Athena_01.Traits,
 
 	SpawnLikeHermes = spawnrequirements,
 
@@ -375,8 +373,24 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "Goddess of Wisdom",
 })
 
-if game.LootData[mod.AthenaUpgradeName] then
-	game.LootData[mod.AthenaUpgradeName].SpeakerName = "Athena"
-	game.LootData[mod.AthenaUpgradeName].Portrait = "Portrait_Athena_Default_01"
-	game.LootData[mod.AthenaUpgradeName].OverlayAnim = "AthenaOverlay"
+if not game.LootData[mod.AthenaUpgradeName] then
+	rom.log.error("Athena not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
+	return
+end
+
+game.LootData[mod.AthenaUpgradeName].SpeakerName = "Athena"
+game.LootData[mod.AthenaUpgradeName].Portrait = "Portrait_Athena_Default_01"
+game.LootData[mod.AthenaUpgradeName].OverlayAnim = "AthenaOverlay"
+
+local splitTraits = false
+if config.Athena.splitTraits then
+	splitTraits = true
+end
+
+if splitTraits then
+	game.LootData[mod.AthenaUpgradeName].WeaponUpgrades = {}
+	game.LootData[mod.AthenaUpgradeName].Traits = {}
+else
+	game.LootData[mod.AthenaUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Athena_01.WeaponUpgrades
+	game.LootData[mod.AthenaUpgradeName].Traits = game.EnemyData.NPC_Athena_01.Traits
 end

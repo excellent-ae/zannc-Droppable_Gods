@@ -1,5 +1,3 @@
--- TODO, clean this shit UP, this file SUCKS so much.
-
 ---@meta _
 ---@diagnostic disable-next-line: undefined-global
 local mods = rom.mods
@@ -50,131 +48,6 @@ local function StackingandCostForGods(traits, godName)
 	end
 end
 
-local function on_ready()
-	mod = modutil.mod.Mod.Register(_PLUGIN.guid)
-
-	local package = rom.path.combine(_PLUGIN.plugins_data_mod_folder_path, _PLUGIN.guid)
-
-	modutil.mod.Path.Wrap("SetupMap", function(base)
-		game.LoadPackages({ Name = package })
-		base()
-	end)
-
-	StackingandCostForGods(game.TraitData, "NPC_Artemis_Field_01")
-	StackingandCostForGods(game.TraitData, "NPC_Athena_01")
-	StackingandCostForGods(game.TraitData, "NPC_Dionysus_01")
-	StackingandCostForGods(game.TraitData, "NPC_Hades_Field_01")
-
-	game.EnemyData.NPC_Dionysus_01.AlwaysShowDefaultUseText = true
-	game.EnemyData.NPC_Athena_01.AlwaysShowDefaultUseText = true
-	game.EnemyData.NPC_Hades_Field_01.AlwaysShowDefaultUseText = true
-
-	-- Super Magical Code by Jowday, which doesn't give weird codex unlock popup
-	modutil.mod.Path.Wrap("AttemptOpenUpgradeChoiceBoonInfo", function(base, screen, button)
-		if screen.Source.Name == "zannc-Droppable_Gods-AthenaUpgrade" then
-			local newScreen = {
-				Source = {
-					Name = "NPC_Athena_01",
-				},
-			}
-			base(newScreen, button)
-		elseif screen.Source.Name == "zannc-Droppable_Gods-ArtemisUpgrade" then
-			local newScreen = {
-				Source = {
-					Name = "NPC_Artemis_Field_01",
-				},
-			}
-			base(newScreen, button)
-		elseif screen.Source.Name == "zannc-Droppable_Gods-DionysusUpgrade" then
-			local newScreen = {
-				Source = {
-					Name = "NPC_Dionysus_01",
-				},
-			}
-			base(newScreen, button)
-		elseif screen.Source.Name == "zannc-Droppable_Gods-HadesUpgrade" then
-			local newScreen = {
-				Source = {
-					Name = "NPC_Hades_Field_01",
-				},
-			}
-			base(newScreen, button)
-		else
-			base(screen, button)
-		end
-	end)
-
-	local godList = {}
-	game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = {}
-	game.EnemyData.NPC_Athena_01.WeaponUpgrades = {}
-	game.EnemyData.NPC_Dionysus_01.WeaponUpgrades = {}
-	game.EnemyData.NPC_Hades_Field_01.WeaponUpgrades = {}
-
-	if config.Artemis.enabled then
-		table.insert(godList, "NPC_Artemis_01")
-		import("gods/artemisLoot.lua")
-	end
-	if config.Athena.enabled then
-		table.insert(godList, "NPC_Athena_01")
-		import("gods/athenaLoot.lua")
-	end
-	if config.Dionysus.enabled then
-		table.insert(godList, "NPC_Dionysus_01")
-		import("gods/dionysusLoot.lua")
-	end
-	if config.Hades.enabled then
-		table.insert(godList, "NPC_Dionysus_01")
-		import("gods/hadesLoot.lua")
-		-- if not game.CodexData.OlympianGods.Entries.NPC_Hades_Field_01 then
-		-- 	return
-		-- end
-		-- game.CodexData.OlympianGods.Entries.NPC_Hades_Field_01.NoRequirements = false
-	end
-
-	local pMenu = mods["PonyWarrior-PonyMenu"]
-	for _, npcVal in pairs(godList) do
-		if not game.CodexData.OlympianGods.Entries[npcVal] then
-			return
-		end
-		game.CodexData.OlympianGods.Entries[npcVal].NoRequirements = false
-		if pMenu then
-			for _, v in ipairs(pMenu.CommandData) do
-				if v.Name == "NPC_Artemis_Field_01" then
-					v.NoSpawn = false
-				end
-				if v.Name == "NPC_Athena_01" then
-					v.NoSpawn = false
-				end
-				if v.Name == "NPC_Dionysus_01" then
-					v.NoSpawn = false
-				end
-				if v.Name == "NPC_Hades_Field_01" then
-					v.NoSpawn = false
-				end
-			end
-		end
-	end
-
-	if pMenu then
-		modutil.mod.Path.Wrap("CreateLoot", function(base, args)
-			if args.Name == "NPC_Artemis_Field_01" then
-				args.Name = "zannc-Droppable_Gods-ArtemisUpgrade"
-			elseif args.Name == "NPC_Athena_01" then
-				args.Name = "zannc-Droppable_Gods-AthenaUpgrade"
-			elseif args.Name == "NPC_Dionysus_01" then
-				args.Name = "zannc-Droppable_Gods-DionysusUpgrade"
-			elseif args.Name == "NPC_Hades_Field_01" then
-				args.Name = "zannc-Droppable_Gods-HadesUpgrade"
-			end
-			return base(args)
-		end)
-	end
-end
-
-local function on_reload() end
-
-local loader = reload.auto_single()
-
 local function getTraitIndex(godName)
 	local traitIndex = {}
 
@@ -187,21 +60,138 @@ local function getTraitIndex(godName)
 	return traitIndex
 end
 
+local function on_ready()
+	mod = modutil.mod.Mod.Register(_PLUGIN.guid)
+
+	local package = rom.path.combine(_PLUGIN.plugins_data_mod_folder_path, _PLUGIN.guid)
+	modutil.mod.Path.Wrap("SetupMap", function(base)
+		game.LoadPackages({ Name = package })
+		base()
+	end)
+
+	mod.ArtemisUpgradeName = gods.GetInternalGodName("Artemis")
+	mod.AthenaUpgradeName = gods.GetInternalGodName("Athena")
+	mod.DionysusUpgradeName = gods.GetInternalGodName("Dionysus")
+	mod.HadesUpgradeName = gods.GetInternalGodName("Hades")
+	local pMenu = mods["PonyWarrior-PonyMenu"]
+
+	local data = {
+		[mod.ArtemisUpgradeName] = {
+			codexName = "NPC_Artemis_01",
+			enemyName = "NPC_Artemis_Field_01",
+			enabled = false,
+		},
+
+		[mod.AthenaUpgradeName] = {
+			codexName = "NPC_Athena_01",
+			enemyName = "NPC_Athena_01",
+			enabled = false,
+		},
+
+		[mod.DionysusUpgradeName] = {
+			codexName = "NPC_Dionysus_01",
+			enemyName = "NPC_Dionysus_01",
+			enabled = false,
+		},
+
+		[mod.HadesUpgradeName] = {
+			codexName = "NPC_Hades_01",
+			enemyName = "NPC_Hades_Field_01",
+			enabled = false,
+		},
+	}
+
+	if config.Artemis.enabled then
+		data[mod.ArtemisUpgradeName].enabled = true
+		import("gods/artemisLoot.lua")
+	end
+	if config.Athena.enabled then
+		data[mod.AthenaUpgradeName].enabled = true
+		import("gods/athenaLoot.lua")
+	end
+	if config.Dionysus.enabled then
+		data[mod.DionysusUpgradeName].enabled = true
+		import("gods/dionysusLoot.lua")
+	end
+	if config.Hades.enabled then
+		data[mod.HadesUpgradeName].enabled = true
+		import("gods/hadesLoot.lua")
+	end
+
+	local godLoot = {}
+	local godNames = {}
+
+	for lootName, v in pairs(data) do
+		if not v.enabled then
+			break
+		end
+		godLoot[v.enemyName] = lootName
+		godLoot[lootName] = v.enemyName
+		godNames[v.enemyName] = true
+
+		-- rom.log.warning(lootName, v)
+		StackingandCostForGods(game.TraitData, v.enemyName)
+		game.EnemyData[v.enemyName].AlwaysShowDefaultUseText = true
+		game.EnemyData[v.enemyName].WeaponUpgrades = {}
+
+		-- a fix for if you insert into NPC table too, it needs to update the traitindex
+		local traitIndex = getTraitIndex(v.enemyName)
+		game.EnemyData[v.enemyName].TraitIndex = traitIndex
+
+		--codex stuff now
+		if game.CodexData.OlympianGods.Entries[v.codexName] then
+			game.CodexData.OlympianGods.Entries[v.codexName].NoRequirements = false
+			game.CodexData.OlympianGods.Entries[v.codexName].BoonInfoAllowPinning = true
+		end
+
+		if game.CodexData.OtherDenizens.Entries[v.codexName] then
+			game.CodexData.OtherDenizens.Entries[v.codexName].NoRequirements = false
+			game.CodexData.OtherDenizens.Entries[v.codexName].BoonInfoAllowPinning = true
+		end
+	end
+
+	if pMenu then
+		modutil.mod.Path.Wrap("CreateLoot", function(base, args)
+			if godNames[args.Name] then
+				local lootName = godLoot[args.Name]
+				if lootName then
+					args.Name = lootName
+				end
+			end
+
+			return base(args)
+		end)
+
+		for _, pMenuData in ipairs(pMenu.CommandData) do
+			if godNames[pMenuData.Name] then
+				pMenuData.NoSpawn = false
+			end
+		end
+	end
+
+	-- Super Magical Code by Jowday, which doesn't give weird codex unlock popup
+	modutil.mod.Path.Wrap("AttemptOpenUpgradeChoiceBoonInfo", function(base, screen, button)
+		if godNames[screen.Source.Name] then
+			local npcName = godLoot[screen.Source.Name]
+			if npcName then
+				local newScreen = {
+					Source = {
+						Name = npcName,
+					},
+				}
+				return base(newScreen, button)
+			end
+		end
+		return base(screen, button)
+	end)
+end
+
+local function on_reload() end
+
+local loader = reload.auto_single()
 modutil.once_loaded.game(function()
 	if config.enabled == false then
 		return
 	end
 	loader.load(on_ready, on_reload)
-
-	local npcGods = {
-		["zannc-Droppable_Gods-ArtemisUpgrade"] = "NPC_Artemis_Field_01",
-		["zannc-Droppable_Gods-AthenaUpgrade"] = "NPC_Athena_01",
-		["zannc-Droppable_Gods-DionysusUpgrade"] = "NPC_Dionysus_01",
-		["zannc-Droppable_Gods-HadesUpgrade"] = "NPC_Hades_Field_01",
-	}
-
-	for k, godName in pairs(npcGods) do
-		local traitIndex = getTraitIndex(godName)
-		game.EnemyData[godName].TraitIndex = traitIndex
-	end
 end)

@@ -58,8 +58,6 @@ gods.InitializeGod({
 	LootColor = { 242, 49, 46, 255 },
 	SubtitleColor = Color.HadesVoice,
 	FlavourTextIds = { "HadesUpgrade_FlavorText01", "HadesUpgrade_FlavorText02", "HadesUpgrade_FlavorText03" },
-	WeaponUpgrades = game.EnemyData.NPC_Hades_Field_01.WeaponUpgrades,
-	Traits = game.EnemyData.NPC_Hades_Field_01.Traits,
 
 	SpawnLikeHermes = spawnrequirements,
 
@@ -134,9 +132,25 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "God of the Dead",
 })
 
-if game.LootData[mod.HadesUpgradeName] then
-	game.LootData[mod.HadesUpgradeName].SpeakerName = "Hades"
-	game.LootData[mod.HadesUpgradeName].Portrait = "Portrait_Hades_Chained_01"
-	game.LootData[mod.HadesUpgradeName].OverlayAnim = "HadesOverlay"
-	game.LootData[mod.HadesUpgradeName].CanReceiveGift = false
+if not game.LootData[mod.HadesUpgradeName] then
+	rom.log.error("Hades not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
+	return
+end
+
+game.LootData[mod.HadesUpgradeName].SpeakerName = "Hades"
+game.LootData[mod.HadesUpgradeName].Portrait = "Portrait_Hades_Chained_01"
+game.LootData[mod.HadesUpgradeName].OverlayAnim = "HadesOverlay"
+game.LootData[mod.HadesUpgradeName].CanReceiveGift = false
+
+local splitTraits = false
+if config.Hades.splitTraits then
+	splitTraits = true
+end
+
+if splitTraits then
+	game.LootData[mod.HadesUpgradeName].WeaponUpgrades = {}
+	game.LootData[mod.HadesUpgradeName].Traits = {}
+else
+	game.LootData[mod.HadesUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Hades_Field_01.WeaponUpgrades
+	game.LootData[mod.HadesUpgradeName].Traits = game.EnemyData.NPC_Hades_Field_01.Traits
 end

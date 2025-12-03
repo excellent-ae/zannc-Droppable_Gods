@@ -207,8 +207,6 @@ gods.InitializeGod({
 	LightingColor = { 200, 0, 255, 255 },
 	LootColor = { 200, 0, 255, 227 },
 	SubtitleColor = Color.DionysusVoice,
-	WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades,
-	Traits = game.EnemyData.NPC_Dionysus_01.Traits,
 
 	SpawnLikeHermes = spawnrequirements,
 
@@ -299,8 +297,24 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "God of Wine",
 })
 
-if game.LootData[mod.DionysusUpgradeName] then
-	game.LootData[mod.DionysusUpgradeName].SpeakerName = "Dionysus"
-	game.LootData[mod.DionysusUpgradeName].Portrait = "Portrait_Dionysus_Default_01"
-	game.LootData[mod.DionysusUpgradeName].OverlayAnim = "DionysusOverlay"
+if not game.LootData[mod.DionysusUpgradeName] then
+	rom.log.error("Dionysus not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
+	return
+end
+
+game.LootData[mod.DionysusUpgradeName].SpeakerName = "Dionysus"
+game.LootData[mod.DionysusUpgradeName].Portrait = "Portrait_Dionysus_Default_01"
+game.LootData[mod.DionysusUpgradeName].OverlayAnim = "DionysusOverlay"
+
+local splitTraits = false
+if config.Dionysus.splitTraits then
+	splitTraits = true
+end
+
+if splitTraits then
+	game.LootData[mod.DionysusUpgradeName].WeaponUpgrades = {}
+	game.LootData[mod.DionysusUpgradeName].Traits = {}
+else
+	game.LootData[mod.DionysusUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades
+	game.LootData[mod.DionysusUpgradeName].Traits = game.EnemyData.NPC_Dionysus_01.Traits
 end
