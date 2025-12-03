@@ -1,12 +1,9 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
-local upgradeName = gods.GetInternalGodName("Athena")
 
 game.EnemyData.NPC_Athena_01.GiftTextLineSets.AthenaGift01.GameStateRequirements = {
-	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { upgradeName, "NPC_Athena_01" } },
+	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { mod.AthenaUpgradeName, "NPC_Athena_01" } },
 }
-
-game.EnemyData.NPC_Athena_01.WeaponUpgrades = game.EnemyData.NPC_Athena_01.WeaponUpgrades or {}
 
 local textLineSets = {
 	AthenaChat01 = {
@@ -275,13 +272,15 @@ local textLineSets = {
 }
 
 local spawnrequirements = false
+local godtype = "god"
 if config.Athena.requirements then
 	spawnrequirements = true
+	godtype = "npcgod"
 end
 
 gods.InitializeGod({
 	godName = "Athena",
-	godType = "god",
+	godType = godtype,
 	Gender = "F",
 	skipCodex = true,
 	LoadPackages = { "Athena" },
@@ -362,9 +361,8 @@ gods.InitializeGod({
 })
 
 gods.CreateOlympianSJSONData({
-	pluginGUID = _PLUGIN.guid,
 	godName = "Athena",
-	godType = "god",
+	godType = godtype,
 	iconPathOverrides = {
 		boonSelectSymbolPath = true,
 	},
@@ -377,8 +375,8 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "Goddess of Wisdom",
 })
 
-if game.LootData[upgradeName] then
-	game.LootData[upgradeName].SpeakerName = "Athena"
-	game.LootData[upgradeName].Portrait = "Portrait_Athena_Default_01"
-	game.LootData[upgradeName].OverlayAnim = "AthenaOverlay"
+if game.LootData[mod.AthenaUpgradeName] then
+	game.LootData[mod.AthenaUpgradeName].SpeakerName = "Athena"
+	game.LootData[mod.AthenaUpgradeName].Portrait = "Portrait_Athena_Default_01"
+	game.LootData[mod.AthenaUpgradeName].OverlayAnim = "AthenaOverlay"
 end

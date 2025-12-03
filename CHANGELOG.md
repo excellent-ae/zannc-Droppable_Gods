@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+- Added Hades as a functioning droppable god! (To progress his story you still have to meet him in the underworld)
+- Added Family Dispute attacks for Artemis/Dionysus/Athena.
 
 ## [2.1.3] - 2025-12-01
 

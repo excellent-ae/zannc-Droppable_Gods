@@ -1,12 +1,9 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
-local upgradeName = gods.GetInternalGodName("Dionysus")
 
 game.EnemyData.NPC_Dionysus_01.GiftTextLineSets.DionysusGift01.GameStateRequirements = {
-	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { upgradeName, "NPC_Dionysus_01" } },
+	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { mod.DionysusUpgradeName, "NPC_Dionysus_01" } },
 }
-
-game.EnemyData.NPC_Dionysus_01.WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades or {}
 
 local textLineSets = {
 	DionysusChat01 = {
@@ -192,13 +189,15 @@ local textLineSets = {
 }
 
 local spawnrequirements = false
+local godtype = "god"
 if config.Dionysus.requirements then
 	spawnrequirements = true
+	godtype = "npcgod"
 end
 
 gods.InitializeGod({
 	godName = "Dionysus",
-	godType = "god",
+	godType = godtype,
 	Gender = "F",
 	skipCodex = true,
 	LoadPackages = { "Dionysus" },
@@ -286,9 +285,8 @@ gods.InitializeGod({
 })
 
 gods.CreateOlympianSJSONData({
-	pluginGUID = _PLUGIN.guid,
 	godName = "Dionysus",
-	godType = "god",
+	godType = godtype,
 	iconPathOverrides = {
 		boonSelectSymbolPath = true,
 	},
@@ -301,8 +299,8 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "God of Wine",
 })
 
-if game.LootData[upgradeName] then
-	game.LootData[upgradeName].SpeakerName = "Dionysus"
-	game.LootData[upgradeName].Portrait = "Portrait_Dionysus_Default_01"
-	game.LootData[upgradeName].OverlayAnim = "DionysusOverlay"
+if game.LootData[mod.DionysusUpgradeName] then
+	game.LootData[mod.DionysusUpgradeName].SpeakerName = "Dionysus"
+	game.LootData[mod.DionysusUpgradeName].Portrait = "Portrait_Dionysus_Default_01"
+	game.LootData[mod.DionysusUpgradeName].OverlayAnim = "DionysusOverlay"
 end

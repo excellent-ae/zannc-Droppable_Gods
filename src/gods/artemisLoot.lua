@@ -1,12 +1,9 @@
 ---@meta _
 ---@diagnostic disable: lowercase-global
-local upgradeName = gods.GetInternalGodName("Artemis")
 
 game.EnemyData.NPC_Artemis_01.GiftTextLineSets.ArtemisGift01.GameStateRequirements = {
-	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { upgradeName, "NPC_Artemis_Field_01" } },
+	{ PathTrue = { "GameState", "UseRecord" }, HasAny = { mod.ArtemisUpgradeName, "NPC_Artemis_Field_01" } },
 }
-
-game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades or {}
 
 local textLineSets = {
 	ArtemisChat01 = {
@@ -276,13 +273,15 @@ local textLineSets = {
 }
 
 local spawnrequirements = false
+local godtype = "god"
 if config.Artemis.requirements then
 	spawnrequirements = true
+	godtype = "npcgod"
 end
 
 gods.InitializeGod({
 	godName = "Artemis",
-	godType = "GOD",
+	godType = godtype,
 	Gender = "F",
 	skipCodex = true,
 	LoadPackages = { "Artemis" },
@@ -361,9 +360,8 @@ gods.InitializeGod({
 })
 
 gods.CreateOlympianSJSONData({
-	pluginGUID = _PLUGIN.guid,
 	godName = "Artemis",
-	godType = "god",
+	godType = godtype,
 	iconPathOverrides = {
 		boonSelectSymbolPath = true,
 	},
@@ -376,13 +374,13 @@ gods.CreateOlympianSJSONData({
 	godDescriptionText = "Goddess of the Hunt",
 })
 
-if game.LootData[upgradeName] then
-	game.LootData[upgradeName].SpeakerName = "Artemis"
-	game.LootData[upgradeName].Portrait = "Portrait_Artemis_Default_01"
-	-- game.LootData[upgradeName].WrathPortrait = "Portrait_Artemis_Default_01_Wrath" doesn't have
-	game.LootData[upgradeName].OverlayAnim = "ArtemisOverlay"
+if game.LootData[mod.ArtemisUpgradeName] then
+	game.LootData[mod.ArtemisUpgradeName].SpeakerName = "Artemis"
+	game.LootData[mod.ArtemisUpgradeName].Portrait = "Portrait_Artemis_Default_01"
+	-- game.LootData[mod.ArtemisUpgradeName].WrathPortrait = "Portrait_Artemis_Default_01_Wrath" doesn't have
+	game.LootData[mod.ArtemisUpgradeName].OverlayAnim = "ArtemisOverlay"
 
-	game.LootData[upgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
-	game.LootData[upgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
-	game.LootData[upgradeName].UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
+	game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
+	game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
+	game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
 end

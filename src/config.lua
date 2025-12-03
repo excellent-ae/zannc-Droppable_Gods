@@ -13,6 +13,10 @@ return {
 		enabled = true,
 		requirements = false,
 	},
+	Hades = {
+		enabled = true,
+		requirements = true,
+	},
 }, {
 	enabled = "Set to true to enable the mod, false to disable.",
 	Artemis = {
@@ -26,5 +30,9 @@ return {
 	Dionysus = {
 		enabled = "Set to true to enable Dionysus, false to disable.",
 		requirements = "Set to true to force Dionysus to spawn with restrictions, like Hermes does - and does not add to the MetGod list.",
+	},
+	Hades = {
+		enabled = "Set to true to enable Hades, false to disable.",
+		requirements = "Set to true to force Hades to spawn with restrictions, like Hermes does - and does not add to the MetGod list.",
 	},
 }
