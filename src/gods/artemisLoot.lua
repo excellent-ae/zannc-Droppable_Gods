@@ -398,3 +398,161 @@ else
 	game.LootData[mod.ArtemisUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades
 	game.LootData[mod.ArtemisUpgradeName].Traits = game.EnemyData.NPC_Artemis_Field_01.Traits
 end
+
+game.EnemyData.ArtemisUpgradeRoomWeapon = {
+	InheritFrom = { "PassiveRoomWeapon" },
+
+	DefaultAIData = {
+		DeepInheritance = true,
+		PreAttackDuration = 0.3,
+		FireDuration = 0.0,
+		PostAttackDuration = 0.0,
+		PostAttackCooldownMin = 2.5,
+		PostAttackCooldownMax = 2.8,
+		CreateOwnTargetFromOriginalTarget = true,
+		RandomTargetAngle = true,
+		TargetOffsetDistanceMin = 200,
+		TargetOffsetDistanceMax = 300,
+		TeleportToTargetId = true,
+
+		AIFireTicksMin = 7,
+		AIFireTicksMax = 9,
+		FireCooldown = 0.3,
+		ResetTargetPerTick = true,
+	},
+
+	WeaponOptions = {
+		"DevotionArtemis",
+	},
+}
+
+game.WeaponData.DevotionArtemis_ALT = { -- Is this even used? I can't find its use in H1, though its defined.
+	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+	HitSimSlowParameters = {
+		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+	},
+
+	AIData = {
+		FireTicks = 1,
+		FireIntervalMin = 4.0,
+		FireIntervalMax = 8.0,
+
+		AttackSlotsPerTick = 5,
+		AttackSlotInterval = 0.2,
+		AttackSlots = {
+			{ OffsetDistance = 300, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+			{ OffsetDistance = 660, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+			{ OffsetDistance = 960, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+			{ OffsetDistance = 1260, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+			{ OffsetDistance = 1560, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+		},
+	},
+}
+
+game.WeaponData.DevotionArtemis = {
+	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+	HitSimSlowParameters = {
+		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+	},
+}
+
+--? Relook at these
+--* EnemyProjectiles.sjson
+-- {
+--   Name = "TheseusArtemisBolt"
+--   InheritFrom = "1_BaseEnemyMagicProjectile"
+--   DetonateGraphic = "RadialNovaTheseusWrath-Artemis"
+--   DetonateSound = "null"
+--   Type = "INSTANT"
+--   DamageLow = 5
+--   DamageHigh = 5
+--   DamageRadius = 150.0
+--   DamageRadiusScaleY = 0.6
+--   ImpactVelocity = 0
+--   Fuse = 1.0
+--   AffectsFriends = false
+--   AffectsSelf = false
+--   AffectsEnemies = true
+--   CheckUnitImpact = false
+--   CheckObstacleImpact = false
+--   CanCrit = false
+--   MaxVictimZ = 9999
+--   SpawnRadius = 0
+--   GroupName = "FX_Terrain"
+--   DissipateGraphic = "TheseusGodPowerPreviewDecalDarkFade"
+--   DangerDistance = 0
+--   Thing = {
+--     Graphic = "TheseusGodPowerPreviewDecal_Artemis"
+--     RotateGeometry = false
+--     Scale = 1.0
+--     Color = {
+--       Red = 0
+--       Green = 1.0
+--       Blue = 0.1
+--       Opacity = 1.0
+--     }
+--     Points = [
+--       {
+--         X = 0
+--         Y = 8
+--       }
+--       {
+--         X = 32
+--         Y = 0
+--       }
+--       {
+--         X = 0
+--         Y = -8
+--       }
+--       {
+--         X = -32
+--         Y = 0
+--       }
+--     ]
+--   }
+-- }
+-- {
+--   Name = "DevotionArtemis"
+--   InheritFrom = "TheseusArtemisBolt"
+--   DetonateGraphic = "RadialNovaDevotion-Artemis"
+--   Type = "HOMING"
+--   Fuse = 1.5
+--     AllowTargetInvulnerable = true
+--   DamageLow = 8
+--   DamageHigh = 8
+--   DamageRadius = 160.0
+--   DamageRadiusScaleY = 0.6
+--   ImpactVelocity = 0
+--   MaxAdjustRate = 140
+--   Speed = 600
+--   Range = 1600
+--   DieWithOwner = true
+--     InheritOwnerElapsedTimeMultiplier = false
+--   DangerDistance = 0
+-- }
+
+--*EnemyWeapons.sjson
+-- {
+--   Name = "DevotionArtemis"
+--   InheritFrom = "1_BasePlayerSlowWeapon"
+--   Type = "GUN"
+--   Projectile = "DevotionArtemis"
+--   FullyAutomatic = true
+--   AutoLock = true
+--   FireFx = "null"
+--   IgnoreOwnerAttackDisabled = true
+--   Spread = 360
+-- }
+
+--     {
+--   Name = "EnemyArtemisWeapon"
+--   InheritFrom = "1_BasePlayerSlowWeapon"
+--   Type = "GUN"
+--   Projectile = "DevotionArtemis"
+--   FireSound = "null"
+--   CancelMovement = false
+--   FullyAutomatic = false
+--   AutoLock = false
+-- }
