@@ -400,63 +400,280 @@ else
 end
 
 game.EnemyData.ArtemisUpgradeRoomWeapon = {
-	InheritFrom = { "PassiveRoomWeapon" },
+	Name = "ArtemisUpgradeRoomWeapon",
+	TriggersOnDamageEffects = false,
+	TriggersOnHitEffects = true,
+	SkipModifiers = true,
+	DropItemsOnDeath = false,
+	BlockWrathGain = true,
+	BlocksLootInteraction = false,
+	SimulationSlowOnHit = false,
+	UseShrineUpgrades = false,
+	CanBeFrozen = false,
+	AggroMinimumDistance = 500,
+	SkipDamageText = true,
+	SkipDamagePresentation = true,
+	HideLevelDisplay = true,
+	BlockLifeSteal = true,
+	BlockPolymorph = true,
+	IgnoreAutoLock = true,
+	MaxHitShields = 5,
+	DamageType = "Enemy",
+	RequiredKill = false,
+	HideHealthBar = true,
+
+	WakeUpDelay = 1.75,
 
 	DefaultAIData = {
 		DeepInheritance = true,
-		PreAttackDuration = 0.3,
-		FireDuration = 0.0,
-		PostAttackDuration = 0.0,
-		PostAttackCooldownMin = 2.5,
-		PostAttackCooldownMax = 2.8,
-		CreateOwnTargetFromOriginalTarget = true,
-		RandomTargetAngle = true,
-		TargetOffsetDistanceMin = 200,
-		TargetOffsetDistanceMax = 300,
-		TeleportToTargetId = true,
 
-		AIFireTicksMin = 7,
-		AIFireTicksMax = 9,
-		FireCooldown = 0.3,
-		ResetTargetPerTick = true,
+		PreAttackStop = false,
+		PreAttackEndStop = false,
+		PostAttackStop = false,
+		MoveWithinRange = true,
+		PreAttackAngleTowardTarget = true,
+
+		AttackDistance = 99999,
 	},
 
+	AIOptions = {
+		"AttackerAI",
+	},
+
+	RunHistoryKilledByName = mod.ArtemisUpgradeName,
+
 	WeaponOptions = {
-		"DevotionArtemis",
+		"DevotionZeus",
 	},
 }
 
-game.WeaponData.DevotionArtemis_ALT = { -- Is this even used? I can't find its use in H1, though its defined.
-	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
-	HitSimSlowParameters = {
-		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
-		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+OverwriteTableKeys(game.ProjectileData, {
+	DevotionArtemis = {
+		Name = "DevotionArtemis",
+		HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+		HitSimSlowParameters = {
+			{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+			{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+		},
 	},
+})
 
-	AIData = {
-		FireTicks = 1,
-		FireIntervalMin = 4.0,
-		FireIntervalMax = 8.0,
+local wepData = {
+	DevotionArtemis = {
+		Name = "DevotionArtemis",
+		AIData = {
+			DeepInheritance = true,
 
-		AttackSlotsPerTick = 5,
-		AttackSlotInterval = 0.2,
-		AttackSlots = {
-			{ OffsetDistance = 300, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
-			{ OffsetDistance = 660, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
-			{ OffsetDistance = 960, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
-			{ OffsetDistance = 1260, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
-			{ OffsetDistance = 1560, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+			ProjectileName = "DevotionZeus",
+
+			PreAttackDuration = 0.3,
+			FireDuration = 0.0,
+			PostAttackDuration = 0.0,
+			PostAttackCooldownMin = 2.5,
+			PostAttackCooldownMax = 2.8,
+
+			RandomTargetAngle = true,
+			TargetOffsetDistanceMin = 200,
+			TargetOffsetDistanceMax = 300,
+			PreMoveTeleport = true,
+			TeleportToTarget = true,
+
+			FireTicksMin = 7,
+			FireTicksMax = 9,
+			FireInterval = 0.3,
+			ResetTargetPerTick = true,
+			CreateOwnTargetFromOriginalTarget = true,
 		},
 	},
 }
 
-game.WeaponData.DevotionArtemis = {
-	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
-	HitSimSlowParameters = {
-		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
-		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
-	},
+OverwriteTableKeys(game.WeaponData, wepData)
+OverwriteTableKeys(game.WeaponDataEnemies, wepData)
+wepData = nil
+
+local Order = {
+	"Name",
+	"InheritFrom",
+	"DetonateGraphic",
+	"DetonateSound",
+	"Type",
+	"DamageLow",
+	"DamageHigh",
+	"DamageRadius",
+	"DamageRadiusScaleY",
+	"ImpactVelocity",
+	"Fuse",
+	"AffectsFriends",
+	"AffectsSelf",
+	"AffectsEnemies",
+	"CheckUnitImpact",
+	"CheckObstacleImpact",
+	"CanCrit",
+	"MaxVictimZ",
+	"SpawnRadius",
+	"GroupName",
+	"DissipateGraphic",
+	"DangerDistance",
+	"Thing",
+	-- DevArtemis
+	"AllowTargetInvulnerable",
+	"MaxAdjustRate",
+	"Speed",
+	"Range",
+	"DieWithOwner",
+	"InheritOwnerElapsedTimeMultiplier",
+	"DangerDistance",
+	-- Weapon
+	"Projectile",
+	"FullyAutomatic",
+	"AutoLock",
+	"FireFx",
+	"IgnoreOwnerAttackDisabled",
+	"Spread",
+	"CancelMovement",
+	"DisplayInEditor",
+	"EditorOutlineDrawBounds",
 }
+
+local enemyProj = rom.path.combine(rom.paths.Content, "Game/Projectiles/Enemy_General_Projectiles.sjson")
+local enemy = rom.path.combine(rom.paths.Content, "Game/Units/Enemies.sjson")
+
+local devArtemis = sjson.to_object({
+	Name = "DevotionArtemis",
+	InheritFrom = "1_BaseEnemyMagicProjectile",
+	DetonateGraphic = "RadialNovaDevotion-Artemis",
+	Type = "HOMING",
+	Fuse = 1.5,
+	AllowTargetInvulnerable = true,
+	DamageLow = 8,
+	DamageHigh = 8,
+	DamageRadius = 160.0,
+	DamageRadiusScaleY = 0.6,
+	ImpactVelocity = 0,
+	MaxAdjustRate = 140,
+	Speed = 600,
+	Range = 1600,
+	DieWithOwner = true,
+	InheritOwnerElapsedTimeMultiplier = false,
+	DangerDistance = 0,
+	DetonateSound = "null",
+	AffectsFriends = false,
+	AffectsSelf = false,
+	AffectsEnemies = true,
+	CheckUnitImpact = false,
+	CheckObstacleImpact = false,
+	CanCrit = false,
+	MaxVictimZ = 9999,
+	SpawnRadius = 0,
+	GroupName = "FX_Terrain",
+	DissipateGraphic = "TheseusGodPowerPreviewDecalDarkFade",
+	Thing = {
+		Graphic = "TheseusGodPowerPreviewDecal_Artemis",
+		RotateGeometry = false,
+		Scale = 1.0,
+		Color = {
+			Red = 0,
+			Green = 1.0,
+			Blue = 0.1,
+			Opacity = 1.0,
+		},
+		Points = {
+			{
+				X = 0,
+				Y = 8,
+			},
+			{
+				X = 32,
+				Y = 0,
+			},
+			{
+				X = 0,
+				Y = -8,
+			},
+			{
+				X = -32,
+				Y = 0,
+			},
+		},
+	},
+}, Order)
+
+sjson.hook(enemyProj, function(data)
+	table.insert(data.Projectiles, devArtemis)
+end)
+
+local upgradeArtemis = sjson.to_object({
+	Name = "ArtemisUpgradeRoomWeapon",
+	InheritFrom = "PassiveRoomWeapon",
+	DisplayInEditor = true,
+	Thing = {
+		EditorOutlineDrawBounds = false,
+	},
+}, Order)
+
+sjson.hook(enemy, function(data)
+	table.insert(data.Units, upgradeArtemis)
+end)
+
+--#region
+-- game.EnemyData.ArtemisUpgradeRoomWeapon = {
+-- 	InheritFrom = { "PassiveRoomWeapon" },
+
+-- 	DefaultAIData = {
+-- 		DeepInheritance = true,
+-- 		PreAttackDuration = 0.3,
+-- 		FireDuration = 0.0,
+-- 		PostAttackDuration = 0.0,
+-- 		PostAttackCooldownMin = 2.5,
+-- 		PostAttackCooldownMax = 2.8,
+-- 		CreateOwnTargetFromOriginalTarget = true,
+-- 		RandomTargetAngle = true,
+-- 		TargetOffsetDistanceMin = 200,
+-- 		TargetOffsetDistanceMax = 300,
+-- 		TeleportToTargetId = true,
+
+-- 		AIFireTicksMin = 7,
+-- 		AIFireTicksMax = 9,
+-- 		FireCooldown = 0.3,
+-- 		ResetTargetPerTick = true,
+-- 	},
+
+-- 	WeaponOptions = {
+-- 		"DevotionArtemis",
+-- 	},
+-- }
+
+-- game.WeaponData.DevotionArtemis_ALT = { -- Is this even used? I can't find its use in H1, though its defined.
+-- 	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+-- 	HitSimSlowParameters = {
+-- 		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+-- 		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+-- 	},
+
+-- 	AIData = {
+-- 		FireTicks = 1,
+-- 		FireIntervalMin = 4.0,
+-- 		FireIntervalMax = 8.0,
+
+-- 		AttackSlotsPerTick = 5,
+-- 		AttackSlotInterval = 0.2,
+-- 		AttackSlots = {
+-- 			{ OffsetDistance = 300, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+-- 			{ OffsetDistance = 660, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+-- 			{ OffsetDistance = 960, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+-- 			{ OffsetDistance = 1260, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+-- 			{ OffsetDistance = 1560, OffsetScaleY = 0.48, OffsetFromAttacker = true, UseAngleBetween = true },
+-- 		},
+-- 	},
+-- }
+
+-- game.WeaponData.DevotionArtemis = {
+-- 	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+-- 	HitSimSlowParameters = {
+-- 		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+-- 		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+-- 	},
+-- }
 
 --? Relook at these
 --* EnemyProjectiles.sjson
@@ -556,3 +773,4 @@ game.WeaponData.DevotionArtemis = {
 --   FullyAutomatic = false
 --   AutoLock = false
 -- }
+--#endregion
