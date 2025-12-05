@@ -394,3 +394,102 @@ else
 	game.LootData[mod.AthenaUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Athena_01.WeaponUpgrades
 	game.LootData[mod.AthenaUpgradeName].Traits = game.EnemyData.NPC_Athena_01.Traits
 end
+
+local devAthena = sjson.to_object({
+	Name = "DevotionAthena",
+	InheritFrom = "1_BaseEnemyMagicProjectile",
+	DetonateFx = "null", --RadialNovaTheseusWrath-Athena
+	Type = "INSTANT",
+	Fuse = 1.3,
+	Damage = 0,
+	DamageRadius = 350.0,
+	DamageRadiusScaleY = 0.6,
+	ImpactVelocity = 0,
+	DieWithOwner = true,
+	InheritOwnerElapsedTimeMultiplier = false,
+	CheckUnitImpact = false,
+	CheckObstacleImpact = false,
+	MaxVictimZ = 9999,
+	SpawnRadius = 0,
+	GroupName = "FX_Terrain_Add",
+	DissipateFx = "TheseusGodPowerPreviewDecalDarkFade",
+	AffectsEnemies = false,
+	AffectsFriends = true,
+	AffectsSelf = false,
+	CanBeReflected = false,
+	CanBeProjectileDefenseDestroyed = false,
+	CanBeProjectileDefenseDestroyedByName = "null",
+	CanBeProjectileDefenseDestroyedByLayer = "null",
+	CanBeProjectileDefenseDestroyedByName2 = "null",
+	DetonateSound = "/SFX/Player Sounds/AthenaShieldImpactDetonate",
+	Thing = {
+		Graphic = "null", -- DevotionPreAttackBase_Athena
+		RotateGeometry = false,
+		Scale = 1.0,
+		Color = {
+			Red = 0.0,
+			Green = 0.05,
+			Blue = 1.0,
+			Opacity = 1.0,
+		},
+		Points = {
+			{
+				X = 0,
+				Y = 8,
+			},
+			{
+				X = 32,
+				Y = 0,
+			},
+			{
+				X = 0,
+				Y = -8,
+			},
+			{
+				X = -32,
+				Y = 0,
+			},
+		},
+	},
+	Effect = {
+		Name = "MagicShieldInvincible", -- ?
+		Type = "INVULNERABLE",
+		Duration = 3.5,
+		Modifier = 1.0,
+		FrontFx = "AthenaProtectionFront",
+		BackFx = "AthenaProtectionBack",
+		Active = true,
+		FlashFrontFxWhenExpiring = true,
+	},
+}, mod.Order)
+
+sjson.hook(mod.enemyProjFile, function(data)
+	table.insert(data.Projectiles, devAthena)
+end)
+
+local wepData = {
+	DevotionAthena = {
+		Name = "DevotionAthena",
+		AIData = {
+			DeepInheritance = true,
+			ProjectileName = "DevotionAthena",
+
+			PreAttackDuration = 0,
+			FireDuration = 0.0,
+			PostAttackDuration = 0.0,
+			PostAttackCooldownMin = 6.5,
+			PostAttackCooldownMax = 7.5,
+			CreateOwnTargetFromOriginalTarget = true,
+			RandomTargetAngle = true,
+			TargetOffsetDistanceMin = 0,
+			TargetOffsetDistanceMax = 0,
+			PreMoveTeleport = true,
+			TeleportToTarget = true,
+			TargetRequiredKillEnemy = true,
+		},
+	},
+}
+
+OverwriteTableKeys(game.WeaponData, wepData)
+OverwriteTableKeys(game.WeaponDataEnemies, wepData)
+wepData = nil

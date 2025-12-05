@@ -318,3 +318,124 @@ else
 	game.LootData[mod.DionysusUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades
 	game.LootData[mod.DionysusUpgradeName].Traits = game.EnemyData.NPC_Dionysus_01.Traits
 end
+
+local devDionysus = sjson.to_object({
+	Name = "DevotionDionysus",
+	InheritFrom = "1_BaseEnemyMagicProjectile",
+	DetonateFx = "null", --RadialNovaTheseusWrath-Dionysus
+	Type = "INSTANT",
+	Fuse = 0.25,
+	Damage = 5,
+	DamageRadius = 100.0,
+	DamageRadiusScaleY = 0.6,
+	ImpactVelocity = 0,
+	DieWithOwner = true,
+	InheritOwnerElapsedTimeMultiplier = false,
+	CheckUnitImpact = false,
+	CheckObstacleImpact = false,
+	MaxVictimZ = 9999,
+	SpawnRadius = 0,
+	TotalFuse = 10.0,
+	MultiDetonate = true,
+	ImmunityDuration = 0.1,
+	GroupName = "FX_Terrain",
+	DissipateFx = "TheseusGodPowerPreviewDecalDarkFade",
+	AffectsEnemies = true,
+	AffectsFriends = false,
+	AffectsSelf = false,
+	CanBeReflected = false,
+	CanBeProjectileDefenseDestroyed = false,
+	CanBeProjectileDefenseDestroyedByName = "null",
+	CanBeProjectileDefenseDestroyedByLayer = "null",
+	CanBeProjectileDefenseDestroyedByName2 = "null",
+	DetonateSound = "/SFX/Explosion1",
+	Thing = {
+		Graphic = "null", --DevotionPreAttackBase_Dionysus
+		RotateGeometry = false,
+		Scale = 1.0,
+		Color = {
+			Red = 0.3,
+			Green = 0.0,
+			Blue = 1.0,
+			Opacity = 1.0,
+		},
+		Points = {
+			{
+				X = 0,
+				Y = 8,
+			},
+			{
+				X = 32,
+				Y = 0,
+			},
+			{
+				X = 0,
+				Y = -8,
+			},
+			{
+				X = -32,
+				Y = 0,
+			},
+		},
+	},
+}, mod.Order)
+
+sjson.hook(mod.enemyProjFile, function(data)
+	table.insert(data.Projectiles, devDionysus)
+end)
+
+local wepData = {
+	DevotionDionysus = {
+		Name = "DevotionDionysus",
+		AIData = {
+			DeepInheritance = true,
+			ProjectileName = "DevotionDionysus",
+
+			PreAttackDuration = 0,
+			FireDuration = 0.0,
+			PostAttackDuration = 0.0,
+			PostAttackCooldownMin = 0.9,
+			PostAttackCooldownMax = 1.2,
+			CreateOwnTargetFromOriginalTarget = true,
+			RandomTargetAngle = true,
+			TargetOffsetDistanceMin = 150,
+			TargetOffsetDistanceMax = 350,
+			PreMoveTeleport = true,
+			TeleportToTarget = true,
+		},
+	},
+}
+
+OverwriteTableKeys(game.WeaponData, wepData)
+OverwriteTableKeys(game.WeaponDataEnemies, wepData)
+wepData = nil
+--? Is this used or was this just defined for NO reason, does it work like IconSpin 0-50?
+-- DevotionDionysus2 =
+-- {
+-- 	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+-- 	HitSimSlowParameters =
+-- 	{
+-- 		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+-- 		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+-- 	},
+
+-- 	AIData = {
+-- 		FireTicks = 1,
+-- 		FireIntervalMin = 4.0,
+-- 		FireIntervalMax = 8.0,
+
+-- 		AttackSlotsPerTick = 8,
+-- 		AttackSlotInterval = 0.2,
+-- 		AttackSlots =
+-- 		{
+-- 			{ Angle = 0, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 45, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 90, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 135, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 180, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 225, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 270, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 			{ Angle = 315, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
+-- 		},
+-- 	},
+-- },

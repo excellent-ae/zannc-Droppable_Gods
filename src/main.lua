@@ -69,6 +69,49 @@ local function on_ready()
 		base()
 	end)
 
+	mod.enemyProjFile = rom.path.combine(rom.paths.Content, "Game/Projectiles/Enemy_General_Projectiles.sjson")
+	local enemyFile = rom.path.combine(rom.paths.Content, "Game/Units/Enemies.sjson")
+	mod.Order = {
+		"Name",
+		"InheritFrom",
+		"DetonateFx",
+		"Type",
+		"Fuse",
+		"AllowTargetInvulnerable",
+		"Damage",
+		"DamageRadius",
+		"DamageRadiusScaleY",
+		"ImpactVelocity",
+		"MaxAdjustRate",
+		"Speed",
+		"Range",
+		"FlashBeforeExpireDuration",
+		"DieWithOwner",
+		"InheritOwnerElapsedTimeMultiplier",
+		"CheckUnitImpact",
+		"CheckObstacleImpact",
+		"MaxVictimZ",
+		"SpawnRadius",
+		"IgnoreCoverageAngles",
+		"GroupName",
+		"DissipateFx",
+		"AffectsEnemies",
+		"AffectsFriends",
+		"AffectsSelf",
+		"CanBeReflected",
+		"CanBeProjectileDefenseDestroyed",
+		"CanBeProjectileDefenseDestroyedByName",
+		"CanBeProjectileDefenseDestroyedByLayer",
+		"CanBeProjectileDefenseDestroyedByName2",
+		"DetonateSound",
+		"Thing",
+		"DisplayInEditor",
+		"Effect",
+		"ImmunityDuration",
+		"TotalFuse",
+		"MultiDetonate",
+	}
+
 	mod.ArtemisUpgradeName = gods.GetInternalGodName("Artemis")
 	mod.AthenaUpgradeName = gods.GetInternalGodName("Athena")
 	mod.DionysusUpgradeName = gods.GetInternalGodName("Dionysus")
@@ -77,27 +120,33 @@ local function on_ready()
 
 	local data = {
 		[mod.ArtemisUpgradeName] = {
+			enabled = false,
 			codexName = "NPC_Artemis_01",
 			enemyName = "NPC_Artemis_Field_01",
-			enabled = false,
+			projectileName = "DevotionArtemis",
+			baseName = "Artemis",
 		},
 
 		[mod.AthenaUpgradeName] = {
+			enabled = false,
 			codexName = "NPC_Athena_01",
 			enemyName = "NPC_Athena_01",
-			enabled = false,
+			projectileName = "DevotionAthena",
+			baseName = "Athena",
 		},
 
 		[mod.DionysusUpgradeName] = {
+			enabled = false,
 			codexName = "NPC_Dionysus_01",
 			enemyName = "NPC_Dionysus_01",
-			enabled = false,
+			projectileName = "DevotionDionysus",
+			baseName = "Dionysus",
 		},
 
 		[mod.HadesUpgradeName] = {
+			enabled = false,
 			codexName = "NPC_Hades_01",
 			enemyName = "NPC_Hades_Field_01",
-			enabled = false,
 		},
 	}
 
@@ -147,6 +196,62 @@ local function on_ready()
 		if game.CodexData.OtherDenizens.Entries[v.codexName] then
 			game.CodexData.OtherDenizens.Entries[v.codexName].NoRequirements = false
 			game.CodexData.OtherDenizens.Entries[v.codexName].BoonInfoAllowPinning = true
+		end
+
+		--devotion stuff
+		if lootName ~= mod.HadesUpgradeName then
+			local roomWeaponName = lootName .. "RoomWeapon"
+			local projectileName = "Devotion" .. v.baseName
+			game.EnemyData[roomWeaponName] = {
+				Name = roomWeaponName,
+				InheritFrom = { "PassiveRoomWeapon" },
+
+				WakeUpDelay = 1.75,
+
+				DefaultAIData = {
+					DeepInheritance = true,
+
+					PreAttackStop = false,
+					PreAttackEndStop = false,
+					PostAttackStop = false,
+					MoveWithinRange = true,
+					PreAttackAngleTowardTarget = true,
+
+					AttackDistance = 99999,
+				},
+
+				AIOptions = {
+					"AttackerAI",
+				},
+
+				RunHistoryKilledByName = lootName,
+
+				WeaponOptions = {
+					projectileName,
+				},
+			}
+
+			game.ProjectileData[projectileName] = {
+				Name = projectileName,
+				HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
+				HitSimSlowParameters = {
+					{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
+					{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
+				},
+			}
+
+			local upgrade = sjson.to_object({
+				Name = roomWeaponName,
+				InheritFrom = "PassiveRoomWeapon",
+				DisplayInEditor = true,
+				Thing = {
+					EditorOutlineDrawBounds = false,
+				},
+			}, mod.Order)
+
+			sjson.hook(enemyFile, function(data)
+				table.insert(data.Units, upgrade)
+			end)
 		end
 	end
 
