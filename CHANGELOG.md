@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.0] - 2025-12-08
+
 - Added Hades as a functioning droppable god! (To progress his story you still have to meet him in the underworld)
 - Added Family Dispute attacks for Artemis/Dionysus/Athena.
 - Animation for Hades boon drop, blender file included in source.
@@ -50,7 +53,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.3...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.3...3.0.0
 [2.1.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.2...2.1.3
 [2.1.2]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.1...2.1.2
 [2.1.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.0...2.1.1
