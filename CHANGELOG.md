@@ -1,7 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.1] - 2025-12-08
+
 - Icon Update
+
 ## [3.0.0] - 2025-12-08
 
 - Added Hades as a functioning droppable god! (To progress his story you still have to meet him in the underworld)
@@ -53,7 +57,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.0...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.1...HEAD
+[3.0.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.3...3.0.0
 [2.1.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.2...2.1.3
 [2.1.2]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.1...2.1.2
