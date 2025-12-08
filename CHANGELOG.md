@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-
+- Icon Update
 ## [3.0.0] - 2025-12-08
 
 - Added Hades as a functioning droppable god! (To progress his story you still have to meet him in the underworld)
