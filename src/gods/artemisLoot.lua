@@ -8,26 +8,38 @@ game.EnemyData.NPC_Artemis_01.GiftTextLineSets.ArtemisGift01.GameStateRequiremen
 local textLineSets = {
 	ArtemisChat01 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0004", UseEventEndSound = true, Text = "Take this, Sister, and go find your mark." },
 	},
 	ArtemisChat02 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0005", UseEventEndSound = true, Text = "Tread ever softly and strike swift and true, Sister." },
 	},
 	ArtemisChat03 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0006", UseEventEndSound = true, Text = "Happened to be in the area again, so thought I'd stop on by." },
 	},
 	ArtemisChat04 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0007", UseEventEndSound = true, Text = "May Moonlight guide you to your prey, and expose his every weakness." },
 	},
 	ArtemisChat05 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0008", UseEventEndSound = true, Text = "Another night, another duty for the Silver Sisters." },
 	},
 	ArtemisChat06 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				Path = { "CurrentRun", "CurrentRoom", "RoomSetName" },
@@ -39,6 +51,8 @@ local textLineSets = {
 	ArtemisChat07 = {
 		PlayFirst = true,
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				PathTrue = { "CurrentRun", "BiomesReached", "G" },
@@ -48,31 +62,45 @@ local textLineSets = {
 	},
 	ArtemisChat08 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0011", UseEventEndSound = true, Text = "The skilled huntress keeps her bag of tricks full and with her at all times." },
 	},
 	ArtemisChat09 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0012", UseEventEndSound = true, Text = "Steady yourself, Sister. You have my full support and more." },
 	},
 	ArtemisChat10 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0013", UseEventEndSound = true, Text = "May your aim ever be true. Not unlike mine!" },
 	},
 	ArtemisChat11 = {
 		PlayFirst = true,
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0014", UseEventEndSound = true, Text = "I still think you should try a bow again sometime..." },
 	},
 	ArtemisChat12 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0015", UseEventEndSound = true, Text = "We hunt alone. Although these run-ins aren't so bad!" },
 	},
 	ArtemisChat13 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0016", UseEventEndSound = true, Text = "Always a pleasure working with you, Sister." },
 	},
 	ArtemisChat14 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				PathTrue = { "CurrentRun", "BiomesReached", "F" },
@@ -83,10 +111,14 @@ local textLineSets = {
 	},
 	ArtemisChat15 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0018", UseEventEndSound = true, Text = "May none dare stand between a witch and her prey." },
 	},
 	ArtemisChat16 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			NamedRequirementsFalse = { "StandardPackageBountyActive" },
 		},
@@ -94,38 +126,56 @@ local textLineSets = {
 	},
 	ArtemisChat17 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0020", UseEventEndSound = true, Portrait = "Portrait_Artemis_Serious_01", Text = "Picked up the scent of a few stragglers I'll take care of after this..." },
 	},
 	ArtemisChat18 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0021", UseEventEndSound = true, Text = "You'll find your mark. I know you will." },
 	},
 	ArtemisChat19 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0022", UseEventEndSound = true, Text = "Yours is the most dangerous prey of all. I'm a bit envious!" },
 	},
 	ArtemisChat20 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0023", UseEventEndSound = true, Text = "Here's a little something to go with those witching arts of yours." },
 	},
 	ArtemisChat21 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0024", UseEventEndSound = true, Text = "I've got your back, Sister, so just keep moving forward." },
 	},
 	ArtemisChat22 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0025", UseEventEndSound = true, Text = "We're the Silver Sisters, and we never miss our mark." },
 	},
 	ArtemisChat23 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0026", UseEventEndSound = true, Text = "We are the Silver Sisters, and this is our time to shine." },
 	},
 	ArtemisChat24 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0027", UseEventEndSound = true, Text = "Got to say it's nice to get away from it all like this." },
 	},
 	ArtemisChat25 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				Path = { "CurrentRun", "SpeechRecord" },
@@ -136,19 +186,27 @@ local textLineSets = {
 	},
 	ArtemisChat26 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0029", UseEventEndSound = true, Text = "You tracked {#Emph}me {#Prev}down this time, I'll have you know!" },
 	},
 	ArtemisChat27 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0030", UseEventEndSound = true, Text = "You were born to do this, Sister, and you're going to succeed." },
 	},
 	ArtemisChat28 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Artemis_0031", UseEventEndSound = true, Text = "Sure beats being back on that mountaintop, let me tell you." },
 	},
 	ArtemisChat29 = {
 		PlayFirst = true,
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				Path = { "GameState", "GamePhase" },
@@ -161,6 +219,8 @@ local textLineSets = {
 	ArtemisChat30 = {
 		PlayFirst = true,
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				Path = { "GameState", "GamePhase" },
@@ -173,6 +233,8 @@ local textLineSets = {
 	ArtemisChat31 = {
 		PlayFirst = true,
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				Path = { "GameState", "GamePhase" },
@@ -185,6 +247,8 @@ local textLineSets = {
 	ArtemisChat32 = {
 		PlayFirst = true,
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				Path = { "GameState", "GamePhase" },
@@ -196,6 +260,8 @@ local textLineSets = {
 	},
 	ArtemisChat33 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				PathTrue = { "CurrentRun", "BiomesReached", "N" },
@@ -206,6 +272,8 @@ local textLineSets = {
 	},
 	ArtemisChat34 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				PathTrue = { "GameState", "ReachedTrueEnding" },
@@ -215,6 +283,8 @@ local textLineSets = {
 	},
 	ArtemisChat35 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				PathTrue = { "GameState", "ReachedTrueEnding" },
@@ -228,26 +298,17 @@ local textLineSets = {
 	},
 	ArtemisChat36 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {},
 		{ Cue = "/VO/Artemis_0452", UseEventEndSound = true, Text = "I'll cover your tracks, but first, here's something for the road." },
 	},
-	ArtemisChat37 = {
-		UseableOffSource = true,
-		GameStateRequirements = {
-			{
-				Path = { "CurrentRun", "ProjectileRecord", "ArtemisSniperBolt" },
-				Comparison = "<=",
-				Value = 4,
-			},
-			{
-				PathFalse = { "CurrentRun", "SpeechRecord", "/VO/Artemis_0448" },
-			},
-		},
-		{ Cue = "/VO/Artemis_0453", UseEventEndSound = true, Text = "Next time leave more of them for me, would you?" },
-	},
+
 	-- 38 blank
 	ArtemisChat39 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			{
 				FunctionName = "RequiredHealthFraction",
@@ -260,16 +321,34 @@ local textLineSets = {
 		},
 		{ Cue = "/VO/Artemis_0467", UseEventEndSound = true, Text = "Clean and efficient, just the way I like it, Sister." },
 	},
-	ArtemisChat40 = {
-		UseableOffSource = true,
-		GameStateRequirements = {
-			{
-				FunctionName = "RequireRunsSinceTextLines",
-				FunctionArgs = { TextLines = { "ArtemisGrantsReward01" }, Min = 9 },
-			},
-		},
-		{ Cue = "/VO/Artemis_0468", UseEventEndSound = true, Text = "Here, a little extra Moon magick for all you've done, and still intend to do." },
-	},
+	-- ArtemisChat37 = {
+	-- 	UseableOffSource = true,
+	-- 	PreEventFunctionName = "BoonInteractPresentation",
+	-- 	PreEventFunctionArgs = { PickupWait = 1.0 },
+	-- 	GameStateRequirements = {
+	-- 		{
+	-- 			Path = { "CurrentRun", "ProjectileRecord", "ArtemisSniperBolt" },
+	-- 			Comparison = "<=",
+	-- 			Value = 4,
+	-- 		},
+	-- 		{
+	-- 			PathFalse = { "CurrentRun", "SpeechRecord", "/VO/Artemis_0448" },
+	-- 		},
+	-- 	},
+	-- 	{ Cue = "/VO/Artemis_0453", UseEventEndSound = true, Text = "Next time leave more of them for me, would you?" },
+	-- },
+	-- ArtemisChat40 = {
+	-- 	UseableOffSource = true,
+	-- 	PreEventFunctionName = "BoonInteractPresentation",
+	-- 	PreEventFunctionArgs = { PickupWait = 1.0 },
+	-- 	GameStateRequirements = {
+	-- 		{
+	-- 			FunctionName = "RequireRunsSinceTextLines",
+	-- 			FunctionArgs = { TextLines = { "ArtemisGrantsReward01" }, Min = 9 },
+	-- 		},
+	-- 	},
+	-- 	{ Cue = "/VO/Artemis_0468", UseEventEndSound = true, Text = "Here, a little extra Moon magick for all you've done, and still intend to do." },
+	-- },
 }
 
 local spawnrequirements = false
@@ -277,6 +356,14 @@ local godtype = "god"
 if config.Artemis.requirements then
 	spawnrequirements = true
 	godtype = "npcgod"
+end
+
+local weaponBoons = nil
+local boons = nil
+if not config.Artemis.splitTraits then -- basically, if we split the boons, it will get populated later by different mods in LootData
+	weaponBoons = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades
+	boons = game.EnemyData.NPC_Artemis_Field_01.Traits
+	game.EnemyData.NPC_Artemis_Field_01.RarityChances = nil
 end
 
 gods.InitializeGod({
@@ -293,6 +380,8 @@ gods.InitializeGod({
 	SubtitleColor = Color.ArtemisVoice,
 
 	SpawnLikeHermes = spawnrequirements,
+	WeaponUpgrades = weaponBoons,
+	Traits = boons,
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -386,119 +475,108 @@ game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait =
 game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7
 game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[3].PreLineWait = 0.7
 
-local splitTraits = false
-if config.Artemis.splitTraits then
-	splitTraits = true
-end
-
-if splitTraits then
-	game.LootData[mod.ArtemisUpgradeName].WeaponUpgrades = {}
-	game.LootData[mod.ArtemisUpgradeName].Traits = {}
-else
-	game.LootData[mod.ArtemisUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades
-	game.LootData[mod.ArtemisUpgradeName].Traits = game.EnemyData.NPC_Artemis_Field_01.Traits
-end
-
 --* Too many vars to do in for loops, and I CBA do it
-local devArtemis = sjson.to_object({
-	Name = "DevotionArtemis",
-	InheritFrom = "1_BaseEnemyMagicProjectile",
-	DetonateFx = "RadialNovaDevotion-Artemis",
-	Type = "HOMING",
-	Fuse = 1.5,
-	AllowTargetInvulnerable = true,
-	Damage = 8,
-	DamageRadius = 160.0,
-	DamageRadiusScaleY = 0.6,
-	ImpactVelocity = 0,
-	MaxAdjustRate = 200, --160
-	Speed = 600,
-	Range = 1600,
-	FlashBeforeExpireDuration = 0.5,
-	DieWithOwner = true,
-	InheritOwnerElapsedTimeMultiplier = false,
-	CheckUnitImpact = false,
-	CheckObstacleImpact = false,
-	MaxVictimZ = 9999,
-	SpawnRadius = 700,
-	IgnoreCoverageAngles = true,
-	GroupName = "FX_Terrain",
-	DissipateFx = "TheseusGodPowerPreviewDecalDarkFade",
-	AffectsEnemies = true,
-	AffectsFriends = false,
-	AffectsSelf = false,
-	CanBeReflected = false,
-	CanBeProjectileDefenseDestroyed = false,
-	CanBeProjectileDefenseDestroyedByName = "null",
-	CanBeProjectileDefenseDestroyedByLayer = "null",
-	CanBeProjectileDefenseDestroyedByName2 = "null",
-	DetonateSound = "null",
-	Thing = {
-		Graphic = "TheseusGodPowerPreviewDecal_Artemis",
-		RotateGeometry = false,
-		Scale = 1.0,
-		Color = {
-			Red = 0,
-			Green = 1.0,
-			Blue = 0.1,
-			Opacity = 1.0,
-		},
-		Points = {
-			{
-				X = 0,
-				Y = 8,
-			},
-			{
-				X = 32,
-				Y = 0,
-			},
-			{
-				X = 0,
-				Y = -8,
-			},
-			{
-				X = -32,
-				Y = 0,
-			},
-		},
-	},
-}, mod.Order)
-
-sjson.hook(mod.enemyProjFile, function(data)
-	table.insert(data.Projectiles, devArtemis)
-end)
-
-local wepData = {
-	DevotionArtemis = {
+if not mod.zagJourney then
+	local devArtemis = sjson.to_object({
 		Name = "DevotionArtemis",
-		AIData = {
-			DeepInheritance = true,
-			ProjectileName = "DevotionArtemis",
-
-			PreAttackDuration = 0.3,
-			FireDuration = 0.0,
-			PostAttackDuration = 0.0,
-			PostAttackCooldownMin = 2.5,
-			PostAttackCooldownMax = 2.8,
-			Spread = 360,
-
-			RandomTargetAngle = true,
-			TargetOffsetDistanceMin = 200,
-			TargetOffsetDistanceMax = 300,
-			PreMoveTeleport = true,
-			TeleportToTarget = true,
-
-			FireTicksMin = 5,
-			FireTicksMax = 7,
-			NumProjectiles = 2,
-
-			FireInterval = 0.3,
-			ResetTargetPerTick = true,
-			CreateOwnTargetFromOriginalTarget = true,
+		InheritFrom = "1_BaseEnemyMagicProjectile",
+		DetonateFx = "RadialNovaDevotion-Artemis",
+		Type = "HOMING",
+		Fuse = 1.5,
+		AllowTargetInvulnerable = true,
+		Damage = 8,
+		DamageRadius = 160.0,
+		DamageRadiusScaleY = 0.6,
+		ImpactVelocity = 0,
+		MaxAdjustRate = 200, --160
+		Speed = 600,
+		Range = 1600,
+		FlashBeforeExpireDuration = 0.5,
+		DieWithOwner = true,
+		InheritOwnerElapsedTimeMultiplier = false,
+		CheckUnitImpact = false,
+		CheckObstacleImpact = false,
+		MaxVictimZ = 9999,
+		SpawnRadius = 700,
+		IgnoreCoverageAngles = true,
+		GroupName = "FX_Terrain",
+		DissipateFx = "TheseusGodPowerPreviewDecalDarkFade",
+		AffectsEnemies = true,
+		AffectsFriends = false,
+		AffectsSelf = false,
+		CanBeReflected = false,
+		CanBeProjectileDefenseDestroyed = false,
+		CanBeProjectileDefenseDestroyedByName = "null",
+		CanBeProjectileDefenseDestroyedByLayer = "null",
+		CanBeProjectileDefenseDestroyedByName2 = "null",
+		DetonateSound = "null",
+		Thing = {
+			Graphic = "TheseusGodPowerPreviewDecal_Artemis",
+			RotateGeometry = false,
+			Scale = 1.0,
+			Color = {
+				Red = 0,
+				Green = 1.0,
+				Blue = 0.1,
+				Opacity = 1.0,
+			},
+			Points = {
+				{
+					X = 0,
+					Y = 8,
+				},
+				{
+					X = 32,
+					Y = 0,
+				},
+				{
+					X = 0,
+					Y = -8,
+				},
+				{
+					X = -32,
+					Y = 0,
+				},
+			},
 		},
-	},
-}
+	}, mod.Order)
 
-OverwriteTableKeys(game.WeaponData, wepData)
-OverwriteTableKeys(game.WeaponDataEnemies, wepData)
-wepData = nil
+	sjson.hook(mod.enemyProjFile, function(data)
+		table.insert(data.Projectiles, devArtemis)
+	end)
+
+	local wepData = {
+		DevotionArtemis = {
+			Name = "DevotionArtemis",
+			AIData = {
+				DeepInheritance = true,
+				ProjectileName = "DevotionArtemis",
+
+				PreAttackDuration = 0.3,
+				FireDuration = 0.0,
+				PostAttackDuration = 0.0,
+				PostAttackCooldownMin = 2.5,
+				PostAttackCooldownMax = 2.8,
+				Spread = 360,
+
+				RandomTargetAngle = true,
+				TargetOffsetDistanceMin = 200,
+				TargetOffsetDistanceMax = 300,
+				PreMoveTeleport = true,
+				TeleportToTarget = true,
+
+				FireTicksMin = 5,
+				FireTicksMax = 7,
+				NumProjectiles = 2,
+
+				FireInterval = 0.3,
+				ResetTargetPerTick = true,
+				CreateOwnTargetFromOriginalTarget = true,
+			},
+		},
+	}
+
+	OverwriteTableKeys(game.WeaponData, wepData)
+	OverwriteTableKeys(game.WeaponDataEnemies, wepData)
+	wepData = nil
+end

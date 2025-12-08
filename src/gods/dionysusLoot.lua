@@ -8,114 +8,171 @@ game.EnemyData.NPC_Dionysus_01.GiftTextLineSets.DionysusGift01.GameStateRequirem
 local textLineSets = {
 	DionysusChat01 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0006",
-			Text = "Things are happening all over but this is the only happening place on {#Emph}this {#Prev}mountain, baby.",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0006", Text = "Things are happening all over but this is the only happening place on {#Emph}this {#Prev}mountain, baby." },
 	},
 	DionysusChat02 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0007",
-			Text = "Just one drink isn't going to hurt! It's going to do the {#Emph}opposite{#Prev}, you'll see!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0007", Text = "Just one drink isn't going to hurt! It's going to do the {#Emph}opposite{#Prev}, you'll see!" },
 	},
 	DionysusChat03 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0008",
-			Text = "Can't stay and hang out, you got places to go, people to see, I get it, baby!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0008", Text = "Can't stay and hang out, you got places to go, people to see, I get it, baby!" },
 	},
 	DionysusChat04 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0009",
-			Emote = "PortraitEmoteCheerful",
-			Text = "You look like you're having a night! And wouldn't you know it, so am {#Emph}I!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0009", Emote = "PortraitEmoteCheerful", Text = "You look like you're having a night! And wouldn't you know it, so am {#Emph}I!" },
 	},
 	DionysusChat05 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0010",
-			Text = "Been going for a while here, baby, and we plan to {#Emph}keep {#Prev}going till all this is over!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0010", Text = "Been going for a while here, baby, and we plan to {#Emph}keep {#Prev}going till all this is over!" },
 	},
 	DionysusChat06 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0011",
-			Emote = "PortraitEmoteCheerful",
-			Text = "Come on now, relax and have a drink, {#Emph}mingle {#Prev}a bit, this is a {#Emph}feast{#Prev}, you know!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0011", Emote = "PortraitEmoteCheerful", Text = "Come on now, relax and have a drink, {#Emph}mingle {#Prev}a bit, this is a {#Emph}feast{#Prev}, you know!" },
 	},
 	DionysusChat07 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0012",
-			Text = "Remember, don't go telling Dad about this little gathering of ours, all right?",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0012", Text = "Remember, don't go telling Dad about this little gathering of ours, all right?" },
 	},
 	DionysusChat08 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0013",
-			Emote = "PortraitEmoteCheerful",
-			Text = "You're always welcome here but not your worries, baby, you leave those behind!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0013", Emote = "PortraitEmoteCheerful", Text = "You're always welcome here but not your worries, baby, you leave those behind!" },
 	},
 	DionysusChat09 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0014",
-			Emote = "PortraitEmoteCheerful",
-			Text = "Hey, pull yourself together, baby, we're just getting started!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0014", Emote = "PortraitEmoteCheerful", Text = "Hey, pull yourself together, baby, we're just getting started!" },
 	},
 	DionysusChat10 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0015",
-			Emote = "PortraitEmoteCheerful",
-			Text = "Sure you don't want to take a quick dip in the spring? It'll warm you right up!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0015", Emote = "PortraitEmoteCheerful", Text = "Sure you don't want to take a quick dip in the spring? It'll warm you right up!" },
 	},
 	DionysusChat11 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0016", Text = "This mountain isn't going anywhere, and neither are we!" },
 	},
 	DionysusChat12 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0017", Text = "Come all this way and can't even hang out, that's just not right, baby!" },
 	},
 	DionysusChat13 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0018", Text = "If you're sick of all the fighting, I've got {#Emph}just {#Prev}the thing for you!" },
 	},
 	DionysusChat14 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0019", Text = "The water's nice and warm, but if you don't want to take a dip, it's cool!" },
 	},
 	DionysusChat15 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0020", Text = "I'd ask you tell the fam I told them cheers but that might get a little awkward, yeah?" },
 	},
 	DionysusChat16 = {
 		UseableOffSource = true,
-		{
-			Cue = "/VO/Dionysus_0021",
-			Emote = "PortraitEmoteCheerful",
-			Text = "Leave your worries at the gate and have yourself a cup of something, {#Emph}here!",
-		},
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0021", Emote = "PortraitEmoteCheerful", Text = "Leave your worries at the gate and have yourself a cup of something, {#Emph}here!" },
 	},
 	DionysusChat17 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0022", Text = "Know that all of us are with you {#Emph}all {#Prev}the way, so cheers to your success!" },
 	},
 	DionysusChat18 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Dionysus_0023", Text = "Take it from me, there is {#Emph}never {#Prev}a bad time for a good feast!" },
+	},
+	DionysusChat20 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0025", Text = "No use fighting the inevitable when you're thirsty, yeah?" },
+	},
+	DionysusChat21 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0026", Text = "Take a load off, relax, have a drink and all that! The night's still young!" },
+	},
+	DionysusChat22 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0027", Text = "Well don't just stand there, eat! Drink! Whatever you fancy!" },
+	},
+	DionysusChat23 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				Path = { "GameState", "GamePhase" },
+				Comparison = "~=",
+				Value = 5,
+			},
+		},
+		{ Cue = "/VO/Dionysus_0028", Text = "The moon is shining, the water's warm, the Nectar's flowing, what is not to like?" },
+	},
+	DionysusChat24 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		{ Cue = "/VO/Dionysus_0029", Text = "You keep on showing up but never stick around, quit {#Emph}teasing {#Prev}us, baby!" },
+	},
+	DionysusChat25 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				FunctionName = "RequiredHealthFraction",
+				FunctionArgs = { Comparison = "<", Value = 0.6 },
+			},
+		},
+		{ Cue = "/VO/Dionysus_0030", Text = "Hey Mel baby, you're bringing down the mood a bit looking like that, you get me, yeah?" },
+	},
+	DionysusChat26 = {
+		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "PrevRun", "RoomsEntered", "P_Story01" },
+			},
+		},
+		{ Cue = "/VO/Dionysus_0031", Text = "Oh you missed a {#Emph}real {#Prev}good time last night... or might have been the night before..." },
 	},
 	-- DionysusChat19 = {
 	-- 	UseableOffSource = true,
@@ -132,60 +189,6 @@ local textLineSets = {
 	-- 		Text = "Wait wait wait weren't you just here? It's all a blur for me!",
 	-- 	},
 	-- },
-	DionysusChat20 = {
-		UseableOffSource = true,
-		{ Cue = "/VO/Dionysus_0025", Text = "No use fighting the inevitable when you're thirsty, yeah?" },
-	},
-	DionysusChat21 = {
-		UseableOffSource = true,
-
-		{ Cue = "/VO/Dionysus_0026", Text = "Take a load off, relax, have a drink and all that! The night's still young!" },
-	},
-	DionysusChat22 = {
-		UseableOffSource = true,
-
-		{ Cue = "/VO/Dionysus_0027", Text = "Well don't just stand there, eat! Drink! Whatever you fancy!" },
-	},
-	DionysusChat23 = {
-		UseableOffSource = true,
-		GameStateRequirements = {
-			{
-				Path = { "GameState", "GamePhase" },
-				Comparison = "~=",
-				Value = 5,
-			},
-		},
-
-		{ Cue = "/VO/Dionysus_0028", Text = "The moon is shining, the water's warm, the Nectar's flowing, what is not to like?" },
-	},
-	DionysusChat24 = {
-		UseableOffSource = true,
-		{ Cue = "/VO/Dionysus_0029", Text = "You keep on showing up but never stick around, quit {#Emph}teasing {#Prev}us, baby!" },
-	},
-	DionysusChat25 = {
-		UseableOffSource = true,
-		GameStateRequirements = {
-			{
-				FunctionName = "RequiredHealthFraction",
-				FunctionArgs = { Comparison = "<", Value = 0.6 },
-			},
-		},
-
-		{ Cue = "/VO/Dionysus_0030", Text = "Hey Mel baby, you're bringing down the mood a bit looking like that, you get me, yeah?" },
-	},
-	DionysusChat26 = {
-		UseableOffSource = true,
-		GameStateRequirements = {
-			{
-				PathFalse = { "PrevRun", "RoomsEntered", "P_Story01" },
-			},
-		},
-
-		{
-			Cue = "/VO/Dionysus_0031",
-			Text = "Oh you missed a {#Emph}real {#Prev}good time last night... or might have been the night before...",
-		},
-	},
 }
 
 local spawnrequirements = false
@@ -195,12 +198,28 @@ if config.Dionysus.requirements then
 	godtype = "npcgod"
 end
 
+local weaponBoons = nil
+local boons = nil
+if not config.Dionysus.splitTraits then
+	weaponBoons = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades
+	boons = game.EnemyData.NPC_Dionysus_01.Traits
+	game.EnemyData.NPC_Dionysus_01.RarityChances = nil
+end
+
+local packages = nil
+if dioimproved then
+	-- rom.log.warning(dioimproved)
+	packages = { "Dionysus", dioimproved._PLUGIN.guid }
+else
+	packages = { "Dionysus" }
+end
+
 gods.InitializeGod({
 	godName = "Dionysus",
 	godType = godtype,
 	Gender = "F",
 	skipCodex = true,
-	LoadPackages = { "Dionysus" },
+	LoadPackages = packages,
 	FlavorTextIds = { "DionysusUpgrade_FlavorText01", "DionysusUpgrade_FlavorText02", "DionysusUpgrade_FlavorText03" },
 	SFX_Portrait = "/SFX/DionysusBoonWineLaugh",
 	Color = { 91, 255, 100, 255 },
@@ -209,6 +228,8 @@ gods.InitializeGod({
 	SubtitleColor = Color.DionysusVoice,
 
 	SpawnLikeHermes = spawnrequirements,
+	WeaponUpgrades = weaponBoons,
+	Traits = boons,
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -306,136 +327,156 @@ game.LootData[mod.DionysusUpgradeName].SpeakerName = "Dionysus"
 game.LootData[mod.DionysusUpgradeName].Portrait = "Portrait_Dionysus_Default_01"
 game.LootData[mod.DionysusUpgradeName].OverlayAnim = "DionysusOverlay"
 
-local splitTraits = false
-if config.Dionysus.splitTraits then
-	splitTraits = true
-end
-
-if splitTraits then
-	game.LootData[mod.DionysusUpgradeName].WeaponUpgrades = {}
-	game.LootData[mod.DionysusUpgradeName].Traits = {}
-else
-	game.LootData[mod.DionysusUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Dionysus_01.WeaponUpgrades
-	game.LootData[mod.DionysusUpgradeName].Traits = game.EnemyData.NPC_Dionysus_01.Traits
-end
-
-local devDionysus = sjson.to_object({
-	Name = "DevotionDionysus",
-	InheritFrom = "1_BaseEnemyMagicProjectile",
-	DetonateFx = "null", --RadialNovaTheseusWrath-Dionysus
-	Type = "INSTANT",
-	Fuse = 0.25,
-	Damage = 5,
-	DamageRadius = 100.0,
-	DamageRadiusScaleY = 0.6,
-	ImpactVelocity = 0,
-	DieWithOwner = true,
-	InheritOwnerElapsedTimeMultiplier = false,
-	CheckUnitImpact = false,
-	CheckObstacleImpact = false,
-	MaxVictimZ = 9999,
-	SpawnRadius = 0,
-	TotalFuse = 10.0,
-	MultiDetonate = true,
-	ImmunityDuration = 0.1,
-	GroupName = "FX_Terrain",
-	DissipateFx = "TheseusGodPowerPreviewDecalDarkFade",
-	AffectsEnemies = true,
-	AffectsFriends = false,
-	AffectsSelf = false,
-	CanBeReflected = false,
-	CanBeProjectileDefenseDestroyed = false,
-	CanBeProjectileDefenseDestroyedByName = "null",
-	CanBeProjectileDefenseDestroyedByLayer = "null",
-	CanBeProjectileDefenseDestroyedByName2 = "null",
-	DetonateSound = "/SFX/Explosion1",
-	Thing = {
-		Graphic = "null", --DevotionPreAttackBase_Dionysus
-		RotateGeometry = false,
-		Scale = 1.0,
-		Color = {
-			Red = 0.3,
-			Green = 0.0,
-			Blue = 1.0,
-			Opacity = 1.0,
-		},
-		Points = {
-			{
-				X = 0,
-				Y = 8,
-			},
-			{
-				X = 32,
-				Y = 0,
-			},
-			{
-				X = 0,
-				Y = -8,
-			},
-			{
-				X = -32,
-				Y = 0,
-			},
-		},
-	},
-}, mod.Order)
-
-sjson.hook(mod.enemyProjFile, function(data)
-	table.insert(data.Projectiles, devDionysus)
-end)
-
-local wepData = {
-	DevotionDionysus = {
+if not mod.zagJourney then
+	local devDionysus = sjson.to_object({
 		Name = "DevotionDionysus",
-		AIData = {
-			DeepInheritance = true,
-			ProjectileName = "DevotionDionysus",
-
-			PreAttackDuration = 0,
-			FireDuration = 0.0,
-			PostAttackDuration = 0.0,
-			PostAttackCooldownMin = 0.9,
-			PostAttackCooldownMax = 1.2,
-			CreateOwnTargetFromOriginalTarget = true,
-			RandomTargetAngle = true,
-			TargetOffsetDistanceMin = 150,
-			TargetOffsetDistanceMax = 350,
-			PreMoveTeleport = true,
-			TeleportToTarget = true,
+		InheritFrom = "1_BaseEnemyMagicProjectile",
+		DetonateFx = "null", --RadialNovaTheseusWrath-Dionysus
+		Type = "INSTANT",
+		Fuse = 0.25,
+		Damage = 5,
+		DamageRadius = 100.0,
+		DamageRadiusScaleY = 0.6,
+		ImpactVelocity = 0,
+		DieWithOwner = true,
+		InheritOwnerElapsedTimeMultiplier = false,
+		CheckUnitImpact = false,
+		CheckObstacleImpact = false,
+		MaxVictimZ = 9999,
+		SpawnRadius = 0,
+		TotalFuse = 10.0,
+		MultiDetonate = true,
+		ImmunityDuration = 0.1,
+		GroupName = "FX_Terrain",
+		DissipateFx = "TheseusGodPowerPreviewDecalDarkFade",
+		AffectsEnemies = true,
+		AffectsFriends = false,
+		AffectsSelf = false,
+		CanBeReflected = false,
+		CanBeProjectileDefenseDestroyed = false,
+		CanBeProjectileDefenseDestroyedByName = "null",
+		CanBeProjectileDefenseDestroyedByLayer = "null",
+		CanBeProjectileDefenseDestroyedByName2 = "null",
+		DetonateSound = "/SFX/Explosion1",
+		Thing = {
+			Graphic = "DevotionPreAttackBase_Dionysus", --DevotionPreAttackBase_Dionysus
+			RotateGeometry = false,
+			Scale = 1.0,
+			Color = {
+				Red = 0.3,
+				Green = 0.0,
+				Blue = 1.0,
+				Opacity = 1.0,
+			},
+			Points = {
+				{
+					X = 0,
+					Y = 8,
+				},
+				{
+					X = 32,
+					Y = 0,
+				},
+				{
+					X = 0,
+					Y = -8,
+				},
+				{
+					X = -32,
+					Y = 0,
+				},
+			},
 		},
-	},
-}
+	}, mod.Order)
 
-OverwriteTableKeys(game.WeaponData, wepData)
-OverwriteTableKeys(game.WeaponDataEnemies, wepData)
-wepData = nil
---? Is this used or was this just defined for NO reason, does it work like IconSpin 0-50?
--- DevotionDionysus2 =
--- {
--- 	HitScreenshake = { Distance = 3, Speed = 1000, Duration = 0.08, FalloffSpeed = 3000 },
--- 	HitSimSlowParameters =
--- 	{
--- 		{ ScreenPreWait = 0.02, Fraction = 0.01, LerpTime = 0 },
--- 		{ ScreenPreWait = 0.08, Fraction = 1.0, LerpTime = 0 },
--- 	},
+	local devPreAttackDio = sjson.to_object({
+		Name = "DevotionPreAttackFx_Dionysus",
+		InheritFrom = "DevotionPreAttackFx",
+		ClearCreateAnimations = true,
+		CreateAnimations = {
+			{ Name = "DevotionRings_Dionysus" },
+			{ Name = "DevotionLines_Dionysus" },
+		},
+	}, mod.Order)
 
--- 	AIData = {
--- 		FireTicks = 1,
--- 		FireIntervalMin = 4.0,
--- 		FireIntervalMax = 8.0,
+	local devLinesDio = sjson.to_object({
+		Name = "DevotionLines_Dionysus",
+		InheritFrom = "DevotionLines",
+		Red = 0.3,
+		Green = 0.1,
+		Blue = 1,
+		Scale = 3,
+		ScaleFromOwner = "Ignore",
+		ColorFromOwner = "Ignore",
+	}, mod.Order)
 
--- 		AttackSlotsPerTick = 8,
--- 		AttackSlotInterval = 0.2,
--- 		AttackSlots =
--- 		{
--- 			{ Angle = 0, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 45, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 90, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 135, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 180, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 225, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 270, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 			{ Angle = 315, OffsetDistance = 200, OffsetScaleY = 0.48, OffsetFromAttacker = true },
--- 		},
--- 	},
--- },
+	local devRingsDio = sjson.to_object({
+		Name = "DevotionRings_Dionysus",
+		InheritFrom = "DevotionRings",
+		Red = 0.3,
+		Green = 0.1,
+		Blue = 1,
+		ColorFromOwner = "Ignore",
+	}, mod.Order)
+
+	local devPreAttackEndDio = sjson.to_object({
+		Name = "DevotionPreAttackBaseEnd_Dionysus",
+		InheritFrom = "DevotionPreAttackBaseEnd",
+		Red = 0.3,
+		Green = 0.1,
+		Blue = 1,
+	}, mod.Order)
+
+	local devPreAttackBaseDio = sjson.to_object({
+		Name = "DevotionPreAttackBase_Dionysus",
+		InheritFrom = "DevotionPreAttackBase",
+		VisualFx = "DevotionPreAttackFx_Dionysus",
+		CreateAnimationOnEnd = "DevotionPreAttackBaseEnd_Dionysus",
+		Red = 0.3,
+		Green = 0.1,
+		Blue = 1,
+		ColorFromOwner = "Ignore",
+		EndAlpha = 0.2,
+		Sound = "/SFX/Player Sounds/DionysusLobProjectileGas",
+		StopSoundOnFinishFade = 0.2,
+		CreateAnimation = "DionysusCloudB_Devotion",
+	}, mod.Order)
+
+	sjson.hook(mod.enemyProjFile, function(data)
+		table.insert(data.Projectiles, devDionysus)
+	end)
+
+	sjson.hook(mod.enemyAnimFile, function(data)
+		table.insert(data.Animations, devPreAttackDio)
+		table.insert(data.Animations, devLinesDio)
+		table.insert(data.Animations, devRingsDio)
+		table.insert(data.Animations, devPreAttackEndDio)
+		table.insert(data.Animations, devPreAttackBaseDio)
+	end)
+
+	local wepData = {
+		DevotionDionysus = {
+			Name = "DevotionDionysus",
+			AIData = {
+				DeepInheritance = true,
+				ProjectileName = "DevotionDionysus",
+
+				PreAttackDuration = 0,
+				FireDuration = 0.0,
+				PostAttackDuration = 0.0,
+				PostAttackCooldownMin = 0.9,
+				PostAttackCooldownMax = 1.2,
+				CreateOwnTargetFromOriginalTarget = true,
+				RandomTargetAngle = true,
+				TargetOffsetDistanceMin = 150,
+				TargetOffsetDistanceMax = 350,
+				PreMoveTeleport = true,
+				TeleportToTarget = true,
+			},
+		},
+	}
+
+	OverwriteTableKeys(game.WeaponData, wepData)
+	OverwriteTableKeys(game.WeaponDataEnemies, wepData)
+	wepData = nil
+end

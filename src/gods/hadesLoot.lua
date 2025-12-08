@@ -8,18 +8,26 @@
 local textLineSets = {
 	HadesChat05 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Hades_0040", Text = "Thank you for looking after Cerberus, though look after yourself." },
 	},
 	HadesChat06 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Hades_0041", Text = "You are as willful as your brother, aren't you..." },
 	},
 	HadesChat07 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Hades_0096", Text = "Whenever you return... so does a portion of my strength." },
 	},
 	HadesChat08 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Hades_0097", Text = "Take no unnecessary risks and go unseen, Daughter." },
 	},
 	HadesChat09 = {
@@ -31,11 +39,14 @@ local textLineSets = {
 				Value = 1,
 			},
 		},
-		OnQueuedFunctionName = "CheckDistanceTriggerThread",
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Hades_0098", Text = "You have vanquished the Titan before; you know full well what it takes." },
 	},
 	HadesChat13 = {
 		UseableOffSource = true,
+		PreEventFunctionName = "BoonInteractPresentation",
+		PreEventFunctionArgs = { PickupWait = 1.0 },
 		{ Cue = "/VO/Hades_0102", Text = "The Witch of the Crossroads swore no harm would come to you; ensure she keeps her word." },
 	},
 }
@@ -44,6 +55,14 @@ local spawnrequirements = false
 local godtype = "npcgod" -- basically, basically, basically, hes so useless - and has no traits, also no devotion attack so byebye
 if config.Hades.requirements then
 	spawnrequirements = true
+end
+
+local weaponBoons = nil
+local boons = nil
+if not config.Hades.splitTraits then
+	weaponBoons = game.EnemyData.NPC_Hades_Field_01.WeaponUpgrades
+	boons = game.EnemyData.NPC_Hades_Field_01.Traits
+	game.EnemyData.NPC_Hades_Field_01.RarityChances = nil
 end
 
 gods.InitializeGod({
@@ -60,6 +79,9 @@ gods.InitializeGod({
 	FlavourTextIds = { "HadesUpgrade_FlavorText01", "HadesUpgrade_FlavorText02", "HadesUpgrade_FlavorText03" },
 
 	SpawnLikeHermes = spawnrequirements,
+	WeaponUpgrades = weaponBoons,
+	Traits = boons,
+	CanReceiveGift = false,
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -140,17 +162,3 @@ end
 game.LootData[mod.HadesUpgradeName].SpeakerName = "Hades"
 game.LootData[mod.HadesUpgradeName].Portrait = "Portrait_Hades_Chained_01"
 game.LootData[mod.HadesUpgradeName].OverlayAnim = "HadesOverlay"
-game.LootData[mod.HadesUpgradeName].CanReceiveGift = false
-
-local splitTraits = false
-if config.Hades.splitTraits then
-	splitTraits = true
-end
-
-if splitTraits then
-	game.LootData[mod.HadesUpgradeName].WeaponUpgrades = {}
-	game.LootData[mod.HadesUpgradeName].Traits = {}
-else
-	game.LootData[mod.HadesUpgradeName].WeaponUpgrades = game.EnemyData.NPC_Hades_Field_01.WeaponUpgrades
-	game.LootData[mod.HadesUpgradeName].Traits = game.EnemyData.NPC_Hades_Field_01.Traits
-end

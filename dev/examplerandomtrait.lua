@@ -1,62 +1,62 @@
----@meta _
----@diagnostic disable: lowercase-global
+-- ---@meta _
+-- ---@diagnostic disable: lowercase-global
 
-game.TraitData.ArtemisCriticalBoon = {
-	InheritFrom = { "BaseTrait", "AirBoon" },
-	Elements = { "Air" }, -- Need to add this even if you inherit
-	Name = "ArtemisCriticalBoon",
-	BoonInfoTitle = "ArtemisCriticalBoon",
-	Icon = "Boon_Artemis_ArtemisCriticalBoon",
-	TraitOrderingValueCache = 50,
-	BlockStacking = false,
-	RarityLevels = {
-		Common = {
-			Multiplier = 1.0,
-		},
-		Rare = {
-			Multiplier = 1.5,
-		},
-		Epic = {
-			Multiplier = 2.0,
-		},
-		Heroic = {
-			Multiplier = 2.5,
-		},
-		Perfect = {
-			Multiplier = 3.5,
-		},
-	},
+-- game.TraitData.ArtemisCriticalBoon = {
+-- 	InheritFrom = { "BaseTrait", "AirBoon" },
+-- 	Elements = { "Air" }, -- Need to add this even if you inherit
+-- 	Name = "ArtemisCriticalBoon",
+-- 	BoonInfoTitle = "ArtemisCriticalBoon",
+-- 	Icon = "Boon_Artemis_ArtemisCriticalBoon",
+-- 	TraitOrderingValueCache = 50,
+-- 	BlockStacking = false,
+-- 	RarityLevels = {
+-- 		Common = {
+-- 			Multiplier = 1.0,
+-- 		},
+-- 		Rare = {
+-- 			Multiplier = 1.5,
+-- 		},
+-- 		Epic = {
+-- 			Multiplier = 2.0,
+-- 		},
+-- 		Heroic = {
+-- 			Multiplier = 2.5,
+-- 		},
+-- 		Perfect = {
+-- 			Multiplier = 3.5,
+-- 		},
+-- 	},
 
-	AddOutgoingDamageModifiers = {
-		CritDamageBonus = {
-			BaseValue = 1.15,
-			SourceIsMultiplier = true,
-			-- Scaling thing with pom
-			AbsoluteStackValues = {
-				[1] = 1.20,
-				[2] = 1.15,
-				[3] = 1.10,
-			},
-			ChangeType = "Multiply",
-		},
-		ReportValues = {
-			ReportedCriticalDamageBonus = "CritDamageBonus",
-		},
-	},
+-- 	AddOutgoingDamageModifiers = {
+-- 		CritDamageBonus = {
+-- 			BaseValue = 1.15,
+-- 			SourceIsMultiplier = true,
+-- 			-- Scaling thing with pom
+-- 			AbsoluteStackValues = {
+-- 				[1] = 1.20,
+-- 				[2] = 1.15,
+-- 				[3] = 1.10,
+-- 			},
+-- 			ChangeType = "Multiply",
+-- 		},
+-- 		ReportValues = {
+-- 			ReportedCriticalDamageBonus = "CritDamageBonus",
+-- 		},
+-- 	},
 
-	StatLines = { "CriticalDamageBonusStatDisplay1" },
+-- 	StatLines = { "CriticalDamageBonusStatDisplay1" },
 
-	ExtractValues = { {
-		Key = "ReportedCriticalDamageBonus",
-		ExtractAs = "TooltipDamage",
-		Format = "PercentDelta",
-	} },
-}
+-- 	ExtractValues = { {
+-- 		Key = "ReportedCriticalDamageBonus",
+-- 		ExtractAs = "TooltipDamage",
+-- 		Format = "PercentDelta",
+-- 	} },
+-- }
 
--- Adding Boons to Default Artemis
-table.insert(game.EnemyData.NPC_Artemis_Field_01.Traits, "ArtemisCriticalBoon")
-table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, "ArtemisCriticalBoon")
+-- -- Adding Boons to Default Artemis
+-- table.insert(game.EnemyData.NPC_Artemis_Field_01.Traits, "ArtemisCriticalBoon")
+-- table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, "ArtemisCriticalBoon")
 
--- Insert TraitIndex into BoonInfo or else it won't show up in codex since BoonInfo gets populated before traits are added by mods
--- Just adds the boon to the codex - aka the (Hidden) "TraitIndex"
-game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01["ArtemisCriticalBoon"] = true
+-- -- Insert TraitIndex into BoonInfo or else it won't show up in codex since BoonInfo gets populated before traits are added by mods
+-- -- Just adds the boon to the codex - aka the (Hidden) "TraitIndex"
+-- game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01["ArtemisCriticalBoon"] = true

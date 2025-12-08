@@ -3,6 +3,15 @@
 ## [Unreleased]
 - Added Hades as a functioning droppable god! (To progress his story you still have to meet him in the underworld)
 - Added Family Dispute attacks for Artemis/Dionysus/Athena.
+- Animation for Hades boon drop, blender file included in source.
+- Added Config option to allow you to split any new traits between the original npc and the dropped god (new traits to go drop, old ones stay in npcs)
+- Pony Menu integration.
+- Compat with Zagreus' Journey's Theseus fight.
+- DEV: Duplication check for Zagreus' Journey's devotion weapons.
+- DEV: Removed Rarirty Chances for NPC tables if you do not split the traits.
+- Updated README.md
+- Fix Dionysus Improved integration.
+- Fix issue of no animation prewaiting when picking up a boon (it used to just play the animation but cut straight to the boon/text screen.)
 
 ## [2.1.3] - 2025-12-01
 

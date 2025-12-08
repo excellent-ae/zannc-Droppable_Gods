@@ -5,8 +5,8 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "zannc"
 name = "Droppable_Gods"
-versionNumber = "2.1.3"
-description = "Allows for Athena, Artemis and Dionysus to spawn like other Olympian Gods - Config available."
+versionNumber = "3.0.0"
+description = "Adds Artemis, Athena, Dionysus and Hades to the god pool, allowing them to spawn as a normal Olympian god would."
 websiteUrl = "https://github.com/excellent-ae/zannc-Droppable_Gods"
 containsNsfwContent = false
 
