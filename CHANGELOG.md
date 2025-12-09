@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.3] - 2025-12-09
+
 - Fix config setting for maximum spawns.
 - Remove print
 
@@ -67,7 +70,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.2...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.3...HEAD
+[3.0.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.3...3.0.0
