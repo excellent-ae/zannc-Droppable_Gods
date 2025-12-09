@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.2] - 2025-12-09
+
 - Hopefully fix issue with portraits not loading.
 - GodsAPI Fix - Icon size in Hermes Shop.
 - GodsAPI Fix - Travel Deal interaction.
@@ -62,7 +65,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.1...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.2...HEAD
+[3.0.2]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.3...3.0.0
 [2.1.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/2.1.2...2.1.3
