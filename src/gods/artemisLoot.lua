@@ -351,10 +351,13 @@ local textLineSets = {
 	-- },
 }
 
-local spawnrequirements = false
+local spawnrequirements = nil
 local godtype = "god"
-if config.Artemis.requirements then
-	spawnrequirements = true
+if config.Artemis.spawnRequirements.enabled then
+	spawnrequirements = {
+		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 1), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+	}
+	rom.log.warning(spawnrequirements.maximumSpawns)
 	godtype = "npcgod"
 end
 
@@ -371,7 +374,7 @@ gods.InitializeGod({
 	godType = godtype,
 	Gender = "F",
 	skipCodex = true,
-	LoadPackages = { "Artemis" },
+	LoadPackages = { "NPC_Artemis_Field_01", "Artemis" },
 	FlavorTextIds = { "ArtemisUpgrade_FlavorText01", "ArtemisUpgrade_FlavorText02", "ArtemisUpgrade_FlavorText03" },
 	SFX_Portrait = "/SFX/ArtemisBoonArrow",
 	Color = { 91, 255, 100, 255 },
@@ -382,6 +385,13 @@ gods.InitializeGod({
 	SpawnLikeHermes = spawnrequirements,
 	WeaponUpgrades = weaponBoons,
 	Traits = boons,
+
+	ExtraFields = {
+		Speaker = "NPC_Artemis_01",
+		SpeakerName = "Artemis",
+		Portrait = "Portrait_Artemis_Default_01",
+		OverlayAnim = "ArtemisOverlay",
+	},
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -465,11 +475,6 @@ if not game.LootData[mod.ArtemisUpgradeName] then
 	rom.log.error("Artemis not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
 	return
 end
-
-game.LootData[mod.ArtemisUpgradeName].SpeakerName = "Artemis"
-game.LootData[mod.ArtemisUpgradeName].Portrait = "Portrait_Artemis_Default_01"
--- game.LootData[mod.ArtemisUpgradeName].WrathPortrait = "Portrait_Artemis_Default_01_Wrath" doesn't have
-game.LootData[mod.ArtemisUpgradeName].OverlayAnim = "ArtemisOverlay"
 
 game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[1].PreLineWait = 0.6
 game.LootData[mod.ArtemisUpgradeName].UpgradeMenuOpenVoiceLines[2].PreLineWait = 0.7

@@ -283,10 +283,12 @@ local textLineSets = {
 	-- },
 }
 
-local spawnrequirements = false
+local spawnrequirements = nil
 local godtype = "god"
-if config.Athena.requirements then
-	spawnrequirements = true
+if config.Athena.spawnRequirements.enabled then
+	spawnrequirements = {
+		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 1), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+	}
 	godtype = "npcgod"
 end
 
@@ -303,7 +305,7 @@ gods.InitializeGod({
 	godType = godtype,
 	Gender = "F",
 	skipCodex = true,
-	LoadPackages = { "Athena" },
+	LoadPackages = { "NPC_Athena_01", "Athena" },
 	FlavorTextIds = { "AthenaUpgrade_FlavorText01", "AthenaUpgrade_FlavorText02", "AthenaUpgrade_FlavorText03" },
 	SFX_Portrait = "/SFX/AthenaWrathHolyShield",
 	Color = { 91, 255, 100, 255 },
@@ -314,6 +316,13 @@ gods.InitializeGod({
 	SpawnLikeHermes = spawnrequirements,
 	WeaponUpgrades = weaponBoons,
 	Traits = boons,
+
+	ExtraFields = {
+		Speaker = "NPC_Athena_01",
+		SpeakerName = "Athena",
+		Portrait = "Portrait_Athena_Default_01",
+		OverlayAnim = "AthenaOverlay",
+	},
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -399,10 +408,6 @@ if not game.LootData[mod.AthenaUpgradeName] then
 	rom.log.error("Athena not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
 	return
 end
-
-game.LootData[mod.AthenaUpgradeName].SpeakerName = "Athena"
-game.LootData[mod.AthenaUpgradeName].Portrait = "Portrait_Athena_Default_01"
-game.LootData[mod.AthenaUpgradeName].OverlayAnim = "AthenaOverlay"
 
 if not mod.zagJourney then
 	local devAthena = sjson.to_object({

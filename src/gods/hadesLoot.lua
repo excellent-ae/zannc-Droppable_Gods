@@ -51,10 +51,13 @@ local textLineSets = {
 	},
 }
 
-local spawnrequirements = false
+local spawnrequirements = nil
 local godtype = "npcgod" -- basically, basically, basically, hes so useless - and has no traits, also no devotion attack so byebye
-if config.Hades.requirements then
-	spawnrequirements = true
+if config.Hades.spawnRequirements.enabled then
+	spawnrequirements = {
+		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 1), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+	}
+	godtype = "npcgod"
 end
 
 local weaponBoons = nil
@@ -70,7 +73,7 @@ gods.InitializeGod({
 	godType = godtype,
 	Gender = "M",
 	skipCodex = true,
-	LoadPackages = { "Hades" },
+	LoadPackages = { "NPC_Hades_Field_01", "Hades" },
 	SFX_Portrait = "/SFX/Menu Sounds/KeepsakeHadesSigil2",
 	Color = { 255, 0, 0, 255 },
 	LightingColor = { 255, 0, 0, 255 },
@@ -82,6 +85,13 @@ gods.InitializeGod({
 	WeaponUpgrades = weaponBoons,
 	Traits = boons,
 	CanReceiveGift = false,
+
+	ExtraFields = {
+		Speaker = "NPC_Hades_01",
+		SpeakerName = "Hades",
+		Portrait = "Portrait_Hades_Chained_01",
+		OverlayAnim = "HadesOverlay",
+	},
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -158,7 +168,3 @@ if not game.LootData[mod.HadesUpgradeName] then
 	rom.log.error("Hades not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
 	return
 end
-
-game.LootData[mod.HadesUpgradeName].SpeakerName = "Hades"
-game.LootData[mod.HadesUpgradeName].Portrait = "Portrait_Hades_Chained_01"
-game.LootData[mod.HadesUpgradeName].OverlayAnim = "HadesOverlay"

@@ -191,10 +191,12 @@ local textLineSets = {
 	-- },
 }
 
-local spawnrequirements = false
+local spawnrequirements = nil
 local godtype = "god"
-if config.Dionysus.requirements then
-	spawnrequirements = true
+if config.Dionysus.spawnRequirements.enabled then
+	spawnrequirements = {
+		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 1), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+	}
 	godtype = "npcgod"
 end
 
@@ -209,9 +211,9 @@ end
 local packages = nil
 if dioimproved then
 	-- rom.log.warning(dioimproved)
-	packages = { "Dionysus", dioimproved._PLUGIN.guid }
+	packages = { "NPC_Dionysus_01", "Dionysus", dioimproved._PLUGIN.guid }
 else
-	packages = { "Dionysus" }
+	packages = { "NPC_Dionysus_01", "Dionysus" }
 end
 
 gods.InitializeGod({
@@ -230,6 +232,13 @@ gods.InitializeGod({
 	SpawnLikeHermes = spawnrequirements,
 	WeaponUpgrades = weaponBoons,
 	Traits = boons,
+
+	ExtraFields = {
+		Speaker = "NPC_Dionysus_01",
+		SpeakerName = "Dionysus",
+		Portrait = "Portrait_Dionysus_Default_01",
+		OverlayAnim = "DionysusOverlay",
+	},
 
 	-- ! Voice Lines from here downwards
 	--#region Voicelines
@@ -322,10 +331,6 @@ if not game.LootData[mod.DionysusUpgradeName] then
 	rom.log.error("Dionysus not correctly initialized into LootData, please restart your game, if this error persists, please report it.")
 	return
 end
-
-game.LootData[mod.DionysusUpgradeName].SpeakerName = "Dionysus"
-game.LootData[mod.DionysusUpgradeName].Portrait = "Portrait_Dionysus_Default_01"
-game.LootData[mod.DionysusUpgradeName].OverlayAnim = "DionysusOverlay"
 
 if not mod.zagJourney then
 	local devDionysus = sjson.to_object({

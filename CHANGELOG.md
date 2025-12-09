@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+- Hopefully fix issue with portraits not loading.
+- GodsAPI Fix - Icon size in Hermes Shop.
+- GodsAPI Fix - Travel Deal interaction.
+- Hopefully fix issues with Portraits not loading correctly, without breaking anything :doom:
+- Added config option to limit SpawnLikeHermes spawns to a specific number (eg, 1 max spawn per run)
 
 ## [3.0.1] - 2025-12-08
 
