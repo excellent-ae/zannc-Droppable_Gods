@@ -55,7 +55,7 @@ local spawnrequirements = nil
 local godtype = "npcgod" -- basically, basically, basically, hes so useless - and has no traits, also no devotion attack so byebye
 if config.Hades.spawnRequirements.enabled then
 	spawnrequirements = {
-		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 1), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 0), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
 	}
 	godtype = "npcgod"
 end

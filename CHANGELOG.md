@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+- Fix config setting for maximum spawns.
+- Remove print
 
 ## [3.0.2] - 2025-12-09
 
