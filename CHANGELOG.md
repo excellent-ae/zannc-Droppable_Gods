@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.4] - 2025-12-19
+
 - Fix config setting for maximum spawns x2.
 - Add `RandomOneGod` which will allow the game to choose 1 god out of the 4 currently added and only allow them to spawn in a run (randomized per run).
 - Fix issue where TextLines would play for every boon pickup.
@@ -73,7 +76,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.3...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.4...HEAD
+[3.0.4]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.3...3.0.4
 [3.0.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.0...3.0.1
