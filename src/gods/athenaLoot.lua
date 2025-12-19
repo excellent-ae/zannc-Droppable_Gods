@@ -10,30 +10,55 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0006", Text = "I shall ensure this area remains secure for now; make your advance!" },
 	},
 	AthenaChat02 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0007", Text = "Continue your ascent, as I shall keep what passes for the Titan's armies occupied." },
 	},
 	AthenaChat03 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0008", Text = "They never seem to learn, do they? But neither do they ever seem to stop." },
 	},
 	AthenaChat04 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0009", Text = "I trust that our defenses have not proven too much of a hindrance to you here." },
 	},
 	AthenaChat05 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Text = "When our family stands united, there's no hardship that we cannot overcome.",
 		},
@@ -43,6 +68,9 @@ local textLineSets = {
 		GameStateRequirements = {
 			{
 				PathTrue = { "PrevRun", "Cleared" },
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
 			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
@@ -56,6 +84,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0014",
 			Text = "Battle rages all around us still, Melinoë. Then let us finish what our enemies began.",
@@ -67,6 +100,9 @@ local textLineSets = {
 		GameStateRequirements = {
 			{
 				PathFalse = { "GameState", "ReachedTrueEnding" },
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
 			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
@@ -80,6 +116,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0016",
 			Text = "Climb forth, Cousin, and may your foothold never falter on the way.",
@@ -92,6 +133,9 @@ local textLineSets = {
 			{
 				PathFalse = { "GameState", "ReachedTrueEnding" },
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
@@ -101,12 +145,22 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0018", Text = "I'm grateful that you're back, so that the next stage of our plan can now unfold." },
 	},
 	AthenaChat14 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0019",
 			Text = "You're all the reinforcements we require, and I'm ever-grateful that you're here.",
@@ -116,18 +170,33 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0020", Text = "Would that we could fight together, yet we accomplish more going our separate ways." },
 	},
 	AthenaChat16 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0021", Text = "Our foes swarm at us like insects, and we shall deal with them as such." },
 	},
 	AthenaChat17 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0022", Text = "I knew that I could count on you to be here tonight precisely at this time." },
 	},
 	AthenaChat18 = {
@@ -136,6 +205,9 @@ local textLineSets = {
 		GameStateRequirements = {
 			{
 				PathFalse = { "GameState", "ReachedTrueEnding" },
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
 			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
@@ -149,6 +221,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0024",
 			Text = "It is not enough merely to vanquish our enemies; let us make an example of them.",
@@ -161,6 +238,9 @@ local textLineSets = {
 				Path = { "CurrentRun", "BiomesReached" },
 				HasAny = { "I", "P" },
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
@@ -170,6 +250,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0028",
 			Text = "Let our enemies rue the moment they deigned to stand against we gods.",
@@ -186,6 +271,9 @@ local textLineSets = {
 			{
 				PathTrue = { "CurrentRun", "UseRecord", "SpellDrop" },
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
@@ -198,12 +286,22 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0030", Text = "Our family has endured for aeons; this shall pass, as does all else." },
 	},
 	AthenaChat26 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0031",
 			Text = "All those who dare oppose us or our rightful rule shall be given no quarter.",
@@ -213,18 +311,33 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0033", Text = "What use is a good strategy without the necessary skill to see it through?" },
 	},
 	AthenaChat29 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Athena_0034", Text = "The Titan's forces know nothing of fear, but I trust that they can still be taught." },
 	},
 	AthenaChat30 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-AthenaUpgrade" },
+			},
+		},
 		{
 			Cue = "/VO/Athena_0035",
 			Text = "May the Boon I now bestow provide a difference in the battles yet to come.",
@@ -287,7 +400,7 @@ local spawnrequirements = nil
 local godtype = "god"
 if config.Athena.spawnRequirements.enabled then
 	spawnrequirements = {
-		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 0), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+		maximumSpawns = math.max(config.Athena.spawnRequirements.maximumSpawns - 1, 0), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
 	}
 	godtype = "npcgod"
 end

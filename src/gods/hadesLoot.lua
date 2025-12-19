@@ -10,24 +10,44 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-HadesUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Hades_0040", Text = "Thank you for looking after Cerberus, though look after yourself." },
 	},
 	HadesChat06 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-HadesUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Hades_0041", Text = "You are as willful as your brother, aren't you..." },
 	},
 	HadesChat07 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-HadesUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Hades_0096", Text = "Whenever you return... so does a portion of my strength." },
 	},
 	HadesChat08 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-HadesUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Hades_0097", Text = "Take no unnecessary risks and go unseen, Daughter." },
 	},
 	HadesChat09 = {
@@ -38,6 +58,9 @@ local textLineSets = {
 				Comparison = ">=",
 				Value = 1,
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-HadesUpgrade" },
+			},
 		},
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
@@ -47,6 +70,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-HadesUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Hades_0102", Text = "The Witch of the Crossroads swore no harm would come to you; ensure she keeps her word." },
 	},
 }
@@ -55,7 +83,7 @@ local spawnrequirements = nil
 local godtype = "npcgod" -- basically, basically, basically, hes so useless - and has no traits, also no devotion attack so byebye
 if config.Hades.spawnRequirements.enabled then
 	spawnrequirements = {
-		maximumSpawns = math.max(config.Artemis.spawnRequirements.maximumSpawns - 1, 0), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
+		maximumSpawns = math.max(config.Hades.spawnRequirements.maximumSpawns - 1, 0), -- cause they say they want x spawns, but game handles it to be lessthan or equal spawns, so if they pass in x, they will actually get x+1 without doing -1
 	}
 	godtype = "npcgod"
 end

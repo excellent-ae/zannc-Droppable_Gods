@@ -136,6 +136,7 @@ local function on_ready()
 	local data = {
 		[mod.ArtemisUpgradeName] = {
 			enabled = false,
+			type = config.Artemis.spawnRequirements.enabled and "NPCGOD" or "GOD",
 			codexName = "NPC_Artemis_01",
 			enemyName = "NPC_Artemis_Field_01",
 			projectileName = "DevotionArtemis",
@@ -144,6 +145,7 @@ local function on_ready()
 
 		[mod.AthenaUpgradeName] = {
 			enabled = false,
+			type = config.Athena.spawnRequirements.enabled and "NPCGOD" or "GOD",
 			codexName = "NPC_Athena_01",
 			enemyName = "NPC_Athena_01",
 			projectileName = "DevotionAthena",
@@ -152,6 +154,7 @@ local function on_ready()
 
 		[mod.DionysusUpgradeName] = {
 			enabled = false,
+			type = config.Dionysus.spawnRequirements.enabled and "NPCGOD" or "GOD",
 			codexName = "NPC_Dionysus_01",
 			enemyName = "NPC_Dionysus_01",
 			projectileName = "DevotionDionysus",
@@ -160,6 +163,7 @@ local function on_ready()
 
 		[mod.HadesUpgradeName] = {
 			enabled = false,
+			type = config.Hades.spawnRequirements.enabled and "NPCGOD" or nil, -- Hades is always NPC
 			codexName = "NPC_Hades_01",
 			enemyName = "NPC_Hades_Field_01",
 		},
@@ -325,6 +329,113 @@ local function on_ready()
 				pMenuData.NoSpawn = false
 			end
 		end
+	end
+
+	function mod.checkReward()
+		for _, value in ipairs(mod.eligibleGods) do
+			if value.Type ~= "NPCGOD" then
+				goto GOD
+			end
+
+			for k, v in pairs(game.RewardStoreData.HubRewards) do
+				if v.Name == value.Name then
+					table.remove(game.RewardStoreData.HubRewards, k)
+					break
+				end
+			end
+			for k, v in pairs(game.RewardStoreData.RunProgress) do
+				if v.Name == value.Name then
+					table.remove(game.RewardStoreData.RunProgress, k)
+					break
+				end
+			end
+			for k, v in pairs(game.StoreData.SurfaceShop.GroupsOf[2].OptionsData) do
+				if v.Name == "Shop" .. value.Name then
+					table.remove(game.StoreData.SurfaceShop.GroupsOf[2].OptionsData, k)
+					break
+				end
+			end
+			for k, v in pairs(game.StoreData.WorldShop.GroupsOf[1].OptionsData) do
+				if v.Name == "Shop" .. value.Name then
+					table.remove(game.StoreData.WorldShop.GroupsOf[1].OptionsData, k)
+					break
+				end
+			end
+			for k, v in pairs(game.StoreData.I_WorldShop.GroupsOf[4].OptionsData) do
+				if v.Name == "Shop" .. value.Name then
+					table.remove(game.StoreData.I_WorldShop.GroupsOf[4].OptionsData, k)
+					break
+				end
+			end
+			for k, v in pairs(game.StoreData.Q_WorldShop.GroupsOf[3].OptionsData) do
+				if v.Name == "Shop" .. value.Name then
+					table.remove(game.StoreData.Q_WorldShop.GroupsOf[3].OptionsData, k)
+					break
+				end
+			end
+			::GOD::
+		end
+	end
+
+	if config.RandomOneGod then
+		mod.ChosenGod = nil
+		mod.typeNPC = false
+		mod.eligibleGods = {}
+
+		if config._RandomGod.chosenGod then
+			mod.ChosenGod = config._RandomGod.chosenGod
+			mod.typeNPC = config._RandomGod.typeNPC
+			mod.checkReward()
+		end
+
+		modutil.mod.Path.Wrap("StartNewRun", function(base, prevRun, args)
+			mod.ChosenGod = nil
+			mod.typeNPC = false
+			mod.eligibleGods = {}
+
+			for lootName, v in pairs(data) do
+				if v.enabled then -- and v.type ~= "NPCGOD" and mod.ChosenGod == nil
+					table.insert(mod.eligibleGods, {
+						Name = lootName,
+						Type = v.type,
+					})
+				end
+			end
+
+			if #mod.eligibleGods > 0 then
+				local index = math.random(#mod.eligibleGods)
+				mod.ChosenGod = mod.eligibleGods[index].Name
+				if mod.eligibleGods[index].Type == "NPCGOD" then
+					mod.typeNPC = true
+				end
+
+				rom.log.warning("Random Droppable_God for run: " .. mod.ChosenGod)
+
+				config._RandomGod.chosenGod = mod.ChosenGod
+				config._RandomGod.typeNPC = mod.typeNPC
+				table.remove(mod.eligibleGods, index)
+			end
+
+			mod.checkReward()
+
+			return base(prevRun, args)
+		end)
+
+		modutil.mod.Path.Wrap("GetEligibleLootNames", function(base, excludeLootNames)
+			if not mod.typeNPC then
+				local alreadyExcluded = false
+				for _, excludedName in ipairs(excludeLootNames) do
+					if excludedName == mod.ChosenGod then
+						alreadyExcluded = true
+						break
+					end
+				end
+				if not alreadyExcluded then
+					table.insert(excludeLootNames, mod.ChosenGod)
+				end
+			end
+			return base(excludeLootNames)
+		end)
 	end
 
 	-- Super Magical Code by Jowday, which doesn't give weird codex unlock popup

@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- Fix config setting for maximum spawns x2.
+- Add `RandomOneGod` which will allow the game to choose 1 god out of the 4 currently added and only allow them to spawn in a run (randomized per run).
+- Fix issue where TextLines would play for every boon pickup.
 
 ## [3.0.3] - 2025-12-09
 

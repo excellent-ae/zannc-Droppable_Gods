@@ -1,6 +1,7 @@
 ---@meta Droppable_Gods-zannc-config
 return {
 	enabled = true,
+	RandomOneGod = false,
 	Artemis = {
 		enabled = true,
 		spawnRequirements = {
@@ -33,8 +34,13 @@ return {
 		},
 		splitTraits = false,
 	},
+	_RandomGod = {
+		chosenGod = nil,
+		typeNPC = false,
+	},
 }, {
 	enabled = "Set to true to enable the mod, false to disable.",
+	RandomOneGod = "Sets it so there is only one god per run, eg Artemis for an entire run, Dionysus for next run, Artemis for third run etc.",
 	Artemis = {
 		enabled = "Set to true to enable Artemis, false to disable.",
 		spawnRequirements = {
@@ -67,4 +73,5 @@ return {
 		},
 		splitTraits = "Set to true to split traits between the DROPPED god and NPC god - default game boons will be locked to the NPC version, and any new ones will be in the dropped version",
 	},
+	_RandomGod = "Just values so the RandomOneGod above is consistent, you can change this, though it is not advised and may break your game.",
 }

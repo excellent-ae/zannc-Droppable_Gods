@@ -10,30 +10,55 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0004", UseEventEndSound = true, Text = "Take this, Sister, and go find your mark." },
 	},
 	ArtemisChat02 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0005", UseEventEndSound = true, Text = "Tread ever softly and strike swift and true, Sister." },
 	},
 	ArtemisChat03 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0006", UseEventEndSound = true, Text = "Happened to be in the area again, so thought I'd stop on by." },
 	},
 	ArtemisChat04 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0007", UseEventEndSound = true, Text = "May Moonlight guide you to your prey, and expose his every weakness." },
 	},
 	ArtemisChat05 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0008", UseEventEndSound = true, Text = "Another night, another duty for the Silver Sisters." },
 	},
 	ArtemisChat06 = {
@@ -44,6 +69,9 @@ local textLineSets = {
 			{
 				Path = { "CurrentRun", "CurrentRoom", "RoomSetName" },
 				IsAny = { "F" },
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
 			},
 		},
 		{ Cue = "/VO/Artemis_0009", UseEventEndSound = true, Portrait = "Portrait_Artemis_Serious_01", Text = "I have to say, these woods are not my favorite..." },
@@ -57,6 +85,9 @@ local textLineSets = {
 			{
 				PathTrue = { "CurrentRun", "BiomesReached", "G" },
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0010", UseEventEndSound = true, Text = "I can't venture any further below, though I can give you this." },
 	},
@@ -64,18 +95,33 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0011", UseEventEndSound = true, Text = "The skilled huntress keeps her bag of tricks full and with her at all times." },
 	},
 	ArtemisChat09 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0012", UseEventEndSound = true, Text = "Steady yourself, Sister. You have my full support and more." },
 	},
 	ArtemisChat10 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0013", UseEventEndSound = true, Text = "May your aim ever be true. Not unlike mine!" },
 	},
 	ArtemisChat11 = {
@@ -83,18 +129,33 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0014", UseEventEndSound = true, Text = "I still think you should try a bow again sometime..." },
 	},
 	ArtemisChat12 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0015", UseEventEndSound = true, Text = "We hunt alone. Although these run-ins aren't so bad!" },
 	},
 	ArtemisChat13 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0016", UseEventEndSound = true, Text = "Always a pleasure working with you, Sister." },
 	},
 	ArtemisChat14 = {
@@ -106,6 +167,9 @@ local textLineSets = {
 				PathTrue = { "CurrentRun", "BiomesReached", "F" },
 			},
 			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0017", UseEventEndSound = true, Text = "Go cut that wretched Titan down to size for me, would you?" },
 	},
@@ -113,6 +177,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0018", UseEventEndSound = true, Text = "May none dare stand between a witch and her prey." },
 	},
 	ArtemisChat16 = {
@@ -121,6 +190,9 @@ local textLineSets = {
 		PreEventFunctionArgs = { PickupWait = 1.0 },
 		GameStateRequirements = {
 			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0019", UseEventEndSound = true, Text = "Fine night for hunting Titans, don't you think?" },
 	},
@@ -128,48 +200,88 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0020", UseEventEndSound = true, Portrait = "Portrait_Artemis_Serious_01", Text = "Picked up the scent of a few stragglers I'll take care of after this..." },
 	},
 	ArtemisChat18 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0021", UseEventEndSound = true, Text = "You'll find your mark. I know you will." },
 	},
 	ArtemisChat19 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0022", UseEventEndSound = true, Text = "Yours is the most dangerous prey of all. I'm a bit envious!" },
 	},
 	ArtemisChat20 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0023", UseEventEndSound = true, Text = "Here's a little something to go with those witching arts of yours." },
 	},
 	ArtemisChat21 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0024", UseEventEndSound = true, Text = "I've got your back, Sister, so just keep moving forward." },
 	},
 	ArtemisChat22 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0025", UseEventEndSound = true, Text = "We're the Silver Sisters, and we never miss our mark." },
 	},
 	ArtemisChat23 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0026", UseEventEndSound = true, Text = "We are the Silver Sisters, and this is our time to shine." },
 	},
 	ArtemisChat24 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0027", UseEventEndSound = true, Text = "Got to say it's nice to get away from it all like this." },
 	},
 	ArtemisChat25 = {
@@ -181,6 +293,9 @@ local textLineSets = {
 				Path = { "CurrentRun", "SpeechRecord" },
 				HasNone = { "/VO/Artemis_0094" },
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0028", UseEventEndSound = true, Text = "Fancy running into you again, and here of all places!" },
 	},
@@ -188,18 +303,33 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0029", UseEventEndSound = true, Text = "You tracked {#Emph}me {#Prev}down this time, I'll have you know!" },
 	},
 	ArtemisChat27 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0030", UseEventEndSound = true, Text = "You were born to do this, Sister, and you're going to succeed." },
 	},
 	ArtemisChat28 = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0031", UseEventEndSound = true, Text = "Sure beats being back on that mountaintop, let me tell you." },
 	},
 	ArtemisChat29 = {
@@ -212,6 +342,9 @@ local textLineSets = {
 				Path = { "GameState", "GamePhase" },
 				Comparison = "==",
 				Value = 1,
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
 			},
 		},
 		{ Cue = "/VO/Artemis_0032", UseEventEndSound = true, Text = "The Moon is full again. May our combined might take you far." },
@@ -227,6 +360,9 @@ local textLineSets = {
 				Comparison = "==",
 				Value = 5,
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0033", UseEventEndSound = true, Text = "A new moon marks a new beginning, so take heart, Sister." },
 	},
@@ -240,6 +376,9 @@ local textLineSets = {
 				Path = { "GameState", "GamePhase" },
 				Comparison = "==",
 				Value = 4,
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
 			},
 		},
 		{ Cue = "/VO/Artemis_0034", UseEventEndSound = true, Text = "The Moon's light wanes again, but your strength needn't falter." },
@@ -255,6 +394,9 @@ local textLineSets = {
 				Comparison = "==",
 				Value = 8,
 			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0035", UseEventEndSound = true, Text = "As the light of the waxing Moon intensifies, so too does our potential, Sister." },
 	},
@@ -267,6 +409,9 @@ local textLineSets = {
 				PathTrue = { "CurrentRun", "BiomesReached", "N" },
 			},
 			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0449", UseEventEndSound = true, Text = "Good hunting on the way up to the mountain, Sister." },
 	},
@@ -277,6 +422,9 @@ local textLineSets = {
 		GameStateRequirements = {
 			{
 				PathTrue = { "GameState", "ReachedTrueEnding" },
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
 			},
 		},
 		{ Cue = "/VO/Artemis_0450", UseEventEndSound = true, Text = "Father better have expressed his gratitude for all you've done." },
@@ -293,6 +441,9 @@ local textLineSets = {
 				PathTrue = { "CurrentRun", "BiomesReached", "N" },
 			},
 			NamedRequirementsFalse = { "StandardPackageBountyActive" },
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
 		},
 		{ Cue = "/VO/Artemis_0451", UseEventEndSound = true, Text = "Good of you to deal with Typhon so that we don't have to anymore!" },
 	},
@@ -300,7 +451,11 @@ local textLineSets = {
 		UseableOffSource = true,
 		PreEventFunctionName = "BoonInteractPresentation",
 		PreEventFunctionArgs = { PickupWait = 1.0 },
-		GameStateRequirements = {},
+		GameStateRequirements = {
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
+			},
+		},
 		{ Cue = "/VO/Artemis_0452", UseEventEndSound = true, Text = "I'll cover your tracks, but first, here's something for the road." },
 	},
 
@@ -317,6 +472,9 @@ local textLineSets = {
 			{
 				FunctionName = "RequireRunsSinceTextLines",
 				FunctionArgs = { TextLines = { "ArtemisAboutSayingLittle01" }, Min = 9 },
+			},
+			{
+				PathFalse = { "CurrentRun", "UseRecord", "zannc-Droppable_Gods-ArtemisUpgrade" },
 			},
 		},
 		{ Cue = "/VO/Artemis_0467", UseEventEndSound = true, Text = "Clean and efficient, just the way I like it, Sister." },
