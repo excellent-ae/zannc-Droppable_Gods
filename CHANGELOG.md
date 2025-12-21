@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.6] - 2025-12-21
+
 - Fix RandomOneGod x2.
 
 ## [3.0.5] - 2025-12-21
@@ -82,7 +85,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.5...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.6...HEAD
+[3.0.6]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.4...3.0.5
 [3.0.4]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.3...3.0.4
 [3.0.3]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.2...3.0.3
