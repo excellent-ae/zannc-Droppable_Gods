@@ -334,6 +334,7 @@ local function on_ready()
 	function mod.checkReward()
 		for _, value in ipairs(mod.eligibleGods) do
 			if value.Type ~= "NPCGOD" then
+				game.LootData[value.Name].DebugOnly = true
 				goto GOD
 			end
 
@@ -415,6 +416,8 @@ local function on_ready()
 				-- rom.log.warning("Random Droppable_God for run: " .. mod.ChosenGod)
 
 				table.remove(mod.eligibleGods, index)
+				game.LootData[mod.ChosenGod].DebugOnly = false
+
 				config._RandomGod.chosenGod = mod.ChosenGod
 				config._RandomGod.typeNPC = mod.typeNPC
 				config._RandomGod.eligibleGods = mod.eligibleGods
@@ -425,27 +428,27 @@ local function on_ready()
 			return base(prevRun, args)
 		end)
 
-		modutil.mod.Path.Wrap("GetEligibleLootNames", function(base, excludeLootNames)
-			if #mod.eligibleGods < 0 then -- or mod.typeNPC == true // though it shouldnt be NPC here anyway - so there is no reason to check it anyway, NPCs get removed from loot earlier on run start and game start
-				return base(excludeLootNames)
-			end
+		-- modutil.mod.Path.Wrap("GetEligibleLootNames", function(base, excludeLootNames)
+		-- 	if #mod.eligibleGods < 0 then -- or mod.typeNPC == true // though it shouldnt be NPC here anyway - so there is no reason to check it anyway, NPCs get removed from loot earlier on run start and game start
+		-- 		return base(excludeLootNames)
+		-- 	end
 
-			for _, godData in ipairs(mod.eligibleGods) do
-				local alreadyExcluded = false
-				if excludeLootNames ~= nil then
-					for _, excludedName in ipairs(excludeLootNames) do
-						if excludedName == godData.Name then
-							alreadyExcluded = true
-							break
-						end
-					end
-				end
-				if not alreadyExcluded then
-					table.insert(excludeLootNames, godData.Name)
-				end
-			end
-			return base(excludeLootNames)
-		end)
+		-- 	for _, godData in ipairs(mod.eligibleGods) do
+		-- 		local alreadyExcluded = false
+		-- 		if excludeLootNames ~= nil then
+		-- 			for _, excludedName in ipairs(excludeLootNames) do
+		-- 				if excludedName == godData.Name then
+		-- 					alreadyExcluded = true
+		-- 					break
+		-- 				end
+		-- 			end
+		-- 		end
+		-- 		if not alreadyExcluded then
+		-- 			table.insert(excludeLootNames, godData.Name)
+		-- 		end
+		-- 	end
+		-- 	return base(excludeLootNames)
+		-- end)
 	end
 
 	-- Super Magical Code by Jowday, which doesn't give weird codex unlock popup
