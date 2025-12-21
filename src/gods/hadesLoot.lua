@@ -102,7 +102,6 @@ gods.InitializeGod({
 	Gender = "M",
 	skipCodex = true,
 	LoadPackages = { "NPC_Hades_Field_01", "Hades" },
-	UpgradeScreenOpenSound = "/SFX/Enemy Sounds/Hades/HadesSummonPresentation3",
 	SFX_Portrait = "/SFX/Menu Sounds/KeepsakeHadesSigil2",
 	Color = { 255, 0, 0, 255 },
 	LightingColor = { 255, 0, 0, 255 },
@@ -120,6 +119,7 @@ gods.InitializeGod({
 		SpeakerName = "Hades",
 		Portrait = "Portrait_Hades_Chained_01",
 		OverlayAnim = "HadesOverlay",
+		UpgradeScreenOpenSound = "/SFX/Enemy Sounds/Hades/HadesSummonPresentation3",
 	},
 
 	-- ! Voice Lines from here downwards
