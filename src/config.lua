@@ -37,6 +37,7 @@ return {
 	_RandomGod = {
 		chosenGod = nil,
 		typeNPC = false,
+		eligibleGods = {},
 	},
 }, {
 	enabled = "Set to true to enable the mod, false to disable.",

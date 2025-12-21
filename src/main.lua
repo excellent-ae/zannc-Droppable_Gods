@@ -383,8 +383,11 @@ local function on_ready()
 		mod.eligibleGods = {}
 
 		if config._RandomGod.chosenGod then
+			-- rom.log.warning("Cache: " .. config._RandomGod.chosenGod)
+
 			mod.ChosenGod = config._RandomGod.chosenGod
 			mod.typeNPC = config._RandomGod.typeNPC
+			mod.eligibleGods = config._RandomGod.eligibleGods
 			mod.checkReward()
 		end
 
@@ -409,11 +412,12 @@ local function on_ready()
 					mod.typeNPC = true
 				end
 
-				rom.log.warning("Random Droppable_God for run: " .. mod.ChosenGod)
+				-- rom.log.warning("Random Droppable_God for run: " .. mod.ChosenGod)
 
+				table.remove(mod.eligibleGods, index)
 				config._RandomGod.chosenGod = mod.ChosenGod
 				config._RandomGod.typeNPC = mod.typeNPC
-				table.remove(mod.eligibleGods, index)
+				config._RandomGod.eligibleGods = mod.eligibleGods
 			end
 
 			mod.checkReward()
@@ -422,16 +426,22 @@ local function on_ready()
 		end)
 
 		modutil.mod.Path.Wrap("GetEligibleLootNames", function(base, excludeLootNames)
-			if not mod.typeNPC then
+			if #mod.eligibleGods < 0 then -- or mod.typeNPC == true // though it shouldnt be NPC here anyway - so there is no reason to check it anyway, NPCs get removed from loot earlier on run start and game start
+				return base(excludeLootNames)
+			end
+
+			for _, godData in ipairs(mod.eligibleGods) do
 				local alreadyExcluded = false
-				for _, excludedName in ipairs(excludeLootNames) do
-					if excludedName == mod.ChosenGod then
-						alreadyExcluded = true
-						break
+				if excludeLootNames ~= nil then
+					for _, excludedName in ipairs(excludeLootNames) do
+						if excludedName == godData.Name then
+							alreadyExcluded = true
+							break
+						end
 					end
 				end
 				if not alreadyExcluded then
-					table.insert(excludeLootNames, mod.ChosenGod)
+					table.insert(excludeLootNames, godData.Name)
 				end
 			end
 			return base(excludeLootNames)

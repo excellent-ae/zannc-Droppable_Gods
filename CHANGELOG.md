@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+- Fix config setting for RandomOneGod.
+- Remove print.
 
 ## [3.0.4] - 2025-12-19
 
