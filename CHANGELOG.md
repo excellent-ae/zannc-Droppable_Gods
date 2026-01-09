@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Fix RandomOneGod x3?
 
 ## [3.0.6] - 2025-12-21
 
