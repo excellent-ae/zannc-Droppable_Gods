@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-- Fix RandomOneGod x3?
+- Change RandomOneGod x3 functionality, hopefully for the last time.
 
 ## [3.0.6] - 2025-12-21
 

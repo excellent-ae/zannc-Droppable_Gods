@@ -1,7 +1,7 @@
 ---@meta Droppable_Gods-zannc-config
 return {
     enabled = true,
-    RandomOneGod = true,
+    RandomOneGod = false,
     Artemis = {
         enabled = true,
         spawnRequirements = {

@@ -351,7 +351,7 @@ local function on_ready()
 
     if config.RandomOneGod then
         if config._RandomGod.chosenGod ~= "default" then
-            rom.log.warning("Cache: " .. config._RandomGod.chosenGod)
+            -- rom.log.warning("Cache: " .. config._RandomGod.chosenGod)
             for lootName, v in pairs(data) do
                 if v.enabled and lootName ~= config._RandomGod.chosenGod then
                     game.LootData[lootName].DebugOnly = true
