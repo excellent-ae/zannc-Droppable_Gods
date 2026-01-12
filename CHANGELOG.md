@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [3.0.8] - 2026-01-12
+
 - Change RandomOneGod x4 functionality, please I can't do this anymore.
 
 ## [3.0.7] - 2026-01-09
@@ -90,7 +93,8 @@
 
 Initial Release.
 
-[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.7...HEAD
+[unreleased]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.8...HEAD
+[3.0.8]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.7...3.0.8
 [3.0.7]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.6...3.0.7
 [3.0.6]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/excellent-ae/zannc-Droppable_Gods/compare/3.0.4...3.0.5
