@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Change RandomOneGod x4 functionality, please I can't do this anymore.
 
 ## [3.0.7] - 2026-01-09
 

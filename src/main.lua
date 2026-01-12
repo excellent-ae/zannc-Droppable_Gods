@@ -197,11 +197,13 @@ local function on_ready()
 
     local enemyLoot = {}
     local lootEnemy = {}
+    mod.EnabledGods = {}
 
     for lootName, v in pairs(data) do
         if not v.enabled then
             goto continue
         end
+        table.insert(mod.EnabledGods, { Name = lootName, Type = v.type })
         enemyLoot[v.enemyName] = lootName
         lootEnemy[lootName] = v.enemyName
 
@@ -331,60 +333,80 @@ local function on_ready()
         end
     end
 
-    function mod.RemoveHadesReward(lootName)
-        if lootName ~= mod.HadesUpgradeName then
-            return
+    local function removeLoot(array, lootName)
+        for i = #array, 1, -1 do
+            if array[i].Name == lootName then
+                table.remove(array, i)
+            end
         end
+    end
+    local function containsLoot(array, lootName)
+        for _, v in ipairs(array) do
+            if v.Name == lootName then
+                return true
+            end
+        end
+        return false
+    end
 
-        game.ConsumableData["Shop" .. mod.HadesUpgradeName].DebugOnly = true
-        for k, v in pairs(game.RewardStoreData.HubRewards) do
-            if v.Name == mod.HadesUpgradeName then
-                table.remove(game.RewardStoreData.HubRewards, k)
+    function mod.HandleChoice(lootName, type)
+        if lootName == config._RandomGod.chosenGod then
+            -- rom.log.warning("Chosen: " .. lootName)
+            game.LootData[lootName].GameStateRequirements = nil
+
+            if type ~= "NPCGOD" then
+                return
             end
-        end
-        for k, v in pairs(game.RewardStoreData.RunProgress) do
-            if v.Name == mod.HadesUpgradeName then
-                table.remove(game.RewardStoreData.RunProgress, k)
+
+            game.ConsumableData["Shop" .. lootName].DebugOnly = false
+
+            if not containsLoot(game.RewardStoreData.HubRewards, lootName) then
+                table.insert(game.RewardStoreData.HubRewards, { Name = lootName, GameStateRequirements = { NamedRequirements = { lootName .. "-Requirements" } } })
             end
+
+            if not containsLoot(game.RewardStoreData.RunProgress, lootName) then
+                table.insert(game.RewardStoreData.RunProgress, { Name = lootName, GameStateRequirements = { NamedRequirements = { lootName .. "-Requirements" } } })
+            end
+        else
+            rom.log.warning(lootName)
+
+            game.LootData[lootName].DebugOnly = true
+            game.LootData[lootName].GameStateRequirements = {
+                {
+                    Path = { "CurrentRun", "LootTypeHistory", lootName },
+                    Comparison = ">",
+                    Value = 99,
+                },
+            }
+
+            if type ~= "NPCGOD" then
+                return
+            end
+            game.ConsumableData["Shop" .. lootName].DebugOnly = true
+
+            removeLoot(game.RewardStoreData.HubRewards, lootName)
+            removeLoot(game.RewardStoreData.RunProgress, lootName)
         end
     end
 
     if config.RandomOneGod then
         if config._RandomGod.chosenGod ~= "default" then
             -- rom.log.warning("Cache: " .. config._RandomGod.chosenGod)
-            for lootName, v in pairs(data) do
-                if v.enabled and lootName ~= config._RandomGod.chosenGod then
-                    game.LootData[lootName].DebugOnly = true
-                end
-                mod.RemoveHadesReward(lootName)
+            for _, v in pairs(mod.EnabledGods) do
+                mod.HandleChoice(v.Name)
             end
         end
 
         modutil.mod.Path.Wrap("StartNewRun", function(base, prevRun, args)
-            local ineligibleGods = {}
-
-            for lootName, v in pairs(data) do
-                if v.enabled then
-                    table.insert(ineligibleGods, {
-                        Name = lootName,
-                    })
-                end
-            end
-
-            if #ineligibleGods < 0 then
+            if #mod.EnabledGods <= 0 then
                 return base(prevRun, args)
             end
 
-            local index = math.random(#ineligibleGods)
-            config._RandomGod.chosenGod = ineligibleGods[index].Name
-            rom.log.warning(config._RandomGod.chosenGod)
+            local index = math.random(#mod.EnabledGods)
+            config._RandomGod.chosenGod = mod.EnabledGods[index].Name
 
-            table.remove(ineligibleGods, index)
-            game.LootData[config._RandomGod.chosenGod].DebugOnly = false
-
-            for _, value in ipairs(ineligibleGods) do
-                game.LootData[value.Name].DebugOnly = true
-                mod.RemoveHadesReward(value.Name)
+            for _, value in pairs(mod.EnabledGods) do
+                mod.HandleChoice(value.Name, value.Type)
             end
 
             return base(prevRun, args)
