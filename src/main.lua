@@ -6,7 +6,7 @@ local mods = rom.mods
 ---@module 'LuaENVY-ENVY-auto'
 mods["LuaENVY-ENVY"].auto()
 rom = rom
-_PLUGIN = PLUGIN
+_PLUGIN = _PLUGIN
 game = rom.game
 modutil = mods["SGG_Modding-ModUtil"]
 chalk = mods["SGG_Modding-Chalk"]
@@ -368,7 +368,7 @@ local function on_ready()
                 table.insert(game.RewardStoreData.RunProgress, { Name = lootName, GameStateRequirements = { NamedRequirements = { lootName .. "-Requirements" } } })
             end
         else
-            rom.log.warning(lootName)
+            -- rom.log.warning(lootName)
 
             game.LootData[lootName].DebugOnly = true
             game.LootData[lootName].GameStateRequirements = {
